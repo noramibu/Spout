@@ -1,3 +1,4 @@
+import io.papermc.paperweight.core.tasks.patching.ApplyFilePatches
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
@@ -93,3 +94,11 @@ subprojects {
         }
     }
 }
+
+// Spout start - Project setup - Don't produce Git rejects
+allprojects {
+    tasks.withType<ApplyFilePatches> {
+        rejectsDir.set(null as? Directory)
+    }
+}
+// Spout end - Project setup - Don't produce Git rejects
