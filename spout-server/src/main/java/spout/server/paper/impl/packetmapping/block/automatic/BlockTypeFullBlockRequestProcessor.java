@@ -3,11 +3,12 @@ package spout.server.paper.impl.packetmapping.block.automatic;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 
 /**
- * A {@link RequestProcessor} for {@link AutomaticBlockMappingsImpl#brushable}.
+ * A {@link RequestProcessor} for {@link AutomaticBlockMappingsImpl} requests
+ * that are fulfilled using full blocks but backed by a block rather than a block state.
  */
-public class BrushableRequestProcessor extends FilledArrayResultRequestProcessor<FromToBlockTypeRequestBuilderImpl, ArrayResultRequestProcessor.RequestBasedResult> {
+public class BlockTypeFullBlockRequestProcessor extends FilledArrayResultRequestProcessor<FromToBlockTypeRequestBuilderImpl, ArrayResultRequestProcessor.RequestBasedResult> {
 
-    public BrushableRequestProcessor(FromToBlockTypeRequestBuilderImpl request, BlockMappingsComposeEventImpl event) {
+    public BlockTypeFullBlockRequestProcessor(FromToBlockTypeRequestBuilderImpl request, BlockMappingsComposeEventImpl event) {
         super(request, event);
     }
 

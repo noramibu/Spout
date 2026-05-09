@@ -77,27 +77,35 @@
              .strength(50.0F)
              .isViewBlocking(Blocks::never)
      );
-@@ -7124,12 +_,16 @@
+@@ -7124,15 +_,19 @@
              .pushReaction(PushReaction.DESTROY)
      );
  
 -    private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
 -        return state -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+-    }
+-
+-    private static Function<BlockState, MapColor> waterloggedMapColor(MapColor unwaterloggedMapColor) {
+-        return state -> state.getValue(BlockStateProperties.WATERLOGGED) ? MapColor.WATER : unwaterloggedMapColor;
+-    }
+-
+-    private static Boolean never(BlockState state, BlockGetter level, BlockPos pos, EntityType<?> entity) {
 +    // Spout start - More data-driven - Minecraft registries - Types - Properties serialization - Make light emission property serializable
 +    private static spout.common.moredatadriven.minecraft.type.BlockStateFunction<Integer> litBlockEmission(int lightValue) {
 +        return new spout.common.moredatadriven.minecraft.type.BlockStateFunction.ByProperties<>(java.util.List.of(BlockStateProperties.LIT), state -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0);
 +        // Spout end - More data-driven - Minecraft registries - Types - Properties serialization - Make light emission property serializable
-     }
- 
--    private static Function<BlockState, MapColor> waterloggedMapColor(MapColor unwaterloggedMapColor) {
--        return state -> state.getValue(BlockStateProperties.WATERLOGGED) ? MapColor.WATER : unwaterloggedMapColor;
++    }
++
 +    // Spout start - More data-driven - Minecraft registries - Types - Properties serialization - Make map color property serializable
 +    private static spout.common.moredatadriven.minecraft.type.BlockStateFunction<MapColor> waterloggedMapColor(MapColor unwaterloggedMapColor) {
 +        return new spout.common.moredatadriven.minecraft.type.BlockStateFunction.ByProperties<>(java.util.List.of(BlockStateProperties.WATERLOGGED), state -> state.getValue(BlockStateProperties.WATERLOGGED) ? MapColor.WATER : unwaterloggedMapColor);
 +        // Spout end - More data-driven - Minecraft registries - Types - Properties serialization - Make map color property serializable
++    }
++
++    public static Boolean never(BlockState state, BlockGetter level, BlockPos pos, EntityType<?> entity) { // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Defaults for types - Make public
+         return false;
      }
  
-     private static Boolean never(BlockState state, BlockGetter level, BlockPos pos, EntityType<?> entity) {
 @@ -7149,7 +_,7 @@
              name,
              properties -> new BedBlock(color, properties),

@@ -43,6 +43,17 @@ import java.util.function.Consumer;
 public interface AutomaticBlockMappings {
 
     /**
+     * Attempts to find a proxy state for every possible state of a barrel block.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#BARREL}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void barrel(Consumer<? extends B> builderConsumer);
+
+    /**
      * Attempts to find a proxy state for every possible state of a brushable block.
      *
      * <p>
@@ -63,6 +74,28 @@ public interface AutomaticBlockMappings {
      * </ul>
      */
     <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void button(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a chain.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#IRON_CHAIN}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void chain(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a chiseled bookshelf.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#CHISELED_BOOKSHELF}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void chiseledBookshelf(Consumer<? extends B> builderConsumer);
 
     /**
      * Attempts to find a proxy state for every possible state of a door.
@@ -98,6 +131,28 @@ public interface AutomaticBlockMappings {
     <B extends FromBlockStateRequestBuilder & ToBlockStateRequestBuilder> void fullBlock(Consumer<? extends B> builderConsumer);
 
     /**
+     * Attempts to find a proxy state for every possible state of a furnace block.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#FURNACE}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void furnace(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a glazed terracotta block.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#WHITE_GLAZED_TERRACOTTA}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void glazedTerracotta(Consumer<? extends B> builderConsumer);
+
+    /**
      * Attempts to find a proxy state for every possible state of a ladder.
      *
      * <p>
@@ -127,6 +182,17 @@ public interface AutomaticBlockMappings {
     <B extends LeavesRequestBuilder> void leaves(Consumer<? extends B> builderConsumer);
 
     /**
+     * Attempts to find a proxy state for every possible state of a loom.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#LOOM}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void loom(Consumer<? extends B> builderConsumer);
+
+    /**
      * Attempts to find a proxy state for every possible state of a nether portal.
      *
      * <p>
@@ -147,6 +213,39 @@ public interface AutomaticBlockMappings {
      * </ul>
      */
     <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void pressurePlate(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a pumpkin block.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#PUMPKIN}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void pumpkin(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a redstone ore block.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#REDSTONE_ORE}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void redstoneOre(Consumer<? extends B> builderConsumer);
+
+    /**
+     * Attempts to find a proxy state for every possible state of a respawn anchor.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#RESPAWN_ANCHOR}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void respawnAnchor(Consumer<? extends B> builderConsumer);
 
     /**
      * Attempts to find a proxy state for every possible state of a rotated pillar block.

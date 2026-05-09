@@ -1,6 +1,5 @@
 package spout.server.paper.impl.packetmapping.block.automatic;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrays;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -17,7 +16,6 @@ import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockStateReg
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingsImpl;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;

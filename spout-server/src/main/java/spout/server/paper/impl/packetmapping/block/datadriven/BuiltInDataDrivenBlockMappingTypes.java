@@ -225,9 +225,15 @@ public final class BuiltInDataDrivenBlockMappingTypes {
 
     };
 
+    public static final DataDrivenBlockMappingType BARREL = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("barrel", AutomaticBlockMappingsImpl::barrel);
+
     public static final DataDrivenBlockMappingType BRUSHABLE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("brushable", AutomaticBlockMappingsImpl::brushable);
 
     public static final DataDrivenBlockMappingType BUTTON = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("button", AutomaticBlockMappingsImpl::button);
+
+    public static final DataDrivenBlockMappingType CHAIN = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("chain", AutomaticBlockMappingsImpl::chain);
+
+    public static final DataDrivenBlockMappingType CHISELED_BOOKSHELF = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("chiseled_bookshelf", AutomaticBlockMappingsImpl::chiseledBookshelf);
 
     public static final DataDrivenBlockMappingType DOOR = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("door", AutomaticBlockMappingsImpl::door);
 
@@ -249,6 +255,10 @@ public final class BuiltInDataDrivenBlockMappingTypes {
 
     };
 
+    public static final DataDrivenBlockMappingType FURNACE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("furnace", AutomaticBlockMappingsImpl::furnace);
+
+    public static final DataDrivenBlockMappingType GLAZED_TERRACOTTA = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("glazed_terracotta", AutomaticBlockMappingsImpl::glazedTerracotta);
+
     public static final DataDrivenBlockMappingType LADDER = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("ladder", AutomaticBlockMappingsImpl::ladder);
 
     public static final DataDrivenBlockMappingType LEAVES = new MultiStateBuiltInDataDrivenBlockMappingType<LeavesRequestBuilderImpl>("leaves", AutomaticBlockMappingsImpl::leaves, new SimpleBuiltInDataDrivenBlockMappingType.BuilderConsumer<>() {
@@ -263,9 +273,17 @@ public final class BuiltInDataDrivenBlockMappingTypes {
 
     });
 
+    public static final DataDrivenBlockMappingType LOOM = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("loom", AutomaticBlockMappingsImpl::loom);
+
     public static final DataDrivenBlockMappingType NETHER_PORTAL = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("nether_portal", AutomaticBlockMappingsImpl::netherPortal);
 
     public static final DataDrivenBlockMappingType PRESSURE_PLATE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("pressure_plate", AutomaticBlockMappingsImpl::pressurePlate);
+
+    public static final DataDrivenBlockMappingType PUMPKIN = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("pumpkin", AutomaticBlockMappingsImpl::pumpkin);
+
+    public static final DataDrivenBlockMappingType REDSTONE_ORE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("redstone_ore", AutomaticBlockMappingsImpl::redstoneOre);
+
+    public static final DataDrivenBlockMappingType RESPAWN_ANCHOR = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("respawn_anchor", AutomaticBlockMappingsImpl::respawnAnchor);
 
     public static final DataDrivenBlockMappingType ROTATED_PILLAR = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("rotated_pillar", AutomaticBlockMappingsImpl::rotatedPillar);
 

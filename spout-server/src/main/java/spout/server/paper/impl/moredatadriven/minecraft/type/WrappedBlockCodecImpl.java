@@ -6,6 +6,7 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.MapLike;
 import com.mojang.serialization.RecordBuilder;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import spout.server.paper.api.moredatadriven.paper.registry.type.nms.WrappedBlockCodec;
 import spout.server.paper.impl.packetmapping.block.datadriven.UnappliedDataDrivenBlockMapping;
@@ -23,7 +24,8 @@ public final class WrappedBlockCodecImpl<B extends Block> implements WrappedBloc
 
     /**
      * A codec wrapping {@link #codec},
-     * that sets {@link Block#unappliedDataPackMappings}.
+     * that applies {@linkplain BlockPropertiesWithDefaultsForDataDrivenType data-driven block type defaults}
+     * and sets {@link Block#unappliedDataPackMappings}.
      */
     private final MapCodec<B> extendedCodec;
 
@@ -38,7 +40,10 @@ public final class WrappedBlockCodecImpl<B extends Block> implements WrappedBloc
 
             @Override
             public <T> DataResult<B> decode(DynamicOps<T> ops, MapLike<T> mapLike) {
-                return codec.decode(ops, mapLike).flatMap(block -> {
+                BlockPropertiesWithDefaultsForDataDrivenType.setDecodingForType(Identifier.CODEC.decode(ops, mapLike.get("type")).getOrThrow().getFirst());
+                DataResult<B> internalDecoded = codec.decode(ops, mapLike);
+                BlockPropertiesWithDefaultsForDataDrivenType.clearDecodingForType();
+                return internalDecoded.flatMap(block -> {
                     T mappingsInput = mapLike.get("mappings");
                     if (mappingsInput != null) {
                         DataResult<Pair<List<UnappliedDataDrivenBlockMapping>, T>> mappings = UnappliedDataDrivenBlockMapping.LIST_CODEC.decode(ops, mappingsInput);

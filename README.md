@@ -54,7 +54,7 @@ This is the Spout server extension of Paper.
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Works with the
 <a href="https://github.com/ModernSpout/Spout-Fabric-client">Spout client mod</a> and vanilla clients
 
-## Download
+## Downloads
 
 * [Latest version: 1.21.11-R0.10](https://github.com/ModernSpout/Spout-Paper-server/releases/download/1.21.11-R0.10/spout-1.21.11-R0.10.jar)
 * Development versions: download from

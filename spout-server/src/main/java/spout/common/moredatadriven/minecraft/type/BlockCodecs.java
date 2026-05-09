@@ -38,6 +38,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import spout.common.util.mojang.codec.EnumViaIdentifierCodec;
 import spout.common.util.mojang.codec.StaticFieldViaIdentifierCodec;
+import spout.server.paper.impl.moredatadriven.minecraft.type.BlockPropertiesWithDefaultsForDataDrivenType;
 import spout.server.paper.impl.moredatadriven.minecraft.type.ChunkSectionLayer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -106,7 +107,7 @@ public final class BlockCodecs {
         @Override
         public <T> DataResult<Pair<BlockBehaviour.Properties, T>> decode(DynamicOps<T> ops, T input) {
             return ops.getMap(input).flatMap(mapLike -> {
-                BlockBehaviour.Properties properties = BlockBehaviour.Properties.of();
+                BlockBehaviour.Properties properties = BlockPropertiesWithDefaultsForDataDrivenType.create();
                 T chunkSectionLayerInput = mapLike.get("chunk_section_layer");
                 if (chunkSectionLayerInput != null) {
                     DataResult<ChunkSectionLayer> chunkSectionLayer = CHUNK_SECTION_LAYER_CODEC.decode(ops, chunkSectionLayerInput).map(Pair::getFirst);
