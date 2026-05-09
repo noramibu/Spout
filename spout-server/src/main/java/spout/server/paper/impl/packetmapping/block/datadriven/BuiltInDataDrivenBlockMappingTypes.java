@@ -263,6 +263,8 @@ public final class BuiltInDataDrivenBlockMappingTypes {
 
     });
 
+    public static final DataDrivenBlockMappingType NETHER_PORTAL = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("nether_portal", AutomaticBlockMappingsImpl::netherPortal);
+
     public static final DataDrivenBlockMappingType PRESSURE_PLATE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("pressure_plate", AutomaticBlockMappingsImpl::pressurePlate);
 
     public static final DataDrivenBlockMappingType SLAB = new BuiltInDataDrivenBlockMappingType("slab") {

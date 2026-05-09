@@ -79,6 +79,14 @@ public final class AutomaticBlockMappingsImpl implements AutomaticBlockMappings 
     }
 
     @Override
+    public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void netherPortal(Consumer<? extends B> builderConsumer) {
+        FromToBlockTypeRequestBuilderImpl builder = new FromToBlockTypeRequestBuilderImpl();
+        builder.fallback(BlockType.NETHER_PORTAL);
+        ((Consumer) builderConsumer).accept(builder);
+        new NetherPortalRequestProcessor(builder, this.event).process();
+    }
+
+    @Override
     public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void pressurePlate(Consumer<? extends B> builderConsumer) {
         FromToBlockTypeRequestBuilderImpl builder = new FromToBlockTypeRequestBuilderImpl();
         builder.fallback(BlockType.STONE_PRESSURE_PLATE);
