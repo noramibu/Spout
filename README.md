@@ -108,7 +108,7 @@ It's very simple:
 3. Define your content with a data and resource pack
 
 See the step-by-step guide on the
-<a href="https://github.com/ModernSpout/Spout/wiki">wiki</a>!
+<a href="https://github.com/ModernSpout/Spout/wiki/*-Making-a-Spout-plugin">wiki</a>!
 
 <!--
 ## Next
