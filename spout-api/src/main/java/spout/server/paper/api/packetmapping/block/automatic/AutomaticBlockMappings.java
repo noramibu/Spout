@@ -109,6 +109,17 @@ public interface AutomaticBlockMappings {
     <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void door(Consumer<? extends B> builderConsumer);
 
     /**
+     * Attempts to find a proxy state for every possible state of a fence.
+     *
+     * <p>
+     * By default:
+     * <ul>
+     *     <li>{@link ToBlockTypeRequestBuilder#fallback()} is {@link BlockType#OAK_FENCE}.</li>
+     * </ul>
+     */
+    <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void fence(Consumer<? extends B> builderConsumer);
+
+    /**
      * Attempts to find a proxy state for every possible state of a fence gate.
      *
      * <p>

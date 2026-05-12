@@ -3,11 +3,12 @@ package spout.server.paper.impl.packetmapping.block.automatic;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 
 /**
- * A {@link RequestProcessor} for {@link AutomaticBlockMappingsImpl#ladder}.
+ * A {@link RequestProcessor} for {@link AutomaticBlockMappingsImpl} requests
+ * that are backed by a block.
  */
-public class LadderRequestProcessor extends FilledArrayResultRequestProcessor<FromToBlockTypeRequestBuilderImpl, ArrayResultRequestProcessor.RequestBasedResult> {
+public class StandardBlockTypeRequestProcessor extends FilledArrayResultRequestProcessor<FromToBlockTypeRequestBuilderImpl, ArrayResultRequestProcessor.RequestBasedResult> {
 
-    public LadderRequestProcessor(FromToBlockTypeRequestBuilderImpl request, BlockMappingsComposeEventImpl event) {
+    public StandardBlockTypeRequestProcessor(FromToBlockTypeRequestBuilderImpl request, BlockMappingsComposeEventImpl event) {
         super(request, event);
     }
 

@@ -163,6 +163,7 @@ public final class ResourcePackConstructionImpl extends ComposableImpl<ResourceP
 
     private static final String[] DEFAULT_RESOURCE_PACK_CONTENTS_PATHS = {
         "pack.mcmeta",
+        "pack.png",
         "assets/spout/models/block/bevel_middle.json",
         "assets/spout/models/block/bevel_nnnnnnnn.json",
         "assets/spout/models/block/bevel_nnnynnyn.json",

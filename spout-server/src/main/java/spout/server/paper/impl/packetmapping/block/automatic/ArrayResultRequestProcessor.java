@@ -1,11 +1,13 @@
 package spout.server.paper.impl.packetmapping.block.automatic;
 
+import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectBooleanPair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.jspecify.annotations.Nullable;
 import spout.common.util.minecraft.blockstate.BlockStateUtil;
@@ -300,7 +302,16 @@ public abstract class ArrayResultRequestProcessor<R extends ProxyStatesRequestBu
                                 blockstates = Blockstates.create();
                             }
                             Blockstates fromBlockBlockstates = PluginResourcePackDiscoveryImpl.get().getResourcePackBlockstates(fromState.getBlock().keyInBlockRegistry);
-                            blockstates.setVariant(resourcePackToState.asBlockData(), Objects.requireNonNull(fromBlockBlockstates.getVariant(fromState.asBlockData()), "Missing blockstates entry for " + fromState));
+                            if (fromBlockBlockstates.hasVariants()) {
+                                blockstates.setVariant(resourcePackToState.asBlockData(), Objects.requireNonNull(fromBlockBlockstates.getVariant(fromState.asBlockData()), "Missing blockstates variants entry for " + fromState));
+                            } else if (fromBlockBlockstates.hasMultipart()) {
+                                BlockData resourcePackToStateBukkit = resourcePackToState.asBlockData();
+                                for (JsonObject multipart : fromBlockBlockstates.getMultipartApplies(fromState.asBlockData())) {
+                                    blockstates.addMultipartApply(multipart, resourcePackToStateBukkit);
+                                }
+                            } else {
+                                throw new IllegalStateException("Missing blockstates entry for " + fromState);
+                            }
                             return blockstates;
                         });
                     });

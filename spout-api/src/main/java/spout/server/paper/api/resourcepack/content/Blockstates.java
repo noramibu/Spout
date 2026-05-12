@@ -3,13 +3,17 @@ package spout.server.paper.api.resourcepack.content;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.data.BlockData;
 import org.jspecify.annotations.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * The contents of a {@code blockstates} file in a resource pack.
@@ -40,6 +44,57 @@ public final class Blockstates {
         return multipart != null && !multipart.isEmpty();
     }
 
+    public List<JsonObject> getMultipartApplies(BlockData state) {
+        @Nullable JsonArray multipart = this.getMultipartJsonOrNull();
+        if (multipart == null || multipart.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return multipart.asList().stream()
+            .map(JsonElement::getAsJsonObject)
+            .filter(multipartElement -> multipartWhenMatches(multipartElement.getAsJsonObject("when"), state))
+            .map(multipartElement -> multipartElement.getAsJsonObject("apply"))
+            .toList();
+    }
+
+    public void addMultipartApply(JsonObject multipartApply, BlockData state) {
+        JsonArray multipart = this.getOrCreateMultipartJson();
+        JsonObject multipartElement = null;
+        for (JsonElement multipartElementCandidate : multipart) {
+            JsonObject multipartElementCandidateObject = multipartElementCandidate.getAsJsonObject();
+            if (multipartElementCandidateObject.getAsJsonObject("apply").equals(multipartApply)) {
+                multipartElement = multipartElementCandidateObject;
+                break;
+            }
+        }
+        if (multipartElement == null) {
+            multipartElement = new JsonObject();
+            multipartElement.add("apply", multipartApply);
+            multipart.add(multipartElement);
+        }
+        JsonObject when = multipartElement.getAsJsonObject("when");
+        JsonArray or;
+        if (when == null) {
+            when = new JsonObject();
+            or = new JsonArray();
+            when.add("OR", or);
+            multipartElement.add("when", when);
+        } else {
+            or = when.getAsJsonArray("OR");
+            if (or == null) {
+                if (when.has("AND")) {
+                    throw new UnsupportedOperationException("Adding multipart apply currently doesn't support existing AND conditions");
+                }
+                JsonObject oldWhen = when;
+                when = new JsonObject();
+                or = new JsonArray();
+                or.add(oldWhen);
+                when.add("OR", or);
+                multipartElement.add("when", when);
+            }
+        }
+        or.add(getMultipartWhenElement(state));
+    }
+
     private @Nullable JsonObject getVariantsJsonOrNull() {
         return this.json.getAsJsonObject("variants");
     }
@@ -51,6 +106,11 @@ public final class Blockstates {
             this.json.add("variants", variants);
         }
         return variants;
+    }
+
+    public boolean hasVariants() {
+        @Nullable JsonObject variants = this.getVariantsJsonOrNull();
+        return variants != null && !variants.isEmpty();
     }
 
     private @Nullable JsonObject getVariantJsonOrNull(String variantKey) {
@@ -157,6 +217,49 @@ public final class Blockstates {
     @Override
     public String toString() {
         return this.json.toString();
+    }
+
+    private static Map<String, String> getStateValuesMap(BlockData state) {
+        Map<String, String> map = new Object2ObjectArrayMap<>(6);
+        {
+            StringTokenizer tokenizer = new StringTokenizer(getVariantKey(state), ",");
+            while (tokenizer.hasMoreTokens()) {
+                String token = tokenizer.nextToken();
+                int equalsIndex = token.indexOf('=');
+                map.put(token.substring(0, equalsIndex), token.substring(equalsIndex + 1));
+            }
+        }
+        return map;
+    }
+
+    private static boolean multipartWhenMatches(JsonObject multipartWhen, BlockData state) {
+        JsonElement or = multipartWhen.get("OR");
+        if (or != null) {
+            return or.getAsJsonArray().asList().stream().anyMatch(listElement -> multipartWhenMatches(listElement.getAsJsonObject(), state));
+        }
+        JsonElement and = multipartWhen.get("AND");
+        if (and != null) {
+            return and.getAsJsonArray().asList().stream().allMatch(listElement -> multipartWhenMatches(listElement.getAsJsonObject(), state));
+        }
+        Map<String, String> stateValues = getStateValuesMap(state);
+        List<String> reusableValuesList = new ArrayList<>(5);
+        for (Map.Entry<String, JsonElement> entry : multipartWhen.entrySet()) {
+            reusableValuesList.clear();
+            StringTokenizer tokenizer = new StringTokenizer(entry.getValue().getAsString(), "|");
+            while (tokenizer.hasMoreTokens()) {
+                reusableValuesList.add(tokenizer.nextToken());
+            }
+            if (!reusableValuesList.contains(stateValues.get(entry.getKey()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static JsonObject getMultipartWhenElement(BlockData state) {
+        JsonObject element = new JsonObject();
+        getStateValuesMap(state).forEach(element::addProperty);
+        return element;
     }
 
     public static Blockstates ofImmutable(JsonObject jsonObject) {

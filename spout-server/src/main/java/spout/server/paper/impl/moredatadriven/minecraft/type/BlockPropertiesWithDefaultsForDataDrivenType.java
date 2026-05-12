@@ -54,6 +54,9 @@ public final class BlockPropertiesWithDefaultsForDataDrivenType {
                 properties.noOcclusion();
                 properties.pushReaction(PushReaction.DESTROY);
             });
+            addInitializer("fence", properties -> {
+                properties.forceSolidOn();
+            });
             addInitializer("fence_gate", properties -> {
                 properties.forceSolidOn();
             });

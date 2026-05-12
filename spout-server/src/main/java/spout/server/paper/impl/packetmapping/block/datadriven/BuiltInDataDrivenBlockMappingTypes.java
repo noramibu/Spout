@@ -237,6 +237,8 @@ public final class BuiltInDataDrivenBlockMappingTypes {
 
     public static final DataDrivenBlockMappingType DOOR = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("door", AutomaticBlockMappingsImpl::door);
 
+    public static final DataDrivenBlockMappingType FENCE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("fence", AutomaticBlockMappingsImpl::fence);
+
     public static final DataDrivenBlockMappingType FENCE_GATE = new MultiStateBuiltInDataDrivenBlockMappingType<FromToBlockTypeRequestBuilderImpl>("fence_gate", AutomaticBlockMappingsImpl::fenceGate);
 
     public static final DataDrivenBlockMappingType FULL_BLOCK = new BuiltInDataDrivenBlockMappingType("full_block") {

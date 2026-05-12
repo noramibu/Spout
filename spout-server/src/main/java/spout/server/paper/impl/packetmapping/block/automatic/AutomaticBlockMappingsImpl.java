@@ -55,7 +55,7 @@ public final class AutomaticBlockMappingsImpl implements AutomaticBlockMappings 
     }
 
     private <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void blockTypeFullBlock(BlockType defaultFallback, Consumer<? extends B> builderConsumer) {
-        this.simpleBlockType(defaultFallback, BlockTypeFullBlockRequestProcessor::new, builderConsumer);
+        this.simpleBlockType(defaultFallback, FullBlockBlockTypeRequestProcessor::new, builderConsumer);
     }
 
     @Override
@@ -70,7 +70,7 @@ public final class AutomaticBlockMappingsImpl implements AutomaticBlockMappings 
 
     @Override
     public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void button(Consumer<? extends B> builderConsumer) {
-        this.simpleBlockType(BlockType.STONE_BUTTON, ButtonRequestProcessor::new, builderConsumer);
+        this.simpleBlockType(BlockType.STONE_BUTTON, StandardBlockTypeRequestProcessor::new, builderConsumer);
     }
 
     @Override
@@ -86,6 +86,11 @@ public final class AutomaticBlockMappingsImpl implements AutomaticBlockMappings 
     @Override
     public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void door(Consumer<? extends B> builderConsumer) {
         this.simpleBlockType(BlockType.OAK_DOOR, DoorRequestProcessor::new, builderConsumer);
+    }
+
+    @Override
+    public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void fence(Consumer<? extends B> builderConsumer) {
+        this.simpleBlockType(BlockType.OAK_FENCE, StandardBlockTypeRequestProcessor::new, builderConsumer);
     }
 
     @Override
@@ -110,7 +115,7 @@ public final class AutomaticBlockMappingsImpl implements AutomaticBlockMappings 
 
     @Override
     public <B extends FromBlockTypeRequestBuilder & ToBlockTypeRequestBuilder> void ladder(Consumer<? extends B> builderConsumer) {
-        this.simpleBlockType(BlockType.LADDER, LadderRequestProcessor::new, builderConsumer);
+        this.simpleBlockType(BlockType.LADDER, StandardBlockTypeRequestProcessor::new, builderConsumer);
     }
 
     @Override
