@@ -19,7 +19,6 @@ public final class PluginItemTypes {
     public static Supplier<ItemType> DIRT_STAIRS = itemType("more_vanilla_shapes:dirt_stairs");
     public static Supplier<ItemType> GLASS_SLAB = itemType("more_vanilla_shapes:glass_slab");
     public static Supplier<ItemType> GLASS_STAIRS = itemType("more_vanilla_shapes:glass_stairs");
-    public static Supplier<ItemType> STONE_BRICK_BEVEL = itemType("more_vanilla_shapes:stone_brick_bevel");
     public static Supplier<ItemType> AZALEA_PLANKS = itemType("quark:azalea_planks");
     public static Supplier<ItemType> BIRCH_BOOKSHELF = itemType("quark:birch_bookshelf");
     public static Supplier<ItemType> DIORITE_BRICK_SLAB = itemType("quark:diorite_brick_slab");

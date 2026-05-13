@@ -2,6 +2,7 @@ package spout.common.builtincontent.block;
 
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 /**
  * Additional block state properties that are not in {@link BlockStateProperties}.
@@ -20,5 +21,6 @@ public final class SpoutBlockStateProperties {
     public static final BooleanProperty SOUTH_EAST_BOTTOM = BooleanProperty.create("east_down_south");
     public static final BooleanProperty NORTH_EAST_TOP = BooleanProperty.create("east_up_north");
     public static final BooleanProperty SOUTH_EAST_TOP = BooleanProperty.create("east_up_south");
+    public static final EnumProperty<VerticalSlabType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", VerticalSlabType.class);
 
 }

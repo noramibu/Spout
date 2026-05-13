@@ -45,6 +45,12 @@ ij_java_use_fq_class_names = true
 [spout-server/src/*/resources/data/**/*.json]
 indent_size = 2
 
+[spout-server/src/*/resources/default_resource_pack_contents/**/*.json]
+indent_size = 2
+
+[spout-server/src/*/resources/default_resource_pack_contents/**/*.mcmeta]
+indent_size = 2
+
 [test-plugin/src/main/resources/*pack*/**/*.json]
 indent_size = 2
 

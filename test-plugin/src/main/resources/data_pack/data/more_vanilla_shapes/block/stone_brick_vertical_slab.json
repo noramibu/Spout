@@ -1,0 +1,20 @@
+{
+  "type": "spout:vertical_slab",
+  "properties": {
+    "map_color": "minecraft:stone",
+    "explosion_resistance": 6.0,
+    "destroy_time": 2.0,
+    "requires_correct_tool_for_drops": true,
+    "instrument": "minecraft:basedrum"
+  },
+  "mappings": [
+    {
+      "type": "manual",
+      "awareness_levels": [
+        "vanilla",
+        "resource_pack"
+      ],
+      "to": "minecraft:stone_bricks"
+    }
+  ]
+}

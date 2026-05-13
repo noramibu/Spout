@@ -1,15 +1,16 @@
 --- a/src/main/java/org/bukkit/craftbukkit/block/data/CraftBlockData.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/data/CraftBlockData.java
-@@ -246,6 +_,13 @@
+@@ -246,6 +_,14 @@
      static {
          //<editor-fold desc="CraftBlockData Registration" defaultstate="collapsed">
          // Start generate - CraftBlockData#INSTANCE_CREATOR
 +        // Spout start - Built-in content - Blocks - API - Implementation part - Register BlockData translations
-+        register(spout.common.builtincontent.block.BevelBlock.class, spout.server.paper.impl.builtincontent.block.api.CraftBevel::new);
++        register(spout.common.builtincontent.block.QuadBlock.class, spout.server.paper.impl.builtincontent.block.api.CraftQuad::new);
 +        register(spout.common.builtincontent.block.HalfTransparentSlabBlock.class, org.bukkit.craftbukkit.block.impl.CraftSlab::new);
 +        register(spout.common.builtincontent.block.HalfTransparentStairBlock.class, org.bukkit.craftbukkit.block.impl.CraftStair::new);
 +        register(spout.common.builtincontent.block.TransparentSlabBlock.class, org.bukkit.craftbukkit.block.impl.CraftSlab::new);
 +        register(spout.common.builtincontent.block.TransparentStairBlock.class, org.bukkit.craftbukkit.block.impl.CraftStair::new);
++        register(spout.common.builtincontent.block.VerticalSlabBlock.class, spout.server.paper.impl.builtincontent.block.api.CraftVerticalSlab::new);
 +        // Spout end - Built-in content - Blocks - API - Implementation part - Register BlockData translations
          register(net.minecraft.world.level.block.AmethystClusterBlock.class, org.bukkit.craftbukkit.block.impl.CraftAmethystCluster::new);
          register(net.minecraft.world.level.block.AnvilBlock.class, org.bukkit.craftbukkit.block.impl.CraftAnvil::new);
