@@ -236,12 +236,8 @@ public final class ResourcePackConstructionImpl extends ComposableImpl<ResourceP
         "assets/spout/models/block/quad_yyyyyyyn.json",
         "assets/spout/models/block/quad_yyyyyyyy.json",
         "assets/spout/models/block/top_half_texture_bottom_slab.json",
-        "assets/spout/models/block/vertical_slab_higher_x.json",
-        "assets/spout/models/block/vertical_slab_higher_z.json",
-        "assets/spout/models/block/vertical_slab_lower_x.json",
-        "assets/spout/models/block/vertical_slab_lower_z.json",
-        "assets/spout/models/block/vertical_slab_middle_x.json",
-        "assets/spout/models/block/vertical_slab_middle_z.json"
+        "assets/spout/models/block/vertical_slab.json",
+        "assets/spout/models/block/vertical_slab_tinted.json",
     };
 
     private static boolean isLangFile(String pathInResourcePack) {
