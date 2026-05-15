@@ -34,14 +34,14 @@ jobs:
           git config --global user.email "no-reply@github.com"
           git config --global user.name "Github Actions"
       - name: Apply single file patches
-        run: ./gradlew applyPaperSingleFilePatches --stacktrace
+        run: ./gradlew :spout-paper:applyPaperSingleFilePatches --stacktrace
       - name: Apply API patches
-        run: ./gradlew applyPaperApiPatches --stacktrace
+        run: ./gradlew :spout-paper:applyPaperApiPatches --stacktrace
       - name: Build JAR
-        run: ./gradlew :spout-api:jar --stacktrace
+        run: ./gradlew :spout-paper:spout-api:jar --stacktrace
       - name: Upload JAR
         uses: actions/upload-artifact@v7
         with:
           name: Spout API JAR
-          path: spout-api/build/libs/spout-api-*.jar
+          path: spout-paper/spout-api/build/libs/spout-api-*.jar
           archive: false
