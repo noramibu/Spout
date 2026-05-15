@@ -2,12 +2,12 @@
 
   <!--<img src="logo.png" alt="Spout logo" width="21%" align="right">-->
   <h1>
-    Spout<br>(for Paper & Bukkit)
+    Spout server / Spoutcraft client<br>(Paper,  Fabric)
   </h1>
   <h3>
-    Server software extension<br>letting you add new blocks and items
+    Vanilla-compatible server + client
     <br>
-    that are automatically installed on clients
+    that automatically sends modded content from server to client
   </h3>
 
 [![Discord](https://img.shields.io/discord/1091830813240348732?color=5865F2&label=discord&style=for-the-badge)](https://discord.gg/EduvcVmKS7)
@@ -18,60 +18,48 @@
 <table>
   <tr>
     <td>
-      <a href="spout/design/fire.png"><img src="spout/design/fire_small.png"></a>
+      <a href="design/fire.png"><img src="design/fire_small.png"></a>
     </td>
     <td>
-      <a href="spout/design/orange.png"><img src="spout/design/orange_small.png"></a>
+      <a href="design/orange.png"><img src="design/orange_small.png"></a>
     </td>
     <td>
-      <a href="spout/design/stone.png"><img src="spout/design/stone_small.png"></a>
+      <a href="design/stone.png"><img src="design/stone_small.png"></a>
     </td>
   </tr>
   <tr>
     <td>
-      <a href="spout/design/lantern.png"><img src="spout/design/lantern_small.png"></a>
+      <a href="design/lantern.png"><img src="design/lantern_small.png"></a>
     </td>
     <td>
-      <a href="spout/design/bookshelves.png"><img src="spout/design/bookshelves_small.png"></a>
+      <a href="design/bookshelves.png"><img src="design/bookshelves_small.png"></a>
     </td>
     <td>
-      <a href="spout/design/concrete.png"><img src="spout/design/concrete_small.png"></a>
+      <a href="design/concrete.png"><img src="design/concrete_small.png"></a>
     </td>
   </tr>
 </table>
 
+# Server
+
 ## Introduction
 
-Spout is a Paper server extension that lets Bukkit plugins add new blocks and items server-side.
-When players join, the new blocks and items will be sent to their client and added client-side.
+Spout lets you add new blocks and items on a Paper server, fully server-side.\
+When players join, the new blocks and items will be added client-side too.
 
-Spout requires a Paper server.
-<!--A Fabric server mod is also in development.-->
-
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Automatically sends custom content to clients with the Spoutcraft mod
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Works with other clients too, including vanilla
+(with/without resource pack)
+<br>
 &nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Support for all Bukkit / Spigot / Paper plugins
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Spout plugins are just Paper plugins
-that can add blocks and items on Spout servers
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Works with all clients,
-with special support for clients with the corresponding
-<a href="https://github.com/ModernSpout/Spoutcraft">Fabric mod</a>
-<br>
 
-## Spout plugin showcase
-
-* [Quark](https://github.com/ModernSpout/Quark-plugin)
-* [Chinese paper lamps](https://github.com/ModernSpout/ChinesePaperLamps-plugin)
-* [Snowy stone bricks](https://github.com/ModernSpout/SnowyStoneBricks-plugin)
+A Fabric server mod is planned.
+Please let us know on [Discord](https://discord.gg/EduvcVmKS7) if you are interested.
 
 ## Downloads
 
-&nbsp;&nbsp;&nbsp;&nbsp;➞&nbsp;&nbsp;**[Latest version: 26.1.2 (version 1.5)](https://github.com/ModernSpout/Spout/releases/download/26.1.2-R1.5/spout-26.1.2-R1.5.jar)**
-
-* Development versions: download from
-  [Actions](https://github.com/ModernSpout/Spout/actions/workflows/build-server.yml),
-  under **Artifacts**
-* [Older releases](https://github.com/ModernSpout/Spout/releases)
+[![Download latest version](https://img.shields.io/badge/⬇-GitHub-878787?style=for-the-badge)](https://github.com/ModernSpout/Spout/releases/download/26.1.2-R1.5/spout-26.1.2-R1.5.jar)
 
 ## Installation
 
@@ -80,8 +68,6 @@ The `.jar` file is a drop-in replacement for the Paper JAR, and you can run it t
 ```sh
 java -jar spout-26.1.2-R1.5.jar
 ```
-
-<!--You can place Bukkit / Paper / Spout plugins in the `plugins` folder.-->
 
 <div align="center">
   <table>
@@ -100,7 +86,17 @@ java -jar spout-26.1.2-R1.5.jar
   </table>
 </div>
 
-## Creating a Spout plugin
+## Adding custom blocks and items
+
+New blocks and items can be added by Paper plugins that support Spout.
+
+### Spout plugin showcase
+
+* [Quark](https://github.com/ModernSpout/Quark-plugin)
+* [Chinese paper lamps](https://github.com/ModernSpout/ChinesePaperLamps-plugin)
+* [Snowy stone bricks](https://github.com/ModernSpout/SnowyStoneBricks-plugin)
+
+### Creating a Spout plugin
 
 It's very simple:
 1. Create a regular Paper plugin
@@ -109,6 +105,55 @@ It's very simple:
 
 See the step-by-step guide on the
 <a href="https://github.com/ModernSpout/Spout/wiki/*-Making-a-Spout-plugin">wiki</a>!
+
+## Current known issues
+
+* Vanilla clients cannot see block display entities, falling blocks and stonecutter recipes for custom blocks.
+
+# Client
+
+## Introduction
+
+Spoutcraft offers extra support for Spout servers.\
+It works just like a modloader: when you join a Spout server,
+the server's modded content will be downloaded and installed automatically.
+
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Supports non-vanilla block shapes, like vertical slabs
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Supports all properties, including breaking speed, light level and textures
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;✓&nbsp;&nbsp;Auto-completion in commands, such as <code>/give</code>
+
+Because it contains no modded block or items of itself, the Spoutcraft client mod is super lightweight.
+<br>
+It is incredibly fast: a server's modded content is downloaded and installed in less than a second.
+
+## Downloads
+
+[![Download latest version](https://img.shields.io/badge/⬇-GitHub-878787?style=for-the-badge)](https://github.com/ModernSpout/Spoutcraft/releases/download/1.1.1/spoutcraft-1.1.1.jar)
+[![Modrinth](https://img.shields.io/badge/⬇-modrinth-2c9448?style=for-the-badge)](https://modrinth.com/mod/spout-client)
+[![CurseForge](https://img.shields.io/badge/⬇-curseforge-ba5c3d?style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/spout)
+
+## Installation
+
+Place the `.jar` file into the `mods` folder.
+
+Requires [Fabric API](https://modrinth.com/mod/fabric-api).
+
+<div align="center">
+  <table>
+    <tr>
+      <td valign="center">
+        <h1>🔨</h1>
+      </td>
+      <td valign="center">
+        Spoutcraft has been tested, but compatibility with other mods has not been explored fully.
+        <br>
+        Please report if you encounter any issues.
+      </td>
+    </tr>
+  </table>
+</div>
 
 <!--
 ## Next
@@ -126,11 +171,8 @@ Afterward, goals of the project are:
 Don't hesitate to suggest ideas, send in PRs (we will take a serious look at every PR, even if it is only a draft),
 or ask to join the project as a developer.
 -->
-## Current known issues
 
-* Vanilla clients cannot see block display entities, falling blocks and stonecutter recipes for custom blocks.
-
-## Acknowledgements
+# Acknowledgements
 
 This project is heavily inspired by the original
 [Spoutcraft / BukkitContrib](https://github.com/spoutcraft) project.
