@@ -29,6 +29,10 @@ loom {
 	}
 }
 
+sourceSets.main {
+    java.srcDir("../common-minecraft-src/src/main/java")
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
