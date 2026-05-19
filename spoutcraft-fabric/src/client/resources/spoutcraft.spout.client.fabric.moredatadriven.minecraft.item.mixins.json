@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "spout.client.fabric.moredatadriven.minecraft.item.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ItemPropertiesSerializationAccessorItemPropertiesMixin",
+    "ItemPropertiesSerializationDecoratorItemPropertiesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
