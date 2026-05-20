@@ -39,7 +39,7 @@ public class SpoutDataDrivenItem implements DependentDataDrivenResource {
 
         @Override
         public <T> DataResult<T> encode(Item input, DynamicOps<T> dynamicOps, T prefix) {
-            return CODEC.encoder().encodeStart(dynamicOps, new SpoutDataDrivenItem(((ItemWithType) input).spout$getItemType(), input));
+            return CODEC.encoder().encodeStart(dynamicOps, new SpoutDataDrivenItem(input));
         }
 
     };
@@ -66,8 +66,8 @@ public class SpoutDataDrivenItem implements DependentDataDrivenResource {
         this.input = input;
     }
 
-    public SpoutDataDrivenItem(SpoutItemType type, Item item) {
-        this.type = type;
+    public SpoutDataDrivenItem(Item item) {
+        this.type = ((ItemTypeDecorator) item).spout$getItemType();
         this.item = item;
     }
 

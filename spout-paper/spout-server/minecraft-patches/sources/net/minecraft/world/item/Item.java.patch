@@ -7,7 +7,7 @@
 -public class Item implements ItemLike, FeatureElement {
 +// Spout start - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key
 +// Spout start - More data-driven - Minecraft registries - Block - Implement interfaces
-+public class Item implements FeatureElement, ItemLike, spout.common.moredatadriven.minecraft.item.ItemWithType, spout.server.paper.impl.moredatadriven.datapack.CopyResourcesFromDataPackRegistryToInternalRegistry.DelayedResourceKeyAttachable<Item> {
++public class Item implements FeatureElement, ItemLike, spout.common.moredatadriven.minecraft.item.ItemTypeDecorator, spout.server.paper.impl.moredatadriven.datapack.CopyResourcesFromDataPackRegistryToInternalRegistry.DelayedResourceKeyAttachable<Item> {
 +    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.ITEM; }
 +    // Spout end - More data-driven - Minecraft registries - Block - Implement interfaces
 +    private Item.@Nullable Properties originalProperties;

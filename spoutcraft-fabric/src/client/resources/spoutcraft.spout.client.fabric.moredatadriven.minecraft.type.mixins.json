@@ -4,11 +4,8 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "BlockBehaviourPropertiesAccessor",
-    "BlockItemCodecMixin",
     "BlocksStatePredicatesAccessor",
-    "EggItemCodecMixin",
     "FeatureFlagRegistryNamesAccessorFeatureFlagRegistryMixin",
-    "ItemCodecMixin",
     "ItemKeepPropertiesMixin",
     "ReplaceBlockBehaviourPropertiesCodecMixin",
     "LazyBaseStateStairBlockAccessor",

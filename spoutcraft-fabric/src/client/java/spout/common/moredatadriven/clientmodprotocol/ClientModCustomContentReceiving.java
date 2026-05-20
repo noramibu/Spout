@@ -1,5 +1,6 @@
 package spout.common.moredatadriven.clientmodprotocol;
 
+import com.mojang.serialization.JsonOps;
 import it.unimi.dsi.fastutil.Pair;
 import org.jspecify.annotations.Nullable;
 import spout.client.fabric.clientview.ClientModState;
@@ -7,6 +8,10 @@ import spout.client.fabric.clientview.SpoutProtocol;
 import spout.client.fabric.moredatadriven.TemporaryRegistryModifiers;
 import spout.client.fabric.moredatadriven.minecraft.type.WithItemProperties;
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.BlockBehaviourPropertiesAccessor;
+import spout.common.moredatadriven.minecraft.item.SpoutDataDrivenItem;
+import spout.common.protocol.ClientModCustomContent;
+import spout.common.protocol.ClientModCustomContentPacketPayload;
+import spout.common.util.minecraft.resources.KeyedValue;
 
 /**
  * Collects all custom content received.
@@ -27,12 +32,12 @@ public final class ClientModCustomContentReceiving {
             Thread.onSpinWait();
         }
         if (receivedContent == null) {
-            receivedContent = new ClientModCustomContent();
+            receivedContent = ClientModCustomContent.createEmpty();
         }
         for (ClientModCustomContentPacketPayload.Element element : payload.elements) {
             switch (element.type) {
-                case BLOCK -> receivedContent.blockJSONs.add(element.getContentAsJsonElement());
-                case ITEM -> receivedContent.itemJSONs.add(element.getContentAsJsonElement());
+                case BLOCK -> receivedContent.getBlocks().add(KeyedValue.of(element.getIdentifier(), element.getContentAsJsonElement()));
+                case ITEM -> receivedContent.getItems().add(KeyedValue.of(element.getIdentifier(), SpoutDataDrivenItem.CODEC.decoder().decode(JsonOps.INSTANCE, element.getContentAsJsonElement()).getOrThrow().getFirst()));
                 case END -> {
                     // Add the received content
                     TemporaryRegistryModifiers.prepareToAddCustomContent();

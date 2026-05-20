@@ -41,7 +41,7 @@ public final class DataPackRegistriesToLoadBeforeDelayedRegistryFreeze {
             SpoutDataDrivenItem.CODEC,
             registry -> {
                 CopyResourcesFromDataPackRegistryToInternalRegistry.copy(
-                    SortDependentDataDrivenResources.sorted(registry).map(pair -> {
+                    SortDependentDataDrivenResources.sortedRegistry(registry).map(pair -> {
                         pair.right().initializeItemFromInput();
                         return Pair.of(pair.left().identifier(), pair.right().getItem());
                     }),

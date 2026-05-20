@@ -4,13 +4,9 @@ import net.minecraft.world.item.Item;
 import spout.common.moredatadriven.minecraft.itemtype.SpoutItemType;
 
 /**
- * An interface to get the type of some {@link Item}.
- *
- * <p>
- * This is specifically meant to be implemented by {@link Item}.
- * </p>
+ * A decorator of {@link Item} that provides the {@link SpoutItemType}.
  */
-public interface ItemWithType {
+public interface ItemTypeDecorator {
 
     SpoutItemType spout$getItemType();
 

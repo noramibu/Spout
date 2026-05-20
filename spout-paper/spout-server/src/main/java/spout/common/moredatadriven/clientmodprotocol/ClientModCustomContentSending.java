@@ -1,11 +1,15 @@
 package spout.common.moredatadriven.clientmodprotocol;
 
+import com.mojang.serialization.JsonOps;
 import net.minecraft.network.Connection;
 import net.minecraft.network.VarInt;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.Nullable;
+import spout.common.moredatadriven.minecraft.item.SpoutDataDrivenItem;
+import spout.common.protocol.ClientModCustomContent;
+import spout.common.protocol.ClientModCustomContentPacketPayload;
 import spout.server.paper.api.clientview.ClientView;
 import spout.server.paper.impl.clientview.JavaWithClientModClientViewImpl;
 import spout.server.paper.impl.clientview.lookup.ClientViewLookup;
@@ -54,7 +58,7 @@ public final class ClientModCustomContentSending {
         }));
 
         // Create the content instance
-        ClientModCustomContent customContent = ClientModCustomContent.create(blocks, items);
+        ClientModCustomContent customContent = ClientModCustomContent.createFilled(blocks, items);
 
         // Remove the temporary client view
         ClientViewLookupThreadLocal.THREAD_LOCAL.remove();
@@ -88,8 +92,8 @@ public final class ClientModCustomContentSending {
             }
 
         }
-        customContent.blockJSONs.forEach(json -> FillPayloadsHelper.addElement(new ClientModCustomContentPacketPayload.Element(ClientModCustomContentPacketPayload.Element.Type.BLOCK, json)));
-        customContent.itemJSONs.forEach(json -> FillPayloadsHelper.addElement(new ClientModCustomContentPacketPayload.Element(ClientModCustomContentPacketPayload.Element.Type.ITEM, json)));
+        customContent.getBlocks().forEach(value -> FillPayloadsHelper.addElement(new ClientModCustomContentPacketPayload.Element(ClientModCustomContentPacketPayload.Element.Type.BLOCK, value.identifier(), value.value())));
+        customContent.getItems().forEach(value -> FillPayloadsHelper.addElement(new ClientModCustomContentPacketPayload.Element(ClientModCustomContentPacketPayload.Element.Type.ITEM, value.identifier(), SpoutDataDrivenItem.CODEC.encoder().encodeStart(JsonOps.INSTANCE, value.value()).getOrThrow())));
         FillPayloadsHelper.addElement(ClientModCustomContentPacketPayload.Element.END);
         FillPayloadsHelper.finishCurrentPayload();
 

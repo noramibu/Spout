@@ -3,7 +3,11 @@
   "package": "spout.client.fabric.moredatadriven.minecraft.item.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "ItemPropertiesSerializationDecoratorItemPropertiesMixin"
+    "ItemPropertiesSerializationDecoratorItemPropertiesMixin",
+    "ItemTypeDecoratorBlockItemMixin",
+    "ItemTypeDecoratorDoubleHighBlockItemMixin",
+    "ItemTypeDecoratorEggItemMixin",
+    "ItemTypeDecoratorItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

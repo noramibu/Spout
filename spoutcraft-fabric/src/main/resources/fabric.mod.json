@@ -29,6 +29,10 @@
       "environment": "client"
     },
     {
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.mixins.json",
+      "environment": "client"
+    },
+    {
       "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.item.mixins.json",
       "environment": "client"
     },

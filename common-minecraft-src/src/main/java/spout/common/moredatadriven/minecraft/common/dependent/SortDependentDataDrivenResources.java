@@ -5,6 +5,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import org.jspecify.annotations.Nullable;
+import spout.common.util.minecraft.resources.KeyedValue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,31 +26,43 @@ public final class SortDependentDataDrivenResources {
     /**
      * A node in a directed acyclic graph.
      */
-    private static class DAGNode<T> {
+    private static class DAGNode<K, T> {
 
-        public final ResourceKey<T> key;
+        public final ResourceKey<K> key;
         public final T resource;
 
-        public @Nullable List<DAGNode<T>> dependents;
+        public @Nullable List<DAGNode<K, T>> dependents;
         public int requiredLeft;
 
-        public DAGNode(ResourceKey<T> key, T resource) {
+        public DAGNode(ResourceKey<K> key, T resource) {
             this.key = key;
             this.resource = resource;
         }
 
     }
 
-    public static <T extends DependentDataDrivenResource> Stream<Pair<ResourceKey<T>, T>> sorted(Registry<T> registry) {
+    public static <T extends DependentDataDrivenResource> Stream<Pair<ResourceKey<T>, T>> sortedRegistry(Registry<T> registry) {
+        return sorted(registry.entrySet().stream().map(entry -> Pair.of(entry.getKey(), entry.getValue())));
+    }
+
+    public static <K, T extends DependentDataDrivenResource> Stream<Pair<ResourceKey<K>, T>> sortedKeyedResources(Registry<K> registry, Stream<KeyedValue<T>> resources) {
+        return sortedKeyedResources(registry.key(), resources);
+    }
+
+    public static <K, T extends DependentDataDrivenResource> Stream<Pair<ResourceKey<K>, T>> sortedKeyedResources(ResourceKey<? extends Registry<K>> registryKey, Stream<KeyedValue<T>> resources) {
+        return sorted(resources.map(value -> Pair.of(ResourceKey.create(registryKey, value.identifier()), value.value())));
+    }
+
+    public static <K, T extends DependentDataDrivenResource> Stream<Pair<ResourceKey<K>, T>> sorted(Stream<Pair<ResourceKey<K>, T>> resources) {
         // Create the nodes
-        Map<Identifier, DAGNode<T>> nodesByIdentifier = registry.entrySet().stream()
-            .collect(Collectors.toMap(entry -> entry.getKey().identifier(), entry -> new DAGNode<>(entry.getKey(), entry.getValue())));
+        Map<Identifier, DAGNode<K, T>> nodesByIdentifier = resources
+            .collect(Collectors.toMap(entry -> entry.left().identifier(), entry -> new DAGNode<>(entry.left(), entry.right())));
         // Link the nodes
         nodesByIdentifier.values().forEach(node -> {
             Collection<Identifier> requiredResources = node.resource.getRequiredResources();
             node.requiredLeft = requiredResources.size();
             for (Identifier requiredResource : requiredResources) {
-                DAGNode<T> requiredResourceNode = nodesByIdentifier.get(requiredResource);
+                DAGNode<K, T> requiredResourceNode = nodesByIdentifier.get(requiredResource);
                 if (requiredResourceNode.dependents == null) {
                     requiredResourceNode.dependents = new ArrayList<>(1);
                 }
@@ -57,15 +70,15 @@ public final class SortDependentDataDrivenResources {
             }
         });
         // List the nodes in a valid order
-        List<DAGNode<T>> ready = new ArrayList<>(nodesByIdentifier.size());
+        List<DAGNode<K, T>> ready = new ArrayList<>(nodesByIdentifier.size());
         nodesByIdentifier.forEach((_, node) -> {
             if (node.requiredLeft == 0) {
                 ready.add(node);
             }
         });
-        List<DAGNode<T>> result = new ArrayList<>(nodesByIdentifier.size());
+        List<DAGNode<K, T>> result = new ArrayList<>(nodesByIdentifier.size());
         while (!ready.isEmpty()) {
-            DAGNode<T> next = ready.removeLast();
+            DAGNode<K, T> next = ready.removeLast();
             if (next.dependents != null) {
                 next.dependents.forEach(dependent -> {
                     if (--dependent.requiredLeft == 0) {
