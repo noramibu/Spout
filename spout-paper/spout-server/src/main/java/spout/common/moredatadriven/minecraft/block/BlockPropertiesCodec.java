@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import spout.common.moredatadriven.minecraft.common.subtypes.SubtypeCodecs;
 import spout.common.moredatadriven.minecraft.type.BlockStateFunction;
-import spout.common.moredatadriven.minecraft.type.KnownStatePredicate;
+import spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate;
 import spout.common.util.mojang.codec.CodecUtil;
 import spout.server.paper.impl.moredatadriven.minecraft.type.BlockPropertiesWithDefaultsForDataDrivenType;
 

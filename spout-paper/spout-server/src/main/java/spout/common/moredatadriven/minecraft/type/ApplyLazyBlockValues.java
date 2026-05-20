@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import spout.common.moredatadriven.minecraft.common.subtypes.BlockStateStringConversion;
 
 /**
  * A utility class that applies lazily applied block values,

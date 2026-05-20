@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.BlockBehaviourPropertiesAccessor;
+import spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate;
 import spout.common.moredatadriven.minecraft.common.subtypes.SubtypeCodecs;
 import java.util.function.BiFunction;
 import java.util.function.Function;

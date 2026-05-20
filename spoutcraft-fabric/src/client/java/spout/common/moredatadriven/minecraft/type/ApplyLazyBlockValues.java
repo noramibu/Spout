@@ -27,6 +27,7 @@ import spout.client.fabric.moredatadriven.minecraft.type.mixin.LazyHostBlockInfe
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.LazyPlantChorusFlowerBlockAccessor;
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.LazyPottedFlowerPotBlockAccessor;
 import spout.client.fabric.moredatadriven.minecraft.type.mixin.LazyTurnsIntoBrushableBlockAccessor;
+import spout.common.moredatadriven.minecraft.common.subtypes.BlockStateStringConversion;
 import java.util.Objects;
 import java.util.stream.Stream;
 

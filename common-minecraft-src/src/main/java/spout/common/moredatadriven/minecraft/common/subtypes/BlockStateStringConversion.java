@@ -1,4 +1,4 @@
-package spout.common.moredatadriven.minecraft.type;
+package spout.common.moredatadriven.minecraft.common.subtypes;
 
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.registries.BuiltInRegistries;

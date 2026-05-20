@@ -1,16 +1,31 @@
 --- a/net/minecraft/world/level/block/Blocks.java
 +++ b/net/minecraft/world/level/block/Blocks.java
-@@ -46,11 +_,11 @@
+@@ -1,7 +_,6 @@
+ package net.minecraft.world.level.block;
+ 
+ import java.util.function.Function;
+-import java.util.function.ToIntFunction;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.core.Direction;
+ import net.minecraft.core.Registry;
+@@ -39,18 +_,17 @@
+ import net.minecraft.world.level.block.state.properties.BlockSetType;
+ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+-import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
+ import net.minecraft.world.level.block.state.properties.WoodType;
+ import net.minecraft.world.level.material.Fluids;
+ import net.minecraft.world.level.material.MapColor;
  import net.minecraft.world.level.material.PushReaction;
  
  public class Blocks {
 -    private static final BlockBehaviour.StatePredicate NOT_CLOSED_SHULKER = (statex, level, pos) -> !(
-+    public static final BlockBehaviour.StatePredicate NOT_CLOSED_SHULKER = (state, level, pos) -> !( // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable - Make public
++    public static final BlockBehaviour.StatePredicate NOT_CLOSED_SHULKER = (state, level, pos) -> !( // Spout - Common class tweakers - Make accessible
              level.getBlockEntity(pos) instanceof ShulkerBoxBlockEntity shulkerBoxBlockEntity
          )
          || shulkerBoxBlockEntity.isClosed();
 -    private static final BlockBehaviour.StatePredicate NOT_EXTENDED_PISTON = (statex, level, pos) -> !statex.getValue(PistonBaseBlock.EXTENDED);
-+    public static final BlockBehaviour.StatePredicate NOT_EXTENDED_PISTON = (state, level, pos) -> !state.getValue(PistonBaseBlock.EXTENDED); // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable - Make public
++    public static final BlockBehaviour.StatePredicate NOT_EXTENDED_PISTON = (state, level, pos) -> !state.getValue(PistonBaseBlock.EXTENDED); // Spout - Common class tweakers - Make accessible
      public static final Block AIR = register("air", AirBlock::new, BlockBehaviour.Properties.of().replaceable().noCollision().noLootTable().air());
      public static final Block STONE = register(
          "stone",
@@ -28,7 +43,7 @@
              .requiresCorrectToolForDrops()
              .sound(SoundType.SNOW)
 -            .isViewBlocking((statex, level, pos) -> statex.getValue(SnowLayerBlock.LAYERS) >= 8)
-+            .isViewBlocking(spout.common.moredatadriven.minecraft.type.KnownStatePredicate.MAX_SNOW_LAYERS) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
++            .isViewBlocking(spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate.MAX_SNOW_LAYERS) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
              .pushReaction(PushReaction.DESTROY)
      );
      public static final Block ICE = register(
@@ -55,7 +70,7 @@
              .sound(SoundType.SCULK_SENSOR)
              .lightLevel(statex -> 1)
 -            .emissiveRendering((statex, level, pos) -> SculkSensorBlock.getPhase(statex) == SculkSensorPhase.ACTIVE)
-+            .emissiveRendering(spout.common.moredatadriven.minecraft.type.KnownStatePredicate.SCULK_PHASE_ACTIVE)
++            .emissiveRendering(spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate.SCULK_PHASE_ACTIVE)
      );
      public static final Block CALIBRATED_SCULK_SENSOR = register(
          "calibrated_sculk_sensor", CalibratedSculkSensorBlock::new, BlockBehaviour.Properties.ofLegacyCopy(SCULK_SENSOR)

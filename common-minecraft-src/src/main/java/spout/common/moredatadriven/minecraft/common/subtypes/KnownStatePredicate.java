@@ -1,13 +1,7 @@
-package spout.common.moredatadriven.minecraft.type;
+package spout.common.moredatadriven.minecraft.common.subtypes;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import java.lang.invoke.SerializedLambda;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.BlockGetter;
@@ -17,7 +11,10 @@ import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SculkSensorPhase;
-import spout.client.fabric.moredatadriven.minecraft.type.mixin.BlocksStatePredicatesAccessor;
+import java.lang.invoke.SerializedLambda;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * A simple enum for the possible values of {@link BlockBehaviour.StatePredicate}s used as values
@@ -29,8 +26,8 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
     ALWAYS(Blocks::always),
     IS_COLLISION_SHAPE_FULL_BLOCK((state, level, pos) -> state.isCollisionShapeFullBlock(level, pos)),
     BLOCKS_MOTION_AND_IS_COLLISION_SHAPE_FULL_BLOCK((state, level, pos) -> state.blocksMotion() && state.isCollisionShapeFullBlock(level, pos)),
-    NOT_CLOSED_SHULKER(BlocksStatePredicatesAccessor.getNotClosedShulker()),
-    NOT_EXTENDED_PISTON(BlocksStatePredicatesAccessor.getNotExtendedPiston()),
+    NOT_CLOSED_SHULKER(Blocks.NOT_CLOSED_SHULKER),
+    NOT_EXTENDED_PISTON(Blocks.NOT_EXTENDED_PISTON),
     MAX_SNOW_LAYERS((state, level, pos) -> state.getValue(SnowLayerBlock.LAYERS) >= 8),
     SCULK_PHASE_ACTIVE((state, level, pos) -> SculkSensorBlock.getPhase(state) == SculkSensorPhase.ACTIVE);
 
@@ -60,34 +57,15 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
         }
         // Use an ugly Reflection trick to detect whether the given predicate is Blocks::never or Blocks::always
         try {
-            List<Method> alwaysNeverMethods = Arrays.stream(Blocks.class.getDeclaredMethods())
-                .filter(m -> Modifier.isPublic(m.getModifiers()))
-                .filter(m -> Modifier.isStatic(m.getModifiers()))
-                .filter(m -> m.getReturnType().equals(Boolean.class))
-                .filter(m -> m.getParameterCount() == 3)
-                .filter(m -> m.getParameterTypes()[0].equals(BlockState.class))
-                .filter(m -> m.getParameterTypes()[1].equals(BlockGetter.class))
-                .filter(m -> m.getParameterTypes()[2].equals(BlockPos.class))
-                .toList();
-            alwaysNeverMethods.forEach(Method::trySetAccessible);
-            Method alwaysMethod;
-            Method neverMethod;
-            if ((boolean) alwaysNeverMethods.get(0).invoke(null, null, null, null)) {
-                alwaysMethod = alwaysNeverMethods.get(0);
-                neverMethod = alwaysNeverMethods.get(1);
-            } else {
-                alwaysMethod = alwaysNeverMethods.get(1);
-                neverMethod = alwaysNeverMethods.get(0);
-            }
-            Method writeReplaceMethod = predicate.getClass().getDeclaredMethod("writeReplace");
-            writeReplaceMethod.trySetAccessible();
-            SerializedLambda serializedLambda = (SerializedLambda) writeReplaceMethod.invoke(predicate);
+            Method m = predicate.getClass().getDeclaredMethod("writeReplace");
+            m.trySetAccessible();
+            SerializedLambda serializedLambda = (SerializedLambda) m.invoke(predicate);
             String implClass = serializedLambda.getImplClass();
-            if (implClass.endsWith("/" + Blocks.class.getSimpleName())) {
+            if (implClass.equals("net/minecraft/world/level/block/Blocks")) {
                 String implMethodName = serializedLambda.getImplMethodName();
-                if (implMethodName.equals(neverMethod.getName())) {
+                if (implMethodName.equals("never")) {
                     return NEVER;
-                } else if (implMethodName.equals(alwaysMethod.getName())) {
+                } else if (implMethodName.equals("always")) {
                     return ALWAYS;
                 }
             }
