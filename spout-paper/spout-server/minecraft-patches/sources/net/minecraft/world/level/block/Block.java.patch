@@ -6,7 +6,7 @@
  
 -public class Block extends BlockBehaviour implements ItemLike {
 +// Spout start - More data-driven - Minecraft registries - Block - Implement interfaces
-+public class Block extends BlockBehaviour implements ItemLike, spout.common.moredatadriven.minecraft.block.BlockCodecAccessor, spout.common.moredatadriven.minecraft.block.BlockWithType {
++public class Block extends BlockBehaviour implements ItemLike, spout.common.moredatadriven.minecraft.block.BlockCodecAccessor, spout.common.moredatadriven.minecraft.block.BlockTypeDecorator {
 +    @Override public MapCodec<? extends Block> spout$codec() { return this.codec(); }
 +    // Spout end - More data-driven - Minecraft registries - Block - Implement interfaces
      public static final MapCodec<Block> CODEC = simpleCodec(Block::new);

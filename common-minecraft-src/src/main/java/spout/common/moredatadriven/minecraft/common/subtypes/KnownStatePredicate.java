@@ -45,15 +45,30 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
     private static final KnownStatePredicate[] VALUES = values();
 
     public static KnownStatePredicate wrap(BlockBehaviour.StatePredicate predicate) {
+        // Return the value itself if it is already a KnownStatePredicate
+        if (predicate instanceof KnownStatePredicate knownStatePredicate) {
+            return knownStatePredicate;
+        }
+        // Go over the known predicates and compare them
         KnownStatePredicate foundValue = Arrays.stream(VALUES).filter(value -> value.predicate.equals(predicate)).findAny().orElse(null);
         if (foundValue != null) {
             return foundValue;
         }
+        // Compare them to newly instantiated literals
         if (((BlockBehaviour.StatePredicate) Blocks::never).equals(predicate)) {
             return NEVER;
         }
         if (((BlockBehaviour.StatePredicate) Blocks::always).equals(predicate)) {
             return ALWAYS;
+        }
+        if (((BlockBehaviour.StatePredicate) BlockBehaviour.BlockStateBase::isCollisionShapeFullBlock).equals(predicate)) {
+            return IS_COLLISION_SHAPE_FULL_BLOCK;
+        }
+        if (Blocks.NOT_CLOSED_SHULKER.equals(predicate)) {
+            return NOT_CLOSED_SHULKER;
+        }
+        if (Blocks.NOT_EXTENDED_PISTON.equals(predicate)) {
+            return NOT_EXTENDED_PISTON;
         }
         // Use an ugly Reflection trick to detect whether the given predicate is Blocks::never or Blocks::always
         try {
@@ -61,31 +76,26 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
             m.trySetAccessible();
             SerializedLambda serializedLambda = (SerializedLambda) m.invoke(predicate);
             String implClass = serializedLambda.getImplClass();
+            String implMethodName = serializedLambda.getImplMethodName();
             if (implClass.equals("net/minecraft/world/level/block/Blocks")) {
-                String implMethodName = serializedLambda.getImplMethodName();
                 if (implMethodName.equals("never")) {
                     return NEVER;
                 } else if (implMethodName.equals("always")) {
                     return ALWAYS;
                 }
+            } else if (implClass.equals("net/minecraft/world/level/block/state/BlockBehaviour$BlockStateBase")) {
+                if (implMethodName.equals("isCollisionShapeFullBlock")) {
+                    return IS_COLLISION_SHAPE_FULL_BLOCK;
+                }
             }
-            throw new IllegalArgumentException("Not a known state predicate: " + predicate);
+            System.out.println("State predicate with impl class " + implClass + " and impl method " + serializedLambda.getImplMethodName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        throw new IllegalArgumentException("Not a known state predicate: " + predicate);
     }
 
-    static String temp(Object x) {
-        java.util.List<Class<?>> c = new java.util.ArrayList<>();
-        Class<?> C = x.getClass();
-        while (C != Object.class) {
-            c.add(C);
-            C = C.getSuperclass();
-        }
-        return c.toString();
-    }
-
-    public static final Codec<KnownStatePredicate> CODEC = Identifier.CODEC.comapFlatMap(key -> {
+    public static final Codec<BlockBehaviour.StatePredicate> CODEC = Identifier.CODEC.comapFlatMap(key -> {
         if (key.getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
             try {
                 return DataResult.success(valueOf(key.getPath().toUpperCase(Locale.ROOT)));
@@ -93,6 +103,6 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
             }
         }
         return DataResult.error(() -> "Not a known state predicate: " + key);
-    }, predicate -> Identifier.parse(predicate.name().toLowerCase(Locale.ROOT)));
+    }, predicate -> Identifier.parse(wrap(predicate).name().toLowerCase(Locale.ROOT)));
 
 }

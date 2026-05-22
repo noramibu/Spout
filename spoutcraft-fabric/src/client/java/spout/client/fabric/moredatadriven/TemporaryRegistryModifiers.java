@@ -43,8 +43,8 @@ public final class TemporaryRegistryModifiers {
     }
 
     public static void addCustomContent(
-        Supplier<List<Pair<ResourceKey<Block>, Block>>> blocks,
-        Supplier<List<Pair<ResourceKey<Item>, Item>>> items
+        Supplier<List<Pair<ResourceKey<Block>, Supplier<Block>>>> blocks,
+        Supplier<List<Pair<ResourceKey<Item>, Supplier<Item>>>> items
     ) {
         initializeIfNecessary();
         blockRegistryModifier.addAndRefreeze(blocks.get());

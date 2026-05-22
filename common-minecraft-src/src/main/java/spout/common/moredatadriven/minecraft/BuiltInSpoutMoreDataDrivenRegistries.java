@@ -2,6 +2,8 @@ package spout.common.moredatadriven.minecraft;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import spout.common.moredatadriven.minecraft.blocktype.SpoutBlockTypeRegistry;
+import spout.common.moredatadriven.minecraft.blocktype.SpoutBlockTypes;
 import spout.common.moredatadriven.minecraft.itemtype.SpoutItemType;
 import spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes;
 
@@ -23,7 +25,7 @@ public final class BuiltInSpoutMoreDataDrivenRegistries {
      * entries added to either are added to the other.
      * </p>
      */
-    // public static final SpoutBlockTypeRegistry BLOCK_TYPE = BuiltInRegistries.internalRegister(SpoutMoreDataDrivenRegistries.BLOCK_TYPE, new SpoutBlockTypeRegistry(), SpoutBlockTypes::bootstrap);
+    public static final SpoutBlockTypeRegistry BLOCK_TYPE = BuiltInRegistries.internalRegister(SpoutMoreDataDrivenRegistries.BLOCK_TYPE, new SpoutBlockTypeRegistry(), SpoutBlockTypes::bootstrap);
 
     /**
      * A registry for item types.

@@ -12,8 +12,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import org.jspecify.annotations.Nullable;
-import spout.common.moredatadriven.minecraft.BlockEntityAlternativeValidation;
-import spout.common.moredatadriven.minecraft.type.ApplyLazyItemValues;
 
 /**
  * An implementation of {@link Registry} specially for {@link BuiltInRegistries#ITEM}.
@@ -72,14 +70,6 @@ public final class ItemRegistry extends DefaultedMappedRegistry<Item> {
     @Override
     public boolean isFreezingDelayed() {
         return true;
-    }
-
-    @Override
-    protected Registry<Item> actuallyFreeze() {
-        // Apply lazy values
-        ApplyLazyItemValues.apply(this.stream());
-        // Freeze
-        return super.actuallyFreeze();
     }
 
 }

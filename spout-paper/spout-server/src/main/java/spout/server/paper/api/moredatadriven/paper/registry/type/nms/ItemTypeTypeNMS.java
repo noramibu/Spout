@@ -11,7 +11,7 @@ import spout.server.paper.api.moredatadriven.paper.registry.type.ItemTypeType;
 public interface ItemTypeTypeNMS extends ItemTypeType {
 
     @Override
-    default NamespacedKey getNamespacedKey() {
+    default NamespacedKey getKey() {
         return CraftNamespacedKey.fromMinecraft(this.getIdentifier());
     }
 

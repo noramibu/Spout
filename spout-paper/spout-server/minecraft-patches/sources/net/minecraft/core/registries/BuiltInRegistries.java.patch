@@ -26,15 +26,6 @@
      public static final Registry<Potion> POTION = registerSimple(Registries.POTION, Potions::bootstrap);
      public static final Registry<ParticleType<?>> PARTICLE_TYPE = registerSimple(Registries.PARTICLE_TYPE, registry -> ParticleTypes.BLOCK);
      public static final Registry<BlockEntityType<?>> BLOCK_ENTITY_TYPE = registerSimpleWithIntrusiveHolders(
-@@ -283,7 +_,7 @@
-     public static final Registry<MapCodec<? extends DensityFunction>> DENSITY_FUNCTION_TYPE = registerSimple(
-         Registries.DENSITY_FUNCTION_TYPE, DensityFunctions::bootstrap
-     );
--    public static final Registry<MapCodec<? extends Block>> BLOCK_TYPE = registerSimple(Registries.BLOCK_TYPE, BlockTypes::bootstrap);
-+    public static final Registry<spout.server.paper.api.moredatadriven.paper.registry.type.nms.WrappedBlockCodec<?>> BLOCK_TYPE = registerSimple((ResourceKey) Registries.BLOCK_TYPE, (RegistryBootstrap) BlockTypes::bootstrap); // Spout - More data-driven - Minecraft registries - Types - Adapt existing block type registry
-     public static final Registry<StructureProcessorType<?>> STRUCTURE_PROCESSOR = registerSimple(
-         Registries.STRUCTURE_PROCESSOR, registry -> StructureProcessorType.BLOCK_IGNORE
-     );
 @@ -367,7 +_,7 @@
      );
      // Paper end - add built-in registry conversions

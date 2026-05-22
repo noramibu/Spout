@@ -1,14 +1,20 @@
 package spout.server.paper.api.moredatadriven.paper.registry.type.nms;
 
-import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.Identifier;
+import org.bukkit.NamespacedKey;
+import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import spout.server.paper.api.moredatadriven.paper.registry.type.BlockTypeType;
 
 /**
  * Extension of {@link BlockTypeType} using Minecraft internals.
  */
-public interface BlockTypeTypeNMS<B extends Block> extends BlockTypeType {
+public interface BlockTypeTypeNMS extends BlockTypeType {
 
     @Override
-    WrappedBlockCodec<B> getWrappedCodec();
+    default NamespacedKey getKey() {
+        return CraftNamespacedKey.fromMinecraft(this.getIdentifier());
+    }
+
+    Identifier getIdentifier();
 
 }

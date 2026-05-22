@@ -1,5 +1,22 @@
 --- a/net/minecraft/core/MappedRegistry.java
 +++ b/net/minecraft/core/MappedRegistry.java
+@@ -31,6 +_,16 @@
+ import org.jspecify.annotations.Nullable;
+ 
+ public class MappedRegistry<T> implements WritableRegistry<T> {
++    // Spout start - More data-driven - Minecraft registries - Type - Cache registry by name codec
++    private com.mojang.serialization.@Nullable Codec<T> spout$cachedByNameCodec;
++    @Override
++    public com.mojang.serialization.Codec<T> byNameCodec() {
++        if (this.spout$cachedByNameCodec == null) {
++            this.spout$cachedByNameCodec = WritableRegistry.super.byNameCodec();
++        }
++        return this.spout$cachedByNameCodec;
++    }
++    // Spout end - More data-driven - Minecraft registries - Type - Cache registry by name codec
+     private final ResourceKey<? extends Registry<T>> key;
+     private final ObjectList<Holder.Reference<T>> byId = new ObjectArrayList<>(256);
+     private final Reference2IntMap<T> toId = Util.make(new Reference2IntOpenHashMap<>(2048), t -> t.defaultReturnValue(-1)); // Paper - Perf: Use bigger expected size to reduce collisions
 @@ -42,7 +_,7 @@
      private final Map<TagKey<T>, HolderSet.Named<T>> frozenTags = new IdentityHashMap<>();
      private MappedRegistry.TagSet<T> allTags = MappedRegistry.TagSet.unbound();
@@ -9,6 +26,14 @@
      private @Nullable Map<T, Holder.Reference<T>> unregisteredIntrusiveHolders;
      // Paper start - support pre-filling in registry mod API
      private final Map<Identifier, T> temporaryUnfrozenMap = new HashMap<>();
+@@ -107,6 +_,7 @@
+ 
+     @Override
+     public Holder.Reference<T> register(final ResourceKey<T> key, final T value, final RegistrationInfo registrationInfo) {
++        spout.common.moredatadriven.minecraft.blocktype.MirrorMinecraftBlockTypeRegistry.mirrorFromMinecraftToSpoutIfNecessary(this, key, value, registrationInfo); // Spout - Minecraft registries - Block type - Adapt existing block type registry
+         this.validateWrite(key);
+         Objects.requireNonNull(key);
+         Objects.requireNonNull(value);
 @@ -294,9 +_,20 @@
  
      @Override

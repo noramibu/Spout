@@ -109,7 +109,7 @@ public final class MaterialByKeyLookupImpl implements MaterialByKeyLookup {
     private Material lookupLegacyName(String name) {
         String filtered = name;
         if (filtered.startsWith(NamespacedKey.MINECRAFT + ":")) {
-            filtered = filtered.substring((NamespacedKey.MINECRAFT + ":").length());
+            filtered = filtered.substring(NamespacedKey.MINECRAFT.length() + 1);
         }
 
         filtered = filtered.toUpperCase(Locale.ROOT);

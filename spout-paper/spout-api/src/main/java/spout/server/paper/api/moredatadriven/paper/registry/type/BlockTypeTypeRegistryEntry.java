@@ -10,7 +10,7 @@ import org.jetbrains.annotations.ApiStatus;
 @ApiStatus.NonExtendable
 public interface BlockTypeTypeRegistryEntry {
 
-    Object getWrappedCodec();
+    // Object getWrappedCodec();
 
     /**
      * A mutable builder for the {@link BlockTypeTypeRegistryEntry},

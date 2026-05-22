@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import spout.common.moredatadriven.minecraft.type.BlockCodecs;
+import spout.common.moredatadriven.minecraft.block.BlockCodecs;
 
 /**
  * A union of {@link StairBlock} and {@link HalfTransparentBlock}.

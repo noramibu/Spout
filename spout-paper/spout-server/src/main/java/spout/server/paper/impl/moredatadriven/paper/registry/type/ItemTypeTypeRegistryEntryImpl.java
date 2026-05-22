@@ -19,6 +19,11 @@ public class ItemTypeTypeRegistryEntryImpl implements ItemTypeTypeRegistryEntryN
         this.itemType = internal;
     }
 
+    // @Override
+    // public WrappedItemCodec<?> getWrappedCodec() {
+    //     return this.wrappedCodec;
+    // }
+
     public static class BuilderImpl extends ItemTypeTypeRegistryEntryImpl implements ItemTypeTypeRegistryEntryNMS.Builder, PaperRegistryBuilder<SpoutItemType, ItemTypeType> {
 
         public BuilderImpl(Conversions conversions, @Nullable SpoutItemType internal) {

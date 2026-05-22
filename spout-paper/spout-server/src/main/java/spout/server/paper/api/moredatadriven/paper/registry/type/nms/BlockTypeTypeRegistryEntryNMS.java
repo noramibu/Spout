@@ -10,8 +10,8 @@ import spout.server.paper.api.moredatadriven.paper.registry.type.BlockTypeTypeRe
  */
 public interface BlockTypeTypeRegistryEntryNMS extends BlockTypeTypeRegistryEntry {
 
-    @Override
-    WrappedBlockCodec<?> getWrappedCodec();
+    // @Override
+    // WrappedBlockCodec<?> getWrappedCodec();
 
     /**
      * A {@link BlockTypeTypeRegistryEntry.Builder}
@@ -19,7 +19,7 @@ public interface BlockTypeTypeRegistryEntryNMS extends BlockTypeTypeRegistryEntr
      */
     interface Builder extends BlockTypeTypeRegistryEntryNMS, BlockTypeTypeRegistryEntry.Builder {
 
-        void setCodec(MapCodec<? extends Block> codecForType);
+        // void setCodec(MapCodec<? extends Block> codecForType);
 
     }
 

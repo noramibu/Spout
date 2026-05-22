@@ -22,7 +22,7 @@ public final class ItemPropertiesCodec {
     }
 
     private static Item.Properties constructItemProperties(DataComponentMap components, FeatureFlagSet requiredFeatures, Optional<Identifier> id) {
-        Item.Properties properties = new Item.Properties();
+        Item.Properties properties = NewContextAwareItemProperties.create();
         ItemPropertiesSerializationDecorator decorator = (ItemPropertiesSerializationDecorator) properties;
         decorator.spout$initializedComponents(components);
         properties.componentInitializer = properties.componentInitializer.andThen((builder, _, _) -> builder.addAll(
@@ -44,7 +44,7 @@ public final class ItemPropertiesCodec {
     ).apply(instance, ItemPropertiesCodec::constructItemProperties));
 
     public static <I extends Item> RecordCodecBuilder<I, Item.Properties> getBuilder() {
-        return CodecUtil.optionalFieldOf(CODEC, "properties", Item.Properties::new).forGetter(ItemPropertiesCodec::reconstructItemProperties);
+        return CodecUtil.optionalFieldOf(CODEC, "properties", NewContextAwareItemProperties::create).forGetter(ItemPropertiesCodec::reconstructItemProperties);
     }
 
 }

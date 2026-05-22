@@ -194,7 +194,7 @@ public abstract class BlockTypeRegistryEntryImpl implements BlockTypeRegistryEnt
 
         @Override
         public Builder lightLevel(int lightEmission) {
-            return this.propertiesNMS(properties -> properties.lightLevel(lightEmission));
+            return this.propertiesNMS(properties -> properties.lightLevel(_ -> lightEmission));
         }
 
         @Override

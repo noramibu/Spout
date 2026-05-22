@@ -4,6 +4,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import spout.common.branding.SpoutNamespace;
+import spout.common.moredatadriven.minecraft.blocktype.SpoutBlockType;
 import spout.common.moredatadriven.minecraft.itemtype.SpoutItemType;
 
 /**
@@ -19,12 +21,12 @@ public final class SpoutMoreDataDrivenRegistries {
     /**
      * Key for {@link BuiltInSpoutMoreDataDrivenRegistries#BLOCK_TYPE}.
      */
-    // public static final ResourceKey<Registry<SpoutBlockType>> BLOCK_TYPE = createRegistryKey(spout.common.branding.SpoutNamespace.SPOUT + ":block_type");
+    public static final ResourceKey<Registry<SpoutBlockType>> BLOCK_TYPE = createRegistryKey(SpoutNamespace.SPOUT + ":block_type");
 
     /**
      * Key for {@link BuiltInSpoutMoreDataDrivenRegistries#ITEM_TYPE}.
      */
-    public static final ResourceKey<Registry<SpoutItemType>> ITEM_TYPE = createRegistryKey(spout.common.branding.SpoutNamespace.SPOUT + ":item_type");
+    public static final ResourceKey<Registry<SpoutItemType>> ITEM_TYPE = createRegistryKey(SpoutNamespace.SPOUT + ":item_type");
 
     /**
      * Analogous to {@link Registries#createRegistryKey}.

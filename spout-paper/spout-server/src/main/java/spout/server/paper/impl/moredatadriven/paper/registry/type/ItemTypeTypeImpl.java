@@ -12,8 +12,8 @@ import spout.server.paper.api.moredatadriven.paper.registry.type.nms.ItemTypeTyp
  */
 public final class ItemTypeTypeImpl extends HolderableBase<SpoutItemType> implements ItemTypeTypeNMS {
 
-    public ItemTypeTypeImpl(Holder<SpoutItemType> wrappedCodecHolder) {
-        super(wrappedCodecHolder);
+    public ItemTypeTypeImpl(Holder<SpoutItemType> minecraftHolder) {
+        super(minecraftHolder);
     }
 
     @Override

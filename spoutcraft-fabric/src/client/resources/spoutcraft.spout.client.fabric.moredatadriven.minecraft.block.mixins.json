@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "spout.client.fabric.moredatadriven.minecraft.block.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "BlockCodecAccessorBlockMixin",
+    "UseFormattedBlockStateCodecStairBlockMixin",
+    "UseFormattedBlockStateCodecWeatheringCopperStairBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

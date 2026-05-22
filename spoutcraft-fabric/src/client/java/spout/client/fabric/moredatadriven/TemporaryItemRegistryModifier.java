@@ -7,11 +7,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import org.jspecify.annotations.Nullable;
 import spout.client.fabric.moredatadriven.mixin.DataComponentInitializersAccessor;
-import spout.common.moredatadriven.minecraft.type.ApplyLazyItemValues;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -24,12 +24,8 @@ public final class TemporaryItemRegistryModifier extends TemporaryRegistryModifi
     }
 
     @Override
-    public void add(List<Pair<ResourceKey<Item>, Item>> resources) {
+    public void add(List<Pair<ResourceKey<Item>, Supplier<Item>>> resources) {
         super.add(resources);
-        if (!resources.isEmpty()) {
-            // Apply lazy values
-            ApplyLazyItemValues.apply(resources.stream().map(Pair::right));
-        }
     }
 
     @Override

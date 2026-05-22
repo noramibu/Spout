@@ -2,8 +2,13 @@ package spout.server.paper.impl.moredatadriven.datapack;
 
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import spout.common.moredatadriven.minecraft.common.dependent.DependentNonBuiltInResource;
+import spout.common.moredatadriven.minecraft.common.dependent.SortDependentDataDrivenResources;
+import spout.common.moredatadriven.minecraft.common.nonbuiltin.SpoutNonBuiltInResource;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -15,26 +20,37 @@ public final class CopyResourcesFromDataPackRegistryToInternalRegistry {
         throw new UnsupportedOperationException();
     }
 
-    public static <T extends DelayedResourceKeyAttachable<T>> void copy(Stream<Pair<Identifier, T>> keyedResources, Registry<T> internalRegistry) {
+    public static <T> void copy(Stream<Pair<ResourceKey<T>, Supplier<T>>> keyedResources, Registry<T> internalRegistry) {
         keyedResources.forEach(keyedDefinition -> {
-            ResourceKey<T> key = ResourceKey.create(internalRegistry.key(), keyedDefinition.left());
-            T resource = keyedDefinition.right();
-            resource.attachResourceKey(key);
+            ResourceKey<T> key = keyedDefinition.first();
+            T resource = keyedDefinition.right().get();
             Registry.register(internalRegistry, key, resource);
         });
     }
 
-    public static <T extends DelayedResourceKeyAttachable<T>> void copy(Registry<T> dataPackRegistry, Registry<T> internalRegistry) {
+    public static <R extends DependentNonBuiltInResource, V> void copyDependent(Registry<R> dataPackRegistry, Registry<V> internalRegistry, BiFunction<ResourceKey<V>, R, V> transform) {
         copy(
-            dataPackRegistry.listElements().map(element -> Pair.of(element.key().identifier(), element.value())),
+            SortDependentDataDrivenResources.sortedRegistry(dataPackRegistry).map(dataPackRegistryElement -> {
+                ResourceKey<V> key = ResourceKey.create(internalRegistry.key(), dataPackRegistryElement.left().identifier());
+                return Pair.of(key, () -> transform.apply(key, dataPackRegistryElement.right()));
+            }),
             internalRegistry
         );
     }
 
-    public interface DelayedResourceKeyAttachable<T> {
+    public static <R extends SpoutNonBuiltInResource<V, ?>, V> void copyInitialized(Registry<R> dataPackRegistry, Registry<V> internalRegistry, Function<BiFunction<ResourceKey<V>, R, V>, BiFunction<ResourceKey<V>, R, V>> transformTransform) {
+        copyDependent(
+            dataPackRegistry,
+            internalRegistry,
+            transformTransform.apply((_, resource) -> {
+                resource.initializeValueFromInput(true);
+                return resource.getValue();
+            })
+        );
+    }
 
-        void attachResourceKey(ResourceKey<T> resourceKey);
-
+    public static <R extends SpoutNonBuiltInResource<V, ?>, V> void copyInitialized(Registry<R> dataPackRegistry, Registry<V> internalRegistry) {
+        copyInitialized(dataPackRegistry, internalRegistry, Function.identity());
     }
 
 }

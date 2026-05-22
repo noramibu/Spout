@@ -1,14 +1,11 @@
 package spout.server.paper.impl.moredatadriven.paper.registry.type;
 
-import com.mojang.serialization.MapCodec;
 import io.papermc.paper.registry.PaperRegistryBuilder;
 import io.papermc.paper.registry.data.util.Conversions;
-import net.minecraft.world.level.block.Block;
+import spout.common.moredatadriven.minecraft.blocktype.SpoutBlockType;
 import spout.server.paper.api.moredatadriven.paper.registry.type.BlockTypeType;
 import spout.server.paper.api.moredatadriven.paper.registry.type.BlockTypeTypeRegistryEntry;
 import spout.server.paper.api.moredatadriven.paper.registry.type.nms.BlockTypeTypeRegistryEntryNMS;
-import spout.server.paper.api.moredatadriven.paper.registry.type.nms.WrappedBlockCodec;
-import spout.server.paper.impl.moredatadriven.minecraft.type.WrappedBlockCodecImpl;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -16,31 +13,31 @@ import org.jspecify.annotations.Nullable;
  */
 public class BlockTypeTypeRegistryEntryImpl implements BlockTypeTypeRegistryEntryNMS {
 
-    protected @Nullable WrappedBlockCodec<?> wrappedCodec;
+    protected @Nullable SpoutBlockType blockType;
 
-    public BlockTypeTypeRegistryEntryImpl(Conversions conversions, @Nullable WrappedBlockCodec<?> internal) {
-        this.wrappedCodec = internal;
+    public BlockTypeTypeRegistryEntryImpl(Conversions conversions, @Nullable SpoutBlockType internal) {
+        this.blockType = internal;
     }
 
-    @Override
-    public WrappedBlockCodec<?> getWrappedCodec() {
-        return this.wrappedCodec;
-    }
+    // @Override
+    // public WrappedBlockCodec<?> getWrappedCodec() {
+    //     return this.wrappedCodec;
+    // }
 
-    public static class BuilderImpl extends BlockTypeTypeRegistryEntryImpl implements BlockTypeTypeRegistryEntryNMS.Builder, PaperRegistryBuilder<WrappedBlockCodec<?>, BlockTypeType> {
+    public static class BuilderImpl extends BlockTypeTypeRegistryEntryImpl implements BlockTypeTypeRegistryEntryNMS.Builder, PaperRegistryBuilder<SpoutBlockType, BlockTypeType> {
 
-        public BuilderImpl(Conversions conversions, @Nullable WrappedBlockCodec<?> internal) {
+        public BuilderImpl(Conversions conversions, @Nullable SpoutBlockType internal) {
             super(conversions, internal);
         }
 
-        @Override
-        public void setCodec(MapCodec<? extends Block> codecForType) {
-            this.wrappedCodec = WrappedBlockCodecImpl.wrap(codecForType);
-        }
+        // @Override
+        // public void setCodec(MapCodec<? extends Block> codecForType) {
+        //     this.wrappedCodec = WrappedBlockCodecImpl.wrap(codecForType);
+        // }
 
         @Override
-        public WrappedBlockCodec<?> build() {
-            return this.wrappedCodec;
+        public SpoutBlockType build() {
+            return this.blockType;
         }
 
     }

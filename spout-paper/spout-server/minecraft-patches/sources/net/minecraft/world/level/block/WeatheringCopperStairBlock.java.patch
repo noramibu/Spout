@@ -12,7 +12,7 @@
 -            )
 -            .apply(i, WeatheringCopperStairBlock::new)
 -    );
-+    public static final MapCodec<WeatheringCopperStairBlock> CODEC = spout.common.moredatadriven.minecraft.type.BlockCodecs.weatheringCopperStairCodec(WeatheringCopperStairBlock::new); // Spout - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Initialize some references late
++    public static final MapCodec<WeatheringCopperStairBlock> CODEC = spout.common.moredatadriven.minecraft.block.BlockCodecs.weatheringCopperStairCodec(WeatheringCopperStairBlock::new); // Spout - More data-driven - Minecraft registries - Block - Use formatted block state codec
      private final WeatheringCopper.WeatherState weatherState;
  
      @Override

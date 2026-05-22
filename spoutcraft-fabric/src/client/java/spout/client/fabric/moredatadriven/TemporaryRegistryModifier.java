@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * A wrapper around a registry, that can make temporarily additions.
@@ -30,7 +31,7 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
     public final R registry;
 
     private @Nullable Map<TagKey<T>, HolderSet.Named<T>> originalFrozenTags = null;
-    private @Nullable List<Pair<ResourceKey<T>, T>> resourcesAdded = null;
+    private @Nullable ArrayList<Pair<ResourceKey<T>, T>> resourcesAdded = null;
 
     TemporaryRegistryModifier(R registry) {
         this.registry = registry;
@@ -57,12 +58,18 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
         this.registry.freeze();
     }
 
-    public void add(List<Pair<ResourceKey<T>, T>> resources) {
+    public void add(List<Pair<ResourceKey<T>, Supplier<T>>> resources) {
         this.originalFrozenTags = this.copyFrozenTags(this.getRegistryAccessor().getFrozenTags());
         if (!resources.isEmpty()) {
-            this.resourcesAdded = resources;
-            for (Pair<ResourceKey<T>, T> resource : resources) {
-                this.add(resource.left(), resource.right());
+            if (this.resourcesAdded == null) {
+                this.resourcesAdded = new ArrayList<>(resources.size());
+            } else {
+                this.resourcesAdded.ensureCapacity(resources.size());
+            }
+            for (Pair<ResourceKey<T>, Supplier<T>> resource : resources) {
+                T builtResource = resource.right().get();
+                this.resourcesAdded.add(Pair.of(resource.left(), builtResource));
+                this.add(resource.left(), builtResource);
             }
         }
     }
@@ -71,7 +78,7 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
         Registry.register(this.registry, resourceKey, resource);
     }
 
-    public void addAndRefreeze(List<Pair<ResourceKey<T>, T>> resources) {
+    public void addAndRefreeze(List<Pair<ResourceKey<T>, Supplier<T>>> resources) {
         this.add(resources);
         this.refreeze();
     }
@@ -81,7 +88,7 @@ public abstract class TemporaryRegistryModifier<T, R extends MappedRegistry<T>> 
         this.unfreeze();
         this.removeWhileUnfrozen(this.resourcesAdded);
         this.refreeze();
-        this.resourcesAdded = null;
+        this.resourcesAdded.clear();
     }
 
     public void removeWhileUnfrozen(List<Pair<ResourceKey<T>, T>> resources) {

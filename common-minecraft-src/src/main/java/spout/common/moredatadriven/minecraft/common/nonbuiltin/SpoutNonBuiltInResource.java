@@ -49,6 +49,8 @@ public abstract class SpoutNonBuiltInResource<V, T extends TypeWithCodec<V, ? ex
      */
     private @Nullable MapInputAndOps<?> input;
 
+    private @Nullable List<Identifier> requiredResources;
+
     public SpoutNonBuiltInResource(T type, MapInputAndOps<?> input) {
         this.type = type;
         this.input = input;
@@ -73,8 +75,12 @@ public abstract class SpoutNonBuiltInResource<V, T extends TypeWithCodec<V, ? ex
         return this.input;
     }
 
+    protected V decodeInput(MapInputAndOps<?> input) {
+        return (V) Objects.requireNonNull(input).<V>decodeValueUntyped((BiFunction) (((dynamicOps, mapLike) -> (DataResult) SpoutNonBuiltInResource.this.type.decodeValueFromInput((DynamicOps) dynamicOps, (MapLike) mapLike))));
+    }
+
     public void initializeValueFromInput(boolean clearInput) {
-        this.value = (V) Objects.requireNonNull(this.input).<V>decodeValue((BiFunction) (((dynamicOps, mapLike) -> (DataResult) SpoutNonBuiltInResource.this.type.decodeValueFromInput((DynamicOps) dynamicOps, (MapLike) mapLike))));
+        this.value = this.decodeInput(this.input);
         if (clearInput) {
             this.clearInput();
         }
@@ -86,7 +92,13 @@ public abstract class SpoutNonBuiltInResource<V, T extends TypeWithCodec<V, ? ex
 
     @Override
     public List<Identifier> getRequiredResources() {
-        return Collections.emptyList();
+        if (this.requiredResources == null) {
+            this.requiredResources = this.type.decodeRequiredResources(this.input);
+            if (this.requiredResources.isEmpty()) {
+                this.requiredResources = Collections.emptyList(); // Potentially saves memory
+            }
+        }
+        return this.requiredResources;
     }
 
     @Override

@@ -1,11 +1,9 @@
 package spout.common.protocol;
 
-import com.google.gson.JsonElement;
-import com.mojang.serialization.JsonOps;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BlockTypes;
 import org.jspecify.annotations.Nullable;
+import spout.common.moredatadriven.minecraft.block.SpoutNonBuiltInBlock;
 import spout.common.moredatadriven.minecraft.item.SpoutNonBuiltInItem;
 import spout.common.util.minecraft.resources.KeyedValue;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public final class ClientModCustomContent {
     /**
      * The blocks.
      */
-    private final List<KeyedValue<JsonElement>> blocks;
+    private final List<KeyedValue<SpoutNonBuiltInBlock>> blocks;
 
     /**
      * The items.
@@ -43,30 +41,12 @@ public final class ClientModCustomContent {
         this.items = new ArrayList<>();
     }
 
-    public List<KeyedValue<JsonElement>> getBlocks() {
+    public List<KeyedValue<SpoutNonBuiltInBlock>> getBlocks() {
         return this.blocks;
     }
 
     public List<KeyedValue<SpoutNonBuiltInItem>> getItems() {
         return this.items;
-    }
-
-    public List<Block> getParsedBlocks() {
-        if (this.parsedBlocks == null) {
-            this.parsedBlocks = this.blocks.stream().map(ClientModCustomContent::parseBlock).toList();
-        }
-        return this.parsedBlocks;
-    }
-
-    public List<Item> getParsedItems() {
-        if (this.parsedItems == null) {
-            this.parsedItems = this.items.stream()
-                .map(item -> {
-                    item.value().initializeValueFromInput(true);
-                    return item.value().getValue();
-                }).toList();
-        }
-        return this.parsedItems;
     }
 
     public static ClientModCustomContent createFilled(
@@ -75,7 +55,7 @@ public final class ClientModCustomContent {
     ) {
         ClientModCustomContent content = new ClientModCustomContent();
         content.blocks.addAll(
-            blocks.stream().map(block -> KeyedValue.of(block.builtInRegistryHolder().key().identifier(), BlockTypes.CODEC.codec().encodeStart(JsonOps.INSTANCE, block).getOrThrow())).toList()
+            blocks.stream().map(block -> KeyedValue.of(block.builtInRegistryHolder().key().identifier(), new SpoutNonBuiltInBlock(block))).toList()
         );
         content.items.addAll(
             items.stream().map(item -> KeyedValue.of(item.builtInRegistryHolder().key().identifier(), new SpoutNonBuiltInItem(item))).toList()
@@ -85,10 +65,6 @@ public final class ClientModCustomContent {
 
     public static ClientModCustomContent createEmpty() {
         return new ClientModCustomContent();
-    }
-
-    private static Block parseBlock(KeyedValue<JsonElement> value) {
-        return BlockTypes.CODEC.codec().decode(JsonOps.INSTANCE, value.value()).getOrThrow().getFirst();
     }
 
 }

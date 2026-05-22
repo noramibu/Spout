@@ -1,28 +1,14 @@
 --- a/net/minecraft/world/item/Item.java
 +++ b/net/minecraft/world/item/Item.java
-@@ -95,16 +_,50 @@
+@@ -95,16 +_,36 @@
  import org.jspecify.annotations.Nullable;
  import org.slf4j.Logger;
  
 -public class Item implements ItemLike, FeatureElement {
-+// Spout start - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key
 +// Spout start - More data-driven - Minecraft registries - Block - Implement interfaces
-+public class Item implements FeatureElement, ItemLike, spout.common.moredatadriven.minecraft.item.ItemTypeDecorator, spout.server.paper.impl.moredatadriven.datapack.CopyResourcesFromDataPackRegistryToInternalRegistry.DelayedResourceKeyAttachable<Item> {
++public class Item implements FeatureElement, ItemLike, spout.common.moredatadriven.minecraft.item.ItemTypeDecorator {
 +    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.ITEM; }
 +    // Spout end - More data-driven - Minecraft registries - Block - Implement interfaces
-+    private Item.@Nullable Properties originalProperties;
-+    @Override
-+    public void attachResourceKey(ResourceKey<Item> resourceKey) {
-+        Item.Properties properties = this.originalProperties;
-+        this.originalProperties = null;
-+        properties.setId(resourceKey);
-+        this.descriptionId = properties.effectiveDescriptionId();
-+        DataComponentInitializers.Initializer<Item> componentInitializer = properties.finalizeInitializer(
-+            Component.translatable(this.descriptionId), properties.effectiveModel()
-+        );
-+        BuiltInRegistries.DATA_COMPONENT_INITIALIZERS.add(properties.itemIdOrThrow(), componentInitializer);
-+    }
-+    // Spout end - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key
      public static final Codec<Holder<Item>> CODEC = BuiltInRegistries.ITEM
          .holderByNameCodec()
          .validate(item -> item.is(Items.AIR.builtInRegistryHolder()) ? DataResult.error(() -> "Item must not be minecraft:air") : DataResult.success(item));
@@ -53,17 +39,7 @@
      private static final Logger LOGGER = LogUtils.getLogger();
      public static final Map<Block, Item> BY_BLOCK = Maps.newHashMap();
      public static final Identifier BASE_ATTACK_DAMAGE_ID = Identifier.withDefaultNamespace("base_attack_damage");
-@@ -114,14 +_,82 @@
-     public static final int MAX_BAR_WIDTH = 13;
-     protected static final int APPROXIMATELY_INFINITE_USE_DURATION = 72000;
-     private final Holder.Reference<Item> builtInRegistryHolder = BuiltInRegistries.ITEM.createIntrusiveHolder(this);
-+    private DataComponentMap components; // Spout - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key - Make dependent fields non-final
-     private final @Nullable ItemStackTemplate craftingRemainingItem;
--    protected final String descriptionId;
-+    protected String descriptionId; // Spout - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key - Make dependent fields non-final
-     private final FeatureFlagSet requiredFeatures;
- 
-     public static int getId(final Item item) {
+@@ -122,6 +_,73 @@
          return item == null ? 0 : BuiltInRegistries.ITEM.getId(item);
      }
  
@@ -137,24 +113,6 @@
      public static Item byId(final int id) {
          return BuiltInRegistries.ITEM.byId(id);
      }
-@@ -132,11 +_,17 @@
-     }
- 
-     public Item(final Item.Properties properties) {
-+        // Spout start - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key - Don't set dependent fields without a key
-+        if (properties.id != null) {
-         this.descriptionId = properties.effectiveDescriptionId();
-         DataComponentInitializers.Initializer<Item> componentInitializer = properties.finalizeInitializer(
-             Component.translatable(this.descriptionId), properties.effectiveModel()
-         );
-         BuiltInRegistries.DATA_COMPONENT_INITIALIZERS.add(properties.itemIdOrThrow(), componentInitializer);
-+        } else {
-+            this.originalProperties = properties;
-+        }
-+        // Spout end - More data-driven - Data pack - Copy loaded blocks and items to their internal registries - Allow delayed setting of key - Don't set dependent fields without a key
-         this.craftingRemainingItem = properties.craftingRemainingItem;
-         this.requiredFeatures = properties.requiredFeatures;
-         if (SharedConstants.IS_RUNNING_IN_IDE) {
 @@ -373,15 +_,20 @@
          return false;
      }

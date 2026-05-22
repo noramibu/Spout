@@ -33,6 +33,22 @@
       "environment": "client"
     },
     {
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.block.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.blocktype.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.common.subtypes.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.common.type.mixins.json",
+      "environment": "client"
+    },
+    {
       "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.item.mixins.json",
       "environment": "client"
     },
@@ -50,10 +66,6 @@
     },
     {
       "config": "spoutcraft.spout.client.fabric.ui.toast.mixins.json",
-      "environment": "client"
-    },
-    {
-      "config": "spoutcraft.spout.common.builtincontent.block.mixins.json",
       "environment": "client"
     }
   ],

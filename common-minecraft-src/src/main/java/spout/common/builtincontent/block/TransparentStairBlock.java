@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import spout.common.moredatadriven.minecraft.type.BlockCodecs;
+import spout.common.moredatadriven.minecraft.block.BlockCodecs;
 
 /**
  * A union of {@link StairBlock} and {@link TransparentBlock}.

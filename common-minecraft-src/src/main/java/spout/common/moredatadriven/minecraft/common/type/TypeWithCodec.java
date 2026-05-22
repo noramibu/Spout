@@ -6,6 +6,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.MapLike;
 import net.minecraft.resources.Identifier;
 import spout.common.moredatadriven.minecraft.common.nonbuiltin.SpoutNonBuiltInResource;
+import spout.common.util.mojang.codec.MapInputAndOps;
+import java.util.List;
 
 /**
  * A type that provides a codec for its resources.
@@ -17,5 +19,7 @@ public interface TypeWithCodec<V, R extends SpoutNonBuiltInResource<V, ?>> {
     MapCodec<R> getCodec();
 
     <T> DataResult<? extends V> decodeValueFromInput(DynamicOps<T> dynamicOps, MapLike<T> mapLike);
+
+    List<Identifier> decodeRequiredResources(MapInputAndOps<?> input);
 
 }
