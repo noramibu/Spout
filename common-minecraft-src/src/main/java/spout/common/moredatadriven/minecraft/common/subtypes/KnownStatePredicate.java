@@ -88,7 +88,6 @@ public enum KnownStatePredicate implements BlockBehaviour.StatePredicate {
                     return IS_COLLISION_SHAPE_FULL_BLOCK;
                 }
             }
-            System.out.println("State predicate with impl class " + implClass + " and impl method " + serializedLambda.getImplMethodName());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
