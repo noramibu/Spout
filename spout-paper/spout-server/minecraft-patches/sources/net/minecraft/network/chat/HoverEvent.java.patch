@@ -3,7 +3,7 @@
 @@ -124,7 +_,7 @@
      }
  
-     public record ShowItem(ItemStackTemplate item) implements HoverEvent {
+     record ShowItem(ItemStackTemplate item) implements HoverEvent {
 -        public static final MapCodec<HoverEvent.ShowItem> CODEC = ItemStackTemplate.MAP_CODEC.xmap(HoverEvent.ShowItem::new, HoverEvent.ShowItem::item);
 +        public static final MapCodec<HoverEvent.ShowItem> CODEC = spout.server.paper.impl.packetmapping.item.applytohoverevent.ClientViewMappedItemStackCodecs.TEMPLATE_MAP_CODEC.xmap(HoverEvent.ShowItem::new, HoverEvent.ShowItem::item); // Spout - Item mapping - Apply to hover events - Use codec that applies mappings
  

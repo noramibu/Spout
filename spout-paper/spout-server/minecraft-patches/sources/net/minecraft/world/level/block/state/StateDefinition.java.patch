@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/state/StateDefinition.java
 +++ b/net/minecraft/world/level/block/state/StateDefinition.java
-@@ -152,6 +_,16 @@
+@@ -150,6 +_,16 @@
          return this.states;
      }
  

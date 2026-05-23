@@ -8,25 +8,18 @@
      private final BitSet skyChangedLightSectionFilter = new BitSet();
      private final LevelLightEngine lightEngine;
      // Paper - rewrite chunk system
-@@ -240,7 +_,7 @@
-         }
-     }
- 
--    public boolean sectionLightChanged(final LightLayer layer, final int chunkY) {
-+    public boolean sectionLightChanged(final LightLayer layer, final int chunkY, boolean requiresExtraLightSending) { // Spout - Block mapping - Update block light for custom blocks
-         ChunkAccess chunk = this.getChunkIfPresent(ChunkStatus.INITIALIZE_LIGHT);
-         if (chunk == null) {
-             return false;
-@@ -257,6 +_,9 @@
-                     int index = chunkY - minLightSection;
-                     if (!filter.get(index)) {
-                         filter.set(index);
-+                        if (layer == LightLayer.BLOCK && requiresExtraLightSending) {
-+                            this.nonClientModBlockChangedLightSectionFilter.set(index);
-+                        }
-                         return true;
-                     } else {
-                         return false;
+@@ -259,6 +_,11 @@
+             int index = chunkY - minLightSection;
+             if (!filter.get(index)) {
+                 filter.set(index);
++                // Spout start - Block mapping - Update block light for custom blocks
++                if (layer == LightLayer.BLOCK && spout.server.paper.impl.packetmapping.block.light.CurrentBroadcastRequiresExtraLightSending.get()) {
++                    this.nonClientModBlockChangedLightSectionFilter.set(index);
++                }
++                // Spout end - Block mapping - Update block light for custom blocks
+                 return true;
+             } else {
+                 return false;
 @@ -269,12 +_,13 @@
      }
  

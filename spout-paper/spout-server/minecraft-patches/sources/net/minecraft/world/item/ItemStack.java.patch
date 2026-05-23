@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/item/ItemStack.java
 +++ b/net/minecraft/world/item/ItemStack.java
-@@ -175,23 +_,72 @@
+@@ -175,6 +_,12 @@
          return new StreamCodec<RegistryFriendlyByteBuf, ItemStack>() {
              @Override
              public ItemStack decode(final RegistryFriendlyByteBuf input) {
@@ -13,21 +13,21 @@
                  int count = input.readVarInt();
                  if (count <= 0) {
                      return ItemStack.EMPTY;
-                 } else {
-                     Holder<Item> item = Item.STREAM_CODEC.decode(input);
-                     DataComponentPatch patch = patchCodec.decode(input);
--                    return new ItemStack(item, count, patch);
-+                    // Spout start - Item mapping - Reverse - Apply at ItemStack decoding
-+                    ItemStack received = new ItemStack(item, count, patch);
-+                    if (attemptReversing) {
-+                        spout.server.paper.impl.packetmapping.item.reverse.@Nullable ItemMappingReverser itemMappingReverser = ((spout.server.paper.impl.clientview.ClientViewImpl) input.getClientViewOrFallback()).getItemMappingReverser();
-+                        if (itemMappingReverser != null) {
-+                            received = itemMappingReverser.reverseMappingIfPossible(received);
-+                        }
+@@ -182,16 +_,59 @@
+ 
+                 Holder<Item> item = Item.STREAM_CODEC.decode(input);
+                 DataComponentPatch patch = patchCodec.decode(input);
+-                return new ItemStack(item, count, patch);
++                // Spout start - Item mapping - Reverse - Apply at ItemStack decoding
++                ItemStack received = new ItemStack(item, count, patch);
++                if (attemptReversing) {
++                    spout.server.paper.impl.packetmapping.item.reverse.@Nullable ItemMappingReverser itemMappingReverser = ((spout.server.paper.impl.clientview.ClientViewImpl) input.getClientViewOrFallback()).getItemMappingReverser();
++                    if (itemMappingReverser != null) {
++                        received = itemMappingReverser.reverseMappingIfPossible(received);
 +                    }
-+                    return received;
-+                    // Spout end - Item mapping - Reverse - Apply at ItemStack decoding
-                 }
++                }
++                return received;
++                // Spout end - Item mapping - Reverse - Apply at ItemStack decoding
              }
  
              @Override

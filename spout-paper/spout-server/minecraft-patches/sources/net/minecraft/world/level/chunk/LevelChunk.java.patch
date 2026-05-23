@@ -1,11 +1,28 @@
 --- a/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/net/minecraft/world/level/chunk/LevelChunk.java
-@@ -395,7 +_,7 @@
-                     profiler.push("updateSkyLightSources");
-                     // Paper - rewrite chunk system
-                     profiler.popPush("queueCheckLight");
--                    this.level.getChunkSource().getLightEngine().checkBlock(pos);
-+                    this.level.getChunkSource().getLightEngine().checkBlock(pos, spout.server.paper.impl.packetmapping.block.light.CheckCustomLightChanges.requiresExtraLightPacketSending(oldState, state)); // Spout - Block mapping - Update block light for custom blocks
-                     profiler.pop();
-                 }
+@@ -387,7 +_,12 @@
+         this.heightmaps.get(Heightmap.Types.WORLD_SURFACE).update(localX, y, localZ, state);
+         boolean isEmpty = section.hasOnlyAir();
+         if (wasEmpty != isEmpty) {
++            // Spout start - Block mapping - Update block light for custom blocks
++            boolean requiresExtraLightSending = spout.server.paper.impl.packetmapping.block.light.CheckCustomLightChanges.requiresExtraLightPacketSending(oldState, state);
++            if (requiresExtraLightSending) spout.server.paper.impl.packetmapping.block.light.CurrentUpdateRequiresExtraLightSending.set();
++            // Spout end - Block mapping - Update block light for custom blocks
+             this.level.getChunkSource().getLightEngine().updateSectionStatus(pos, isEmpty);
++            if (requiresExtraLightSending) spout.server.paper.impl.packetmapping.block.light.CurrentUpdateRequiresExtraLightSending.clear(); // Spout - Block mapping - Update block light for custom blocks
+             this.level.getChunkSource().onSectionEmptinessChanged(this.chunkPos.x(), SectionPos.blockToSectionCoord(y), this.chunkPos.z(), isEmpty);
+         }
+ 
+@@ -396,7 +_,12 @@
+             profiler.push("updateSkyLightSources");
+             // Paper - rewrite chunk system
+             profiler.popPush("queueCheckLight");
++            // Spout start - Block mapping - Update block light for custom blocks
++            boolean requiresExtraLightSending = spout.server.paper.impl.packetmapping.block.light.CheckCustomLightChanges.requiresExtraLightPacketSending(oldState, state);
++            if (requiresExtraLightSending) spout.server.paper.impl.packetmapping.block.light.CurrentUpdateRequiresExtraLightSending.set();
++            // Spout end - Block mapping - Update block light for custom blocks
+             this.level.getChunkSource().getLightEngine().checkBlock(pos);
++            if (requiresExtraLightSending) spout.server.paper.impl.packetmapping.block.light.CurrentUpdateRequiresExtraLightSending.clear(); // Spout - Block mapping - Update block light for custom blocks
+             profiler.pop();
+         }
  

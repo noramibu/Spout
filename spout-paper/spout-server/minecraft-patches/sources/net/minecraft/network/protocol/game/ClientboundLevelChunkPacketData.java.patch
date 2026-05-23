@@ -18,15 +18,14 @@
          // Paper start - Anti-Xray - Add chunk packet info
          if (chunkPacketInfo != null) {
              chunkPacketInfo.setBuffer(this.buffer);
-@@ -82,6 +_,7 @@
-             throw new RuntimeException("Chunk Packet trying to allocate too much memory on read.");
-         } else {
-             this.buffer = new byte[size];
-+            this.bufferLength = this.buffer.length; // Spout - Block mapping - Chunk packets - Make buffer length explicit
-             input.readBytes(this.buffer);
-             this.blockEntitiesData = ClientboundLevelChunkPacketData.BlockEntityInfo.LIST_STREAM_CODEC.decode(input);
+@@ -83,14 +_,17 @@
          }
-@@ -89,8 +_,10 @@
+ 
+         this.buffer = new byte[size];
++        this.bufferLength = this.buffer.length; // Spout - Block mapping - Chunk packets - Make buffer length explicit
+         input.readBytes(this.buffer);
+         this.blockEntitiesData = ClientboundLevelChunkPacketData.BlockEntityInfo.LIST_STREAM_CODEC.decode(input);
+     }
  
      public void write(final RegistryFriendlyByteBuf output) {
          HEIGHTMAPS_STREAM_CODEC.encode(output, this.heightmaps);

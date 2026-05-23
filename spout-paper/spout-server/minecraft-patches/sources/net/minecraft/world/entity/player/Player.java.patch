@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/entity/player/Player.java
 +++ b/net/minecraft/world/entity/player/Player.java
-@@ -124,7 +_,7 @@
+@@ -123,7 +_,7 @@
  import net.minecraft.world.scores.Team;
  import org.jspecify.annotations.Nullable;
  
@@ -9,7 +9,7 @@
      public static final int MAX_HEALTH = 20;
      public static final int SLEEP_DURATION = 100;
      public static final int WAKE_UP_DURATION = 10;
-@@ -619,7 +_,13 @@
+@@ -622,7 +_,13 @@
      }
  
      public float getDestroySpeed(final BlockState state) {
@@ -24,7 +24,7 @@
          if (speed > 1.0F) {
              speed += (float)this.getAttributeValue(Attributes.MINING_EFFICIENCY);
          }
-@@ -651,7 +_,13 @@
+@@ -654,7 +_,13 @@
      }
  
      public boolean hasCorrectToolForDrops(final BlockState state) {

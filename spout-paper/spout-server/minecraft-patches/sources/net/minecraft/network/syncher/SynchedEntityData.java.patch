@@ -1,6 +1,6 @@
 --- a/net/minecraft/network/syncher/SynchedEntityData.java
 +++ b/net/minecraft/network/syncher/SynchedEntityData.java
-@@ -229,10 +_,15 @@
+@@ -233,10 +_,15 @@
          }
      }
  
@@ -18,16 +18,16 @@
          }
  
          public void write(final RegistryFriendlyByteBuf output) {
-@@ -242,7 +_,12 @@
-             } else {
-                 output.writeByte(this.id);
-                 output.writeVarInt(serializerId);
-+                // Spout start - Item mapping - Detect item frame - Set flag if item frame
-+                boolean isItemFrame = this.dataAccessor == net.minecraft.world.entity.decoration.ItemFrame.DATA_ITEM;
-+                if (isItemFrame) output.isEncodingItemFrameItem = true;
-+                // Spout end - Item mapping - Detect item frame - Set flag if item frame
-                 this.serializer.codec().encode(output, this.value);
-+                if (isItemFrame) output.isEncodingItemFrameItem = false; // Spout - Item mapping - Detect item frame - Set flag if item frame
-             }
+@@ -247,7 +_,12 @@
+ 
+             output.writeByte(this.id);
+             output.writeVarInt(serializerId);
++            // Spout start - Item mapping - Detect item frame - Set flag if item frame
++            boolean isItemFrame = this.dataAccessor == net.minecraft.world.entity.decoration.ItemFrame.DATA_ITEM;
++            if (isItemFrame) output.isEncodingItemFrameItem = true;
++            // Spout end - Item mapping - Detect item frame - Set flag if item frame
+             this.serializer.codec().encode(output, this.value);
++            if (isItemFrame) output.isEncodingItemFrameItem = false; // Spout - Item mapping - Detect item frame - Set flag if item frame
          }
  
+         public static SynchedEntityData.DataValue<?> read(final RegistryFriendlyByteBuf input, final int id) {

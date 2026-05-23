@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/RespawnAnchorBlock.java
 +++ b/net/minecraft/world/level/block/RespawnAnchorBlock.java
-@@ -42,6 +_,7 @@
+@@ -41,6 +_,7 @@
  import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.Vec3;
  import org.jspecify.annotations.Nullable;
@@ -8,7 +8,7 @@
  
  public class RespawnAnchorBlock extends Block {
      public static final MapCodec<RespawnAnchorBlock> CODEC = simpleCodec(RespawnAnchorBlock::new);
-@@ -219,7 +_,7 @@
+@@ -215,7 +_,7 @@
          return true;
      }
  

@@ -8,7 +8,7 @@
          this.connection.send(new ClientboundLoginFinishedPacket(gameProfile));
          this.server.services().paper().filledProfileCache().add(gameProfile); // Paper - update profile cache
      }
-@@ -370,6 +_,7 @@
+@@ -366,6 +_,7 @@
  
      @Override
      public void handleCustomQueryPacket(final ServerboundCustomQueryAnswerPacket packet) {

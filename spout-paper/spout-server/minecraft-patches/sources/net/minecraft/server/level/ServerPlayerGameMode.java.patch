@@ -16,7 +16,7 @@
      private boolean hasDelayedDestroy;
      private BlockPos delayedDestroyPos = BlockPos.ZERO;
      private int delayedTickStart;
-@@ -284,6 +_,7 @@
+@@ -283,6 +_,7 @@
                      BlockState state = this.level.getBlockState(pos);
                      if (!state.isAir()) {
                          float destroyProgress = state.getDestroyProgress(this.player, this.player.level(), pos) * (ticksSpentDestroying + 1);

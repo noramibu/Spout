@@ -23,7 +23,7 @@
      }
  
      public static <B extends Block> MapCodec<B> simpleCodec(final Function<BlockBehaviour.Properties, B> constructor) {
-@@ -363,12 +_,20 @@
+@@ -363,13 +_,21 @@
      }
  
      protected float getDestroyProgress(final BlockState state, final Player player, final BlockGetter level, final BlockPos pos) {
@@ -31,22 +31,23 @@
 +        return this.getDestroyProgress(state, player, level, pos, null);
 +    }
 +
-+    protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos, @Nullable ItemStack heldItemStack) {
++    protected float getDestroyProgress(final BlockState state, final Player player, final BlockGetter level, final BlockPos pos, @Nullable ItemStack heldItemStack) {
 +        // Spout end - Block mapping - Breaking speed - Implement calculating destroy progress with given held item stack
          float destroySpeed = state.getDestroySpeed(level, pos);
          if (destroySpeed == -1.0F) {
              return 0.0F;
-         } else {
--            int modifier = player.hasCorrectToolForDrops(state) ? 30 : 100;
--            return player.getDestroySpeed(state) / destroySpeed / modifier;
-+            // Spout start - Block mapping - Breaking speed - Implement calculating destroy progress with given held item stack
-+            int i = player.hasCorrectToolForDrops(state, heldItemStack) ? 30 : 100;
-+            return player.getDestroySpeed(state, heldItemStack) / destroySpeed / i;
-+            // Spout end - Block mapping - Breaking speed - Implement calculating destroy progress with given held item stack
          }
+ 
+-        int modifier = player.hasCorrectToolForDrops(state) ? 30 : 100;
+-        return player.getDestroySpeed(state) / destroySpeed / modifier;
++        // Spout start - Block mapping - Breaking speed - Implement calculating destroy progress with given held item stack
++        int modifier = player.hasCorrectToolForDrops(state, heldItemStack) ? 30 : 100;
++        return player.getDestroySpeed(state, heldItemStack) / destroySpeed / modifier;
++        // Spout end - Block mapping - Breaking speed - Implement calculating destroy progress with given held item stack
      }
  
-@@ -773,7 +_,13 @@
+     protected void spawnAfterBreak(final BlockState state, final ServerLevel level, final BlockPos pos, final ItemStack tool, final boolean dropExperience) {
+@@ -777,7 +_,13 @@
          }
  
          public float getDestroyProgress(final Player player, final BlockGetter level, final BlockPos pos) {
@@ -61,7 +62,7 @@
          }
  
          public int getDirectSignal(final BlockGetter level, final BlockPos pos, final Direction direction) {
-@@ -1104,53 +_,60 @@
+@@ -1106,53 +_,60 @@
          XYZ;
      }
  
@@ -155,7 +156,7 @@
  
          private Properties() {
          }
-@@ -1433,7 +_,7 @@
+@@ -1435,7 +_,7 @@
      }
  
      @FunctionalInterface
