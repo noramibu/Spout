@@ -33,6 +33,10 @@ public final class BlockRequestProcessUtils {
         if (from.liquid() != proxyCandidate.liquid()) {
             return false;
         }
+        // Check occluding
+        if (from.canOcclude() != proxyCandidate.canOcclude()) {
+            return false;
+        }
         // Cannot use instabreak proxy for non-instabreak from
         if (proxyCandidate.destroySpeed == 0 && from.destroySpeed != 0) {
             return false;

@@ -47,19 +47,19 @@ public final class NewContextAwareBlockProperties {
         if (initializers == null) {
             initializers = new HashMap<>();
             addInitializer("base_pressure_plate", properties -> {
-                properties.noCollision();
-                properties.strength(0.5f);
-                properties.forceSolidOn();
-                properties.pushReaction(PushReaction.DESTROY);
+                properties.noCollision()
+                    .strength(0.5f)
+                    .forceSolidOn()
+                    .pushReaction(PushReaction.DESTROY);
             });
             addInitializer("button", properties -> {
-                properties.noCollision();
-                properties.strength(0.5f);
-                properties.pushReaction(PushReaction.DESTROY);
+                properties.noCollision()
+                    .strength(0.5f)
+                    .pushReaction(PushReaction.DESTROY);
             });
             addInitializer("door", properties -> {
-                properties.noOcclusion();
-                properties.pushReaction(PushReaction.DESTROY);
+                properties.noOcclusion()
+                    .pushReaction(PushReaction.DESTROY);
             });
             addInitializer("fence", properties -> {
                 properties.forceSolidOn();
@@ -68,28 +68,28 @@ public final class NewContextAwareBlockProperties {
                 properties.forceSolidOn();
             });
             addInitializer("flower_pot", properties -> {
-                properties.instabreak();
-                properties.noOcclusion();
-                properties.pushReaction(PushReaction.DESTROY);
+                properties.instabreak()
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY);
             });
             addInitializer("ladder", properties -> {
-                properties.sound(SoundType.LADDER);
-                properties.strength(0.4f);
-                properties.noOcclusion();
-                properties.forceSolidOff();
+                properties.sound(SoundType.LADDER)
+                    .strength(0.4f)
+                    .noOcclusion()
+                    .forceSolidOff();
             });
             addInitializer("leaves", properties -> {
-                properties.mapColor(MapColor.PLANT);
-                properties.sound(SoundType.GRASS);
-                properties.strength(0.2f);
-                properties.randomTicks();
-                properties.noOcclusion();
-                properties.ignitedByLava();
-                properties.pushReaction(PushReaction.DESTROY);
-                properties.isValidSpawn(Blocks::ocelotOrParrot); // TODO document on wiki (currently not possible to define in data-driven JSON)
-                properties.isRedstoneConductor(Blocks::never);
-                properties.isSuffocating(Blocks::never);
-                properties.isViewBlocking(Blocks::never);
+                properties.mapColor(MapColor.PLANT)
+                    .sound(SoundType.GRASS)
+                    .strength(0.2f)
+                    .randomTicks()
+                    .noOcclusion()
+                    .ignitedByLava()
+                    .pushReaction(PushReaction.DESTROY)
+                    .isValidSpawn(Blocks::ocelotOrParrot) // TODO document on wiki (currently not possible to define in data-driven JSON)
+                    .isRedstoneConductor(Blocks::never)
+                    .isSuffocating(Blocks::never)
+                    .isViewBlocking(Blocks::never);
             });
             addInitializer("mangrove_leaves", properties -> {
                 getInitializer("leaves").accept(properties);
@@ -102,19 +102,19 @@ public final class NewContextAwareBlockProperties {
                 getInitializer("base_pressure_plate").accept(properties);
             });
             addInitializer("sapling", properties -> {
-                properties.mapColor(MapColor.PLANT);
-                properties.noCollision();
-                properties.sound(SoundType.GRASS);
-                properties.instabreak();
-                properties.randomTicks();
-                properties.pushReaction(PushReaction.DESTROY);
+                properties.mapColor(MapColor.PLANT)
+                    .noCollision()
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .randomTicks()
+                    .pushReaction(PushReaction.DESTROY);
             });
             addInitializer("tinted_particle_leaves", properties -> {
                 getInitializer("leaves").accept(properties);
             });
             addInitializer("trapdoor", properties -> {
-                properties.noOcclusion();
-                properties.isValidSpawn(Blocks::never);
+                properties.noOcclusion()
+                    .isValidSpawn(Blocks::never);
             });
             addInitializer("untinted_particle_leaves", properties -> {
                 getInitializer("leaves").accept(properties);
@@ -124,15 +124,26 @@ public final class NewContextAwareBlockProperties {
             });
             addInitializer("weathering_copper_door", properties -> {
                 getInitializer("door").accept(properties);
-                properties.mapColor(MapColor.COLOR_ORANGE);
-                properties.strength(3.0f, 6.0f);
-                properties.requiresCorrectToolForDrops();
+                properties.mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.0f, 6.0f)
+                    .requiresCorrectToolForDrops();
+            });
+            addInitializer("weathering_copper_grate", properties -> { // TODO document on wiki
+                properties.strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER_GRATE)
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .isValidSpawn(Blocks::never)
+                    .isRedstoneConductor(Blocks::never)
+                    .isSuffocating(Blocks::never)
+                    .isViewBlocking(Blocks::never);
             });
             addInitializer("weathering_copper_trap_door", properties -> {
                 getInitializer("trapdoor").accept(properties);
-                properties.mapColor(MapColor.COLOR_ORANGE);
-                properties.strength(3.0f, 6.0f);
-                properties.requiresCorrectToolForDrops();
+                properties.mapColor(MapColor.COLOR_ORANGE)
+                    .strength(3.0f, 6.0f)
+                    .requiresCorrectToolForDrops();
             });
             addInitializer("weighted_pressure_plate", properties -> {
                 getInitializer("base_pressure_plate").accept(properties);
