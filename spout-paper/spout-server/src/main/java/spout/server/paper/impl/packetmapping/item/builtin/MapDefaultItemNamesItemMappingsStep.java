@@ -4,7 +4,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import spout.server.paper.impl.packetmapping.component.ComponentMappingsImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingHandleNMSImpl;
-import spout.server.paper.impl.packetmapping.item.ItemMappingsImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingsStep;
 
 /**

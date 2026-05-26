@@ -10,6 +10,7 @@ import spout.server.paper.api.packetmapping.component.translatable.ServerSideTra
 import spout.server.paper.api.packetmapping.component.translatable.ServerSideTranslationsComposeEvent;
 import spout.server.paper.api.resourcepack.content.Lang;
 import spout.server.paper.impl.configuration.SpoutGlobalConfiguration;
+import spout.server.paper.impl.moredatadriven.namespace.NamespaceNames;
 import spout.server.paper.impl.resourcepack.construct.ResourcePackConstructionImpl;
 import spout.server.paper.impl.resourcepack.plugin.discover.PluginResourcePackDiscoveryImpl;
 import spout.server.paper.impl.util.composable.ComposableImpl;
@@ -192,6 +193,39 @@ public final class ServerSideTranslationsImpl extends ComposableImpl<ServerSideT
 
     @Override
     protected void copyInformationFromEvent(ServerSideTranslationsComposeEventImpl event) {
+
+        // Add additional namespace translation keys
+        List<Pair<String, RegisteredTranslationsForKey>> namespaces = this.registeredTranslations.entrySet().stream()
+            .map(entry -> {
+                String namespace = NamespaceNames.parseNamespaceFromTranslationKey(entry.getKey());
+                return namespace == null ? null : Pair.of(namespace, entry.getValue());
+            }).filter(Objects::nonNull).toList();
+        for (Pair<String, RegisteredTranslationsForKey> namespace : namespaces) {
+            RegisteredTranslationsForKey translations = namespace.second();
+            for (String alternativeTranslationKey : NamespaceNames.getAlternativeTranslationKeys(namespace.first())) {
+                this.registeredTranslations.compute(alternativeTranslationKey, (_, existing) -> {
+                    if (existing == null) {
+                        return translations;
+                    }
+                    // Not entirely accurate, but good enough for now
+                    if (existing.genericTranslation == null) {
+                        existing.genericTranslation = translations.genericTranslation;
+                    }
+                    if (existing.languageGroupTranslations == null) {
+                        existing.languageGroupTranslations = translations.languageGroupTranslations;
+                    } else if (translations.languageGroupTranslations != null) {
+                        for (Map.Entry<String, ServerSideTranslation> translation : translations.languageGroupTranslations.entrySet()) {
+                            existing.languageGroupTranslations.putIfAbsent(translation.getKey(), translation.getValue());
+                        }
+                    }
+                    for (Map.Entry<String, ServerSideTranslation> translation : translations.localeTranslations.entrySet()) {
+                        existing.localeTranslations.putIfAbsent(translation.getKey(), translation.getValue());
+                    }
+                    return existing;
+                });
+            }
+        }
+
         // Add language files to resource pack
         ResourcePackConstructionImpl.get().addEventInitializer(resourcePackConstructEvent -> {
             Map<String, Lang> languageFiles = ServerSideTranslationsImpl.get().exportForResourcePackAsLangs();
@@ -204,6 +238,7 @@ public final class ServerSideTranslationsImpl extends ComposableImpl<ServerSideT
                 }
             }
         });
+
     }
 
     private Map<String, Map<String, String>> exportForResourcePackAsMaps() {

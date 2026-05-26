@@ -8,11 +8,3 @@
      }
  
      @Override
-@@ -37,6 +_,7 @@
-         }
- 
-         storage.enter();
-+        spout.server.paper.impl.packetmapping.item.namespacetooltip.NamespaceTooltips.registerNamespaceNames(storage); // Spout - Item mapping - Namespace tooltips - Register namespace
-         this.enteredMap.put(entrypoint, true);
-     }
- 

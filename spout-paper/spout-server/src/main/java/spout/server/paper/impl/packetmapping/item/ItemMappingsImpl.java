@@ -4,17 +4,21 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import org.bukkit.Registry;
 import org.bukkit.inventory.ItemType;
+import spout.common.branding.SpoutNamespace;
 import spout.server.paper.api.clientview.ClientView;
 import spout.server.paper.api.packetmapping.item.ItemMappingFunctionContext;
 import spout.server.paper.api.packetmapping.item.ItemMappings;
 import spout.server.paper.api.packetmapping.item.ItemMappingsComposeEvent;
+import spout.server.paper.impl.configuration.SpoutGlobalConfiguration;
 import spout.server.paper.impl.moredatadriven.minecraft.ItemRegistry;
 import spout.server.paper.impl.packetmapping.WithClientViewContextSingleStepMappingPipeline;
+import spout.server.paper.impl.packetmapping.item.builtin.AddTooltipItemMappingsStep;
 import spout.server.paper.impl.packetmapping.item.builtin.MapDefaultItemNamesItemMappingsStep;
 import spout.server.paper.impl.packetmapping.item.builtin.RemoveNonVanillaDebugStickStateItemMappingsStep;
 import spout.server.paper.impl.util.composable.ComposableImpl;
@@ -174,6 +178,24 @@ public final class ItemMappingsImpl extends ComposableImpl<ItemMappingsComposeEv
                 item.unappliedDataPackMappings = null;
             }
         });
+
+        // Register tooltip mappings
+        if (SpoutGlobalConfiguration.get().tooltips.items.namespace) {
+            event.register(
+                Arrays.asList(ClientView.AwarenessLevel.getAll()),
+                Registry.ITEM.stream().filter(item -> {
+                    if (item.isVanilla()) {
+                        return false;
+                    }
+                    String namespace = item.getKey().getNamespace();
+                    if (namespace.equals(Identifier.DEFAULT_NAMESPACE) || namespace.equals(SpoutNamespace.SPOUT)) {
+                        return false;
+                    }
+                    return true;
+                }).toList(),
+                new AddTooltipItemMappingsStep()
+            );
+        }
 
         // Return the event
         return event;

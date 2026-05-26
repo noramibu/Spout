@@ -19,15 +19,16 @@ public final class ServerSideTranslationsComponentMappingsStep implements Compon
     public void apply(ComponentMappingHandleNMSImpl handle) {
         ClientView clientView = handle.getContext().getClientView();
         if (clientView.understandsAllServerSideTranslatables()) return;
-        ComponentContents contents = handle.getImmutable().getContents();
+        Component immutable = handle.getImmutable();
+        ComponentContents contents = immutable.getContents();
         if (contents instanceof TranslatableContents translatableContents) {
             String key = translatableContents.getKey();
             ServerSideTranslations.ServerSideTranslation translation = ServerSideTranslations.get().get(key, clientView.getLocale());
             if (translation != null) {
                 if (translation.overrideClientSide()) {
-                    handle.setMutable(Component.literal(translation.translation()));
+                    handle.setMutable(Component.literal(translation.translation()).withStyle(immutable.getStyle()));
                 } else {
-                    handle.setMutable(Component.translatableWithFallback(key, translation.translation()));
+                    handle.setMutable(Component.translatableWithFallback(key, translation.translation()).withStyle(immutable.getStyle()));
                 }
             }
         }

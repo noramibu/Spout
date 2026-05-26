@@ -29,5 +29,13 @@
   "block.quark.diorite_brick_wall": "Diorite Brick Wall",
   "block.quark.potted_ancient_sapling": "Potted Ashen Sapling",
   "block.red_portal.red_portal": "Red Portal",
-  "item.quark.glass_shard": "Glass Shard"
+  "item.quark.glass_shard": "Glass Shard",
+  "spout.namespace.biome_makeover": "Biome Makeover",
+  "spout.namespace.chinese_mythology_mashup": "Chinese Mythology Mash-up",
+  "spout.namespace.maple_delight": "Maple Delight",
+  "spout.namespace.minecraft_dungeons": "Minecraft Dungeons",
+  "spout.namespace.more_barrel_variants": "More Barrel Variants",
+  "spout.namespace.more_vanilla_shapes": "More Vanilla Shapes",
+  "spout.namespace.quark": "Quark",
+  "spout.namespace.red_portal": "Red Portal"
 }
