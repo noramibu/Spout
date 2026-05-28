@@ -16,6 +16,28 @@ import spout.client.fabric.ui.loadingoverlay.SpoutLogoIdentifier;
 @Mixin(LoadingOverlay.class)
 public abstract class ChangePositionsOfSpoutLogoLoadingOverlayMixin {
 
+    private static final double ADJUSTED_GRAPHICS_WIDTH_FACTOR = 0.4; // Original is 0.25
+    private static final double ADJUSTED_GRAPHICS_Y_FACTOR = 0.85; // Original is 1
+
+    private static void adjustedGraphicsBlit(GuiGraphicsExtractor graphics, RenderPipeline renderPipeline, Identifier texture, int color, int ordinal) {
+
+        // Adjust parameters
+        int contentX = (int) ((double) graphics.guiWidth() * (double) 0.5F);
+        int logoY = (int) ((double) graphics.guiHeight() * (double) 0.5F);
+        double logoHeight = Math.min((double) graphics.guiWidth() * (double) 0.75F, (double) graphics.guiHeight()) * ADJUSTED_GRAPHICS_WIDTH_FACTOR;
+        int logoHeightHalf = (int) (logoHeight * (double) 0.5F);
+        double contentWidth = logoHeight * (double) 4.0F;
+        int logoWidthHalf = (int) (contentWidth * (double) 0.5F);
+
+        // Draw
+        if (ordinal == 0) {
+            graphics.blit(renderPipeline, texture, contentX - logoWidthHalf, ((int) ((logoY - logoHeightHalf) * ADJUSTED_GRAPHICS_Y_FACTOR)), -0.0625F, 0.0F, logoWidthHalf, (int) logoHeight, 120, 60, 120, 120, color);
+        } else {
+            graphics.blit(renderPipeline, texture, contentX, ((int) ((logoY - logoHeightHalf) * ADJUSTED_GRAPHICS_Y_FACTOR)), 0.0625F, 60.0F, logoWidthHalf, (int) logoHeight, 120, 60, 120, 120, color);
+        }
+
+    }
+
     @Redirect(
         method = "extractRenderState",
         at = @At(
@@ -25,29 +47,20 @@ public abstract class ChangePositionsOfSpoutLogoLoadingOverlayMixin {
         )
     )
     private void redirectBlitFirst(
-        GuiGraphicsExtractor guiGraphics,
+        GuiGraphicsExtractor graphics,
         RenderPipeline renderPipeline,
         Identifier texture,
-        int i, int j,
-        float f, float g,
-        int k, int l,
-        int m, int n,
-        int o, int p,
-        int q
+        int x, int y,
+        float u, float v,
+        int width, int height,
+        int srcWidth, int srcHeight,
+        int textureWidth, int textureHeight,
+        int color
     ) {
         if (texture.equals(SpoutLogoIdentifier.IDENTIFIER)) {
-            // Adjust coordinates so the logo renders fully
-            int n2 = (int) ((double) guiGraphics.guiWidth() * (double) 0.5F);
-            int p2 = (int) ((double) guiGraphics.guiHeight() * (double) 0.5F);
-            double d2 = Math.min((double) guiGraphics.guiWidth() * (double) 0.75F, (double) guiGraphics.guiHeight()) * (double) 0.25F;
-            int q2 = (int) (d2 * (double) 0.5F);
-            double e2 = d2 * (double) 4.0F;
-            int r2 = (int) (e2 * (double) 0.5F);
-            int k2 = k * 4 / 5;
-            int l2 = l * 4 / 5;
-            guiGraphics.blit(renderPipeline, texture, n2 - k2 / 2, (p2 - l2) * 17 / 20, 0f, 0f, k2, l2 * 2, 320, 320, 320, 320, q);
+            adjustedGraphicsBlit(graphics, renderPipeline, texture, color, 0);
         } else {
-            guiGraphics.blit(renderPipeline, texture, i, j, f, g, k, l, m, n, o, p, q);
+            graphics.blit(renderPipeline, texture, x, y, u, v, width, height, srcWidth, srcHeight, textureWidth, textureHeight, color);
         }
     }
 
@@ -60,20 +73,20 @@ public abstract class ChangePositionsOfSpoutLogoLoadingOverlayMixin {
         )
     )
     private void redirectBlitSecond(
-        GuiGraphicsExtractor guiGraphics,
+        GuiGraphicsExtractor graphics,
         RenderPipeline renderPipeline,
         Identifier texture,
-        int i, int j,
-        float f, float g,
-        int k, int l,
-        int m, int n,
-        int o, int p,
-        int q
+        int x, int y,
+        float u, float v,
+        int width, int height,
+        int srcWidth, int srcHeight,
+        int textureWidth, int textureHeight,
+        int color
     ) {
         if (texture.equals(SpoutLogoIdentifier.IDENTIFIER)) {
-            // Don't draw anything
+            adjustedGraphicsBlit(graphics, renderPipeline, texture, color, 1);
         } else {
-            guiGraphics.blit(renderPipeline, texture, i, j, f, g, k, l, m, n, o, p, q);
+            graphics.blit(renderPipeline, texture, x, y, u, v, width, height, srcWidth, srcHeight, textureWidth, textureHeight, color);
         }
     }
 
