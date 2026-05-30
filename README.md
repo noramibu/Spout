@@ -94,7 +94,7 @@ See the step-by-step guide on the
 
 ## Current known issues
 
-* Vanilla clients cannot see block display entities, falling blocks and stonecutter recipes for custom blocks.
+* Vanilla clients show stonecutter recipes in the wrong order.
 
 # Client
 

@@ -1,5 +1,14 @@
 --- a/net/minecraft/server/level/ServerEntity.java
 +++ b/net/minecraft/server/level/ServerEntity.java
+@@ -321,7 +_,7 @@
+             // CraftBukkit end
+         }
+ 
+-        Packet<ClientGamePacketListener> packet = this.entity.getAddEntityPacket(this);
++        Packet<ClientGamePacketListener> packet = this.entity.getAddEntityPacket(this, player); // Spout - Packet mapping - Implementation part - Apply to entities
+         broadcast.accept(packet);
+         if (this.trackedDataValues != null) {
+             broadcast.accept(new ClientboundSetEntityDataPacket(this.entity.getId(), this.trackedDataValues));
 @@ -330,12 +_,14 @@
          if (this.entity instanceof LivingEntity livingEntity) {
              Collection<AttributeInstance> attributes = livingEntity.getAttributes().getSyncableAttributes();

@@ -1,0 +1,17 @@
+--- a/net/minecraft/network/syncher/EntityDataSerializers.java
++++ b/net/minecraft/network/syncher/EntityDataSerializers.java
+@@ -87,12 +_,12 @@
+             return value.copy();
+         }
+     };
+-    public static final EntityDataSerializer<BlockState> BLOCK_STATE = EntityDataSerializer.forValueType(ByteBufCodecs.idMapper(Block.BLOCK_STATE_REGISTRY));
++    public static final EntityDataSerializer<BlockState> BLOCK_STATE = EntityDataSerializer.forValueType(ByteBufCodecs.idMapper(spout.server.paper.impl.packetmapping.block.MappedBlockStateRegistry.get())); // Spout - Block mapping - Implementation part - Apply to entity block states
+     private static final StreamCodec<ByteBuf, Optional<BlockState>> OPTIONAL_BLOCK_STATE_CODEC = new StreamCodec<ByteBuf, Optional<BlockState>>() {
+         @Override
+         public void encode(final ByteBuf output, final Optional<BlockState> value) {
+             if (value.isPresent()) {
+-                VarInt.write(output, Block.getId(value.get()));
++                VarInt.write(output, spout.server.paper.impl.packetmapping.block.MappedBlockStateRegistry.get().getIdNullable(value.get())); // Spout - Block mapping - Implementation part - Apply to entity block states
+             } else {
+                 VarInt.write(output, 0);
+             }

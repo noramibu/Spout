@@ -1,0 +1,37 @@
+--- a/net/minecraft/network/protocol/game/ClientboundLevelEventPacket.java
++++ b/net/minecraft/network/protocol/game/ClientboundLevelEventPacket.java
+@@ -32,7 +_,24 @@
+     private void write(final FriendlyByteBuf output) {
+         output.writeInt(this.type);
+         output.writeBlockPos(this.pos);
+-        output.writeInt(this.data);
++        // Spout start - Packet mapping - Implementation part - Apply to level events
++        int dataToWrite = switch (this.type) {
++            case net.minecraft.world.level.block.LevelEvent.SOUND_PLAY_JUKEBOX_SONG -> {
++                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.byId(this.data);
++                spout.server.paper.api.packetmapping.item.ItemMappingFunctionContext context = new spout.server.paper.impl.packetmapping.item.ItemMappingFunctionContextImpl(output.getClientViewOrFallback(), false, false);
++                net.minecraft.world.item.Item mapped = spout.server.paper.impl.packetmapping.item.ItemMappingsImpl.get().apply(item, context);
++                yield mapped.indexInItemRegistry;
++            }
++            case net.minecraft.world.level.block.LevelEvent.PARTICLES_DESTROY_BLOCK, net.minecraft.world.level.block.LevelEvent.PARTICLES_AND_SOUND_BRUSH_BLOCK_COMPLETE -> {
++                net.minecraft.world.level.block.state.BlockState state = net.minecraft.world.level.block.Block.BLOCK_STATE_REGISTRY.byId(this.data);
++                spout.server.paper.api.packetmapping.block.BlockMappingFunctionContext context = new spout.server.paper.impl.packetmapping.block.BlockMappingFunctionContextImpl(output.getClientViewOrFallback(), this.pos);
++                net.minecraft.world.level.block.state.BlockState mapped = spout.server.paper.impl.packetmapping.block.BlockMappingsImpl.get().apply(state, context);
++                yield mapped.indexInBlockStateRegistry;
++            }
++            default -> this.data;
++        };
++        output.writeInt(dataToWrite);
++        // Spout end - Packet mapping - Implementation part - Apply to level events
+         output.writeBoolean(this.globalEvent);
+     }
+ 
+@@ -55,7 +_,7 @@
+     }
+ 
+     public int getData() {
+-        return this.data;
++        throw new UnsupportedOperationException(); // Spout - Packet mapping - Implementation part - Apply to level events
+     }
+ 
+     public BlockPos getPos() {

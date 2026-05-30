@@ -1,0 +1,16 @@
+--- a/net/minecraft/world/entity/Entity.java
++++ b/net/minecraft/world/entity/Entity.java
+@@ -4814,7 +_,13 @@
+     }
+ 
+     public Packet<ClientGamePacketListener> getAddEntityPacket(final ServerEntity serverEntity) {
++        // Spout start - Packet mapping - Implementation part - Apply to entities
++        return this.getAddEntityPacket(serverEntity, null);
++    }
++
++    public Packet<ClientGamePacketListener> getAddEntityPacket(final ServerEntity serverEntity, @Nullable ServerPlayer player) {
+         return new ClientboundAddEntityPacket(this, serverEntity);
++        // Spout end - Packet mapping - Implementation part - Apply to entities
+     }
+ 
+     public EntityDimensions getDimensions(final Pose pose) {
