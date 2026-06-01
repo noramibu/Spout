@@ -1,4 +1,4 @@
-package spout.clientview.packetmapping.blockstate;
+package spout.clientview.packetmapping.blockstate.apply;
 
 import net.minecraft.world.level.block.state.BlockState;
 import spout.util.mapping.handle.AbstractMappingHandle;

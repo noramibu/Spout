@@ -1,4 +1,4 @@
-package spout.clientview.packetmapping.blockstate;
+package spout.clientview.packetmapping.blockstate.apply;
 
 import net.minecraft.core.BlockPos;
 import spout.clientview.model.ClientView;

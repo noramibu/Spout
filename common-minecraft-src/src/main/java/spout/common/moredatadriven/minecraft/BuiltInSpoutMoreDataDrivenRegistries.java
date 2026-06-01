@@ -9,7 +9,7 @@ import spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes;
 
 /**
  * A class similar to {@link BuiltInRegistries},
- * that holds the built-in registries that Spout uses to add more data-driven elements.
+ * that holds the built-in Spout registries that Spout uses to add more data-driven elements.
  */
 public final class BuiltInSpoutMoreDataDrivenRegistries {
 

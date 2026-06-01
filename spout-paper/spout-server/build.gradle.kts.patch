@@ -39,7 +39,7 @@
      updatingMinecraft {
          // oldPaperCommit = "711c5de2b05df39b72c44ff54e9f9381f8d153cb"
      }
-@@ -86,7 +_,25 @@
+@@ -86,7 +_,26 @@
      }
  }
  
@@ -51,6 +51,7 @@
 +        resources { srcDir("../paper-server/src/main/resources") }
 +    }
 +    main {
++        java.srcDir("../../common-server-src/src/main/java")
 +        java.srcDir("../../common-minecraft-src/src/main/java")
 +        java.srcDir("../../common-server-minecraft-src/src/main/java")
 +    }

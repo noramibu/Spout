@@ -8,14 +8,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import spout.common.moredatadriven.minecraft.BuiltInSpoutMoreDataDrivenRegistries;
 
 /**
- * Extends {@link BuiltInRegistries#createContents()}
+ * Extends {@link BuiltInRegistries#bootStrap()}
  * to include the {@link BuiltInSpoutMoreDataDrivenRegistries}.
  */
 @Mixin(BuiltInRegistries.class)
 public abstract class IncludeSpoutBootstrapBuiltInRegistriesMixin {
 
     @Inject(
-        method = "createContents",
+        method = "bootStrap",
         at = @At("HEAD")
     )
     private static void onCreateContents(CallbackInfo ci) {
