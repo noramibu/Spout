@@ -9,3 +9,19 @@
          final io.papermc.paper.registry.data.util.Conversions conversions = new io.papermc.paper.registry.data.util.Conversions(context); // Paper - create conversions
          return CompletableFuture.<Map<Identifier, Resource>>supplyAsync(() -> lister.listMatchingResources(this.resourceManager), executor)
              .thenCompose(
+@@ -62,6 +_,7 @@
+             )
+             .thenAcceptAsync(
+                 loadedEntries -> {
++                    spout.registry.SpoutRegistryListeners.onPrePopulate(this.registry); // Spout - Hook into registry lifecycle
+                     this.registerElements(loadedEntries.entrySet().stream().sorted(Entry.comparingByKey()).map(Entry::getValue), conversions);
+                     io.papermc.paper.registry.PaperRegistryAccess.instance().lockReferenceHolders(this.registryKey()); // Paper - lock reference holders
+                     io.papermc.paper.registry.PaperRegistryListenerManager.INSTANCE.runFreezeListeners(this.registryKey(), conversions); // Paper - run pre-freeze listeners
+@@ -70,6 +_,7 @@
+                     );
+                     Map<TagKey<T>, List<Holder<T>>> pendingTags = TagLoader.loadTagsForRegistry(this.resourceManager, this.registryKey(), tagElementLookup, this.registry, io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent.Cause.INITIAL); // Paper - tag lifecycle - add registry, cause
+                     this.registerTags(pendingTags);
++                    spout.registry.SpoutRegistryListeners.onPrePopulate(this.registry); // Spout - Hook into registry lifecycle
+                 },
+                 executor
+             );

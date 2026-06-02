@@ -1,17 +1,28 @@
 --- a/net/minecraft/server/WorldLoader.java
 +++ b/net/minecraft/server/WorldLoader.java
-@@ -34,6 +_,14 @@
+@@ -33,6 +_,17 @@
+             .thenComposeAsync(
                  packsAndResourceManager -> {
                      CloseableResourceManager resources = packsAndResourceManager.getSecond();
-                     LayeredRegistryAccess<RegistryLayer> initialLayers = RegistryLayer.createRegistryAccess();
 +                    // Spout start - More data-driven - Data pack - Delayed frozen registries - Load some registries before
++                    CompletableFuture<?> lastInstanceCompletableFuture = CompletableFuture.completedFuture(null);
 +                    for (spout.server.paper.impl.moredatadriven.datapack.delayedfrozenregistries.DataPackRegistriesToLoadBeforeDelayedRegistryFreeze.Instance<?> instance : spout.server.paper.impl.moredatadriven.datapack.delayedfrozenregistries.DataPackRegistriesToLoadBeforeDelayedRegistryFreeze.REGISTRIES) {
-+                        CompletableFuture<RegistryAccess.Frozen> registryAccess = RegistryDataLoader.load(resources, java.util.Collections.emptyList(), List.of(instance.registryData()), mainThreadExecutor);
-+                        instance.postLoadAction().accept((Registry) registryAccess.join().lookupOrThrow(instance.registryData().key()));
++                        lastInstanceCompletableFuture = lastInstanceCompletableFuture.thenComposeAsync(_ ->
++                            RegistryDataLoader.load(resources, java.util.Collections.emptyList(), List.of(instance.registryData()), mainThreadExecutor)
++                        ).thenAcceptAsync(access -> instance.postLoadAction().accept((Registry) access.lookupOrThrow(instance.registryData().key())));
 +                    }
++                    return lastInstanceCompletableFuture.thenComposeAsync(_ -> {
 +                    // Spout end - More data-driven - Data pack - Delayed frozen registries - Load some registries before
 +                    spout.server.paper.impl.moredatadriven.datapack.delayedfrozenregistries.DelayedRegistryFreezing.freezeDelayedRegistries(); // Spout - More data-driven - Data pack - Delayed frozen registries - Freeze delayed registries
 +                    spout.server.paper.impl.logging.CustomContentLogging.logCustomContent(); // Spout - Logging - Log custom content
+                     LayeredRegistryAccess<RegistryLayer> initialLayers = RegistryLayer.createRegistryAccess();
                      List<Registry.PendingTags<?>> staticLayerTags = TagLoader.loadTagsForExistingRegistries(
                          resources, initialLayers.getLayer(RegistryLayer.STATIC), io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent.Cause.INITIAL // Paper - tag lifecycle - add cause
-                     );
+@@ -86,6 +_,7 @@
+                             },
+                             backgroundExecutor
+                         );
++                    }); // Spout - More data-driven - Data pack - Delayed frozen registries - Load some registries before
+                 },
+                 backgroundExecutor
+             );
