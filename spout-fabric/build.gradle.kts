@@ -37,6 +37,10 @@ sourceSets.main {
     java.srcDir("../common-minecraft-src/src/main/java")
     java.srcDir("../common-fabric-src/src/main/java")
     java.srcDir("../common-server-minecraft-src/src/main/java")
+    resources.srcDir("../common-src/src/main/resources")
+    resources.srcDir("../common-server-src/src/main/resources")
+    resources.srcDir("../common-minecraft-src/src/main/resources")
+    resources.srcDir("../common-fabric-src/src/main/resources")
     resources.srcDir("../common-server-minecraft-src/src/main/resources")
 }
 

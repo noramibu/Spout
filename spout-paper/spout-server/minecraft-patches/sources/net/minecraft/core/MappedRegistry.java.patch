@@ -34,7 +34,7 @@
          this.validateWrite(key);
          Objects.requireNonNull(key);
          Objects.requireNonNull(value);
-@@ -296,10 +_,21 @@
+@@ -296,10 +_,22 @@
  
      @Override
      public Registry<T> freeze() {
@@ -53,6 +53,15 @@
  
 +    protected Registry<T> actuallyFreeze() {
 +        // Spout end - More data-driven - Data pack - Delayed frozen registries - Delay freezing registries
++        spout.util.minecraft.registry.SpoutRegistryHookEvents.fireEvent(spout.util.minecraft.registry.SpoutRegistryHookEvents.EventType.PRE_FREEZE, this); // Spout - Hook into registry lifecycle
          this.frozen = true;
          this.temporaryUnfrozenMap.clear(); // Paper - support pre-filling in registry mod API
          this.byValue.forEach((value, holder) -> holder.bindValue((T)value));
+@@ -340,6 +_,7 @@
+         this.componentLookup = new DataComponentLookup<>(this.byId);
+         this.allTags = MappedRegistry.TagSet.fromMap(this.frozenTags);
+         this.refreshTagsInHolders();
++        spout.util.minecraft.registry.SpoutRegistryHookEvents.fireEvent(spout.util.minecraft.registry.SpoutRegistryHookEvents.EventType.POST_FREEZE, this); // Spout - Hook into registry lifecycle
+         return this;
+     }
+ 

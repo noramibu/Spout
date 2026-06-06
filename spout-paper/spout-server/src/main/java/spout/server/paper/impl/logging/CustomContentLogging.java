@@ -1,5 +1,6 @@
 package spout.server.paper.impl.logging;
 
+import net.minecraft.server.Main;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +24,7 @@ public final class CustomContentLogging {
     }
 
     public static void logCustomContent() {
-        Logger logger = LoggerFactory.getLogger(CustomContentLogging.class);
+        Logger logger = LoggerFactory.getLogger(Main.class);
         SpoutGlobalConfiguration.Logging.OnStartup onStartupLogging = SpoutGlobalConfiguration.get().logging.onStartup;
         if (onStartupLogging.blocks || onStartupLogging.blockStates || onStartupLogging.items) {
             // Do detailed logging

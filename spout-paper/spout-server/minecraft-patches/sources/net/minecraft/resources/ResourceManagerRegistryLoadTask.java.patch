@@ -13,7 +13,7 @@
              )
              .thenAcceptAsync(
                  loadedEntries -> {
-+                    spout.registry.SpoutRegistryListeners.onPrePopulate(this.registry); // Spout - Hook into registry lifecycle
++                    spout.util.minecraft.registry.SpoutRegistryHookEvents.fireEvent(spout.util.minecraft.registry.SpoutRegistryHookEvents.EventType.PRE_POPULATE_STATIC_REGISTRY, this.registry); // Spout - Hook into registry lifecycle
                      this.registerElements(loadedEntries.entrySet().stream().sorted(Entry.comparingByKey()).map(Entry::getValue), conversions);
                      io.papermc.paper.registry.PaperRegistryAccess.instance().lockReferenceHolders(this.registryKey()); // Paper - lock reference holders
                      io.papermc.paper.registry.PaperRegistryListenerManager.INSTANCE.runFreezeListeners(this.registryKey(), conversions); // Paper - run pre-freeze listeners
@@ -21,7 +21,7 @@
                      );
                      Map<TagKey<T>, List<Holder<T>>> pendingTags = TagLoader.loadTagsForRegistry(this.resourceManager, this.registryKey(), tagElementLookup, this.registry, io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent.Cause.INITIAL); // Paper - tag lifecycle - add registry, cause
                      this.registerTags(pendingTags);
-+                    spout.registry.SpoutRegistryListeners.onPrePopulate(this.registry); // Spout - Hook into registry lifecycle
++                    spout.util.minecraft.registry.SpoutRegistryHookEvents.fireEvent(spout.util.minecraft.registry.SpoutRegistryHookEvents.EventType.POST_POPULATE_STATIC_REGISTRY, this.registry); // Spout - Hook into registry lifecycle
                  },
                  executor
              );
