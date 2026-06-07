@@ -1,4 +1,4 @@
-package spout.gamecontent.datadriven.item;
+package spout.gamecontent.datadriven.item.datapack;
 
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;

@@ -34,25 +34,15 @@
          this.validateWrite(key);
          Objects.requireNonNull(key);
          Objects.requireNonNull(value);
-@@ -296,10 +_,22 @@
+@@ -296,10 +_,11 @@
  
      @Override
      public Registry<T> freeze() {
-+        // Spout start - More data-driven - Data pack - Delayed frozen registries - Delay freezing registries
-+        if (!spout.gamecontent.datadriven.common.delayedfrozenregistries.DelayedRegistryFreezing.isFreezingAllowed(this)) {
-+            spout.gamecontent.datadriven.common.delayedfrozenregistries.DelayedRegistryFreezing.freezeLater(this);
-+            return this;
-+        }
-+        // Spout end - More data-driven - Data pack - Delayed frozen registries - Delay freezing registries
++        if (!spout.gamecontent.datadriven.common.delayedfrozenregistries.DelayedRegistryFreezing.canFreeze(this)) return this; // Spout - Game content - Data-driven - Delayed frozen registries - Delay freezing registries
          if (this.frozen) {
              return this;
          }
-+        // Spout start - More data-driven - Data pack - Delayed frozen registries - Delay freezing registries
-+        return this.actuallyFreeze();
-+    }
- 
-+    protected Registry<T> actuallyFreeze() {
-+        // Spout end - More data-driven - Data pack - Delayed frozen registries - Delay freezing registries
+-
 +        spout.util.minecraft.registry.SpoutRegistryHookEvents.fireEvent(spout.util.minecraft.registry.SpoutRegistryHookEvents.EventType.PRE_FREEZE, this); // Spout - Hook into registry lifecycle
          this.frozen = true;
          this.temporaryUnfrozenMap.clear(); // Paper - support pre-filling in registry mod API

@@ -3,9 +3,12 @@ package spout.gamecontent.datadriven.common.delayedfrozenregistries;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.resources.CloseableResourceManager;
 import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.stream.StreamSupport;
 
 /**
@@ -48,11 +51,13 @@ public final class DelayedRegistryFreezing {
     /**
      * Allow freezing from this moment on, and freeze all registries that would have been frozen before.
      */
-    public static void freezeDelayedRegistries() {
-        initializeDelayedFrozenRegistries();
-        canFreeze = true;
-        delayedFrozenRegistries.forEach(key -> {
-            ((Registry<?>) BuiltInRegistries.WRITABLE_REGISTRY.getValue((ResourceKey) key)).freeze();
+    public static CompletableFuture<?> freezeDelayedRegistries(CloseableResourceManager resources, Executor mainThreadExecutor) {
+        return BeforeDelayedRegistryFreezingActions.runAll(resources, mainThreadExecutor).thenRunAsync(() -> {
+            initializeDelayedFrozenRegistries();
+            canFreeze = true;
+            delayedFrozenRegistries.forEach(key -> {
+                ((Registry<?>) BuiltInRegistries.WRITABLE_REGISTRY.getValue((ResourceKey) key)).freeze();
+            });
         });
     }
 
