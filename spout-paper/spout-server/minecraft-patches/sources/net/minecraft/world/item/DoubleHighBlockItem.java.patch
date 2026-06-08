@@ -4,7 +4,7 @@
  import net.minecraft.world.level.block.state.BlockState;
  
  public class DoubleHighBlockItem extends BlockItem {
-+    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.DOUBLE_HIGH_BLOCK; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
++    @Override public spout.gamecontent.datadriven.itemtype.SpoutItemType spout$getItemType() { return spout.gamecontent.datadriven.itemtype.SpoutItemTypes.DOUBLE_HIGH_BLOCK; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
 +
      public DoubleHighBlockItem(final Block block, final Item.Properties properties) {
          super(block, properties);

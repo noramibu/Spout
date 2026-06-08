@@ -3,7 +3,7 @@ package spout.clientview.model;
 import com.mojang.serialization.Codec;
 import spout.branding.SpoutNamespace;
 import spout.server.paper.impl.packetmapping.item.reverse.ItemMappingReverser;
-import spout.common.util.mojang.codec.EnumViaIdentifierCodec;
+import spout.util.mojang.codec.EnumViaIdentifierCodec;
 import org.jspecify.annotations.Nullable;
 import java.util.List;
 

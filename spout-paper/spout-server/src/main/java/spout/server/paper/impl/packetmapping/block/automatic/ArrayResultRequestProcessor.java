@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.jspecify.annotations.Nullable;
-import spout.common.util.minecraft.blockstate.BlockStateUtil;
+import spout.util.minecraft.blockstate.BlockStateUtil;
 import spout.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.block.automatic.UsedStates;
 import spout.server.paper.api.resourcepack.construct.BlockstatesResourcePackPath;

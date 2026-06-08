@@ -3,7 +3,7 @@ package spout.server.paper.impl.moredatadriven.paper.registry.type;
 import io.papermc.paper.registry.HolderableBase;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
-import spout.common.moredatadriven.minecraft.blocktype.SpoutBlockType;
+import spout.gamecontent.datadriven.blocktype.SpoutBlockType;
 import spout.server.paper.api.moredatadriven.paper.registry.type.BlockTypeType;
 import spout.server.paper.api.moredatadriven.paper.registry.type.nms.BlockTypeTypeNMS;
 

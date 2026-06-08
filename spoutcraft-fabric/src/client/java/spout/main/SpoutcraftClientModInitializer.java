@@ -1,7 +1,7 @@
 package spout.main;
 
 import net.fabricmc.api.ClientModInitializer;
-import spout.client.fabric.clientview.SpoutProtocol;
+import spout.clientview.clientmod.protocol.SpoutProtocol;
 
 public class SpoutcraftClientModInitializer implements ClientModInitializer {
 

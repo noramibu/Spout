@@ -12,7 +12,7 @@
     "sources": "https://github.com/ModernSpout/Spoutcraft"
   },
   "license": "See the included LICENSE.txt",
-  "icon": "icon.png",
+  "icon": "assets/spout/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -25,51 +25,51 @@
   "accessWidener": "spoutcraft.classtweaker",
   "mixins": [
     {
-      "config": "spoutcraft.spout.client.fabric.clientview.mixins.json",
+      "config": "spoutcraft.spout.clientui.resourcepack.loadingoverlay.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.mixins.json",
+      "config": "spoutcraft.spout.clientui.resourcepack.toast.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.block.mixins.json",
+      "config": "spoutcraft.spout.clientview.clientmod.protocol.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.blocktype.mixins.json",
+      "config": "spoutcraft.spout.clientview.clientmod.registryidmapping.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.common.subtypes.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.block.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.common.type.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.block.subtypes.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.item.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.blockentity.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.registry.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.blocktype.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.minecraft.type.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.common.registry.codec.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.moredatadriven.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.common.registry.temporarymodification.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.ui.loadingoverlay.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.item.mixins.json",
       "environment": "client"
     },
     {
-      "config": "spoutcraft.spout.client.fabric.ui.toast.mixins.json",
+      "config": "spoutcraft.spout.gamecontent.datadriven.mixins.json",
       "environment": "client"
     }
   ],

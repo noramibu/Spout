@@ -3,10 +3,10 @@ package spout.gamecontent.datadriven.item.datapack;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import spout.common.moredatadriven.minecraft.item.SpoutNonBuiltInItem;
+import spout.gamecontent.datadriven.item.SpoutNonBuiltInItem;
 import spout.server.paper.impl.moredatadriven.datapack.SpoutDataPackRegistries;
 
-public class LoadDataPackRegistryAction implements spout.gamecontent.datadriven.common.delayedfrozenregistries.LoadDataPackRegistryAction<SpoutNonBuiltInItem> {
+public class LoadDataPackRegistryAction implements spout.gamecontent.datadriven.common.registry.delayedfrozen.LoadDataPackRegistryAction<SpoutNonBuiltInItem> {
 
     @Override
     public int getBeforeDelayedRegistryFreezingActionPriority() {

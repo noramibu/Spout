@@ -4,7 +4,7 @@
  import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.Vec3;
  import org.jspecify.annotations.Nullable;
-+import spout.common.moredatadriven.minecraft.common.subtypes.BlockStateFunction;
++import spout.gamecontent.datadriven.block.subtypes.BlockStateFunction;
  
  public class RespawnAnchorBlock extends Block {
      public static final MapCodec<RespawnAnchorBlock> CODEC = simpleCodec(RespawnAnchorBlock::new);

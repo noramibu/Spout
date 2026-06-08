@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "spout.clientview.clientmod.registryidmapping.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "MapIdsByteBufCodecsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

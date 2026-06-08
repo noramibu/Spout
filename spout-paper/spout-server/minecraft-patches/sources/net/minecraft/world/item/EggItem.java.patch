@@ -4,7 +4,7 @@
  import net.minecraft.world.level.Level;
  
  public class EggItem extends Item implements ProjectileItem {
-+    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.EGG; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
++    @Override public spout.gamecontent.datadriven.itemtype.SpoutItemType spout$getItemType() { return spout.gamecontent.datadriven.itemtype.SpoutItemTypes.EGG; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
      public static final float PROJECTILE_SHOOT_POWER = 1.5F;
  
      public EggItem(final Item.Properties properties) {

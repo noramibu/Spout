@@ -4,7 +4,7 @@
  import org.jspecify.annotations.Nullable;
  
  public class BlockItem extends Item {
-+    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.BLOCK; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
++    @Override public spout.gamecontent.datadriven.itemtype.SpoutItemType spout$getItemType() { return spout.gamecontent.datadriven.itemtype.SpoutItemTypes.BLOCK; } // Spout - More data-driven - Minecraft registries - Block - Implement interfaces
      @Deprecated
      private final Block block;
  

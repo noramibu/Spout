@@ -5,8 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import spout.branding.SpoutNamespace;
-import spout.common.moredatadriven.minecraft.block.SpoutNonBuiltInBlock;
-import spout.common.moredatadriven.minecraft.item.SpoutNonBuiltInItem;
+import spout.gamecontent.datadriven.block.SpoutNonBuiltInBlock;
+import spout.gamecontent.datadriven.item.SpoutNonBuiltInItem;
 
 /**
  * Analogous to {@link Registries}, but specifically for Spout registries populated from data packs.

@@ -19,7 +19,7 @@
              .requiresCorrectToolForDrops()
              .sound(SoundType.SNOW)
 -            .isViewBlocking((statex, level, pos) -> statex.getValue(SnowLayerBlock.LAYERS) >= 8)
-+            .isViewBlocking(spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate.MAX_SNOW_LAYERS) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
++            .isViewBlocking(spout.gamecontent.datadriven.block.subtypes.KnownStatePredicate.MAX_SNOW_LAYERS) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
              .pushReaction(PushReaction.DESTROY)
      );
      public static final Block ICE = register(
@@ -28,7 +28,7 @@
              .sound(SoundType.SCULK_SENSOR)
              .lightLevel(statex -> 1)
 -            .emissiveRendering((statex, level, pos) -> SculkSensorBlock.getPhase(statex) == SculkSensorPhase.ACTIVE)
-+            .emissiveRendering(spout.common.moredatadriven.minecraft.common.subtypes.KnownStatePredicate.SCULK_PHASE_ACTIVE) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
++            .emissiveRendering(spout.gamecontent.datadriven.block.subtypes.KnownStatePredicate.SCULK_PHASE_ACTIVE) // Spout - More data-driven - Minecraft registries - Types - Properties serialization - Make block state predicate properties serializable
      );
      public static final Block CALIBRATED_SCULK_SENSOR = register(
          "calibrated_sculk_sensor", CalibratedSculkSensorBlock::new, BlockBehaviour.Properties.ofLegacyCopy(SCULK_SENSOR)

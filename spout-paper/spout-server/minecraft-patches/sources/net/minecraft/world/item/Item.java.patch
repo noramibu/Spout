@@ -6,8 +6,8 @@
  
 -public class Item implements ItemLike, FeatureElement {
 +// Spout start - More data-driven - Minecraft registries - Block - Implement interfaces
-+public class Item implements FeatureElement, ItemLike, spout.common.moredatadriven.minecraft.item.ItemTypeDecorator {
-+    @Override public spout.common.moredatadriven.minecraft.itemtype.SpoutItemType spout$getItemType() { return spout.common.moredatadriven.minecraft.itemtype.SpoutItemTypes.ITEM; }
++public class Item implements FeatureElement, ItemLike, spout.gamecontent.datadriven.item.ItemTypeDecorator {
++    @Override public spout.gamecontent.datadriven.itemtype.SpoutItemType spout$getItemType() { return spout.gamecontent.datadriven.itemtype.SpoutItemTypes.ITEM; }
 +    // Spout end - More data-driven - Minecraft registries - Block - Implement interfaces
      public static final Codec<Holder<Item>> CODEC = BuiltInRegistries.ITEM
          .holderByNameCodec()
@@ -119,7 +119,7 @@
  
 -    public static class Properties {
 +    // Spout start - More data-driven - Minecraft registries - Item - Implement interfaces
-+    public static class Properties implements spout.common.moredatadriven.minecraft.item.ItemPropertiesSerializationDecorator {
++    public static class Properties implements spout.gamecontent.datadriven.item.ItemPropertiesSerializationDecorator {
 +        private @Nullable DataComponentMap initializedComponents = DataComponentMap.EMPTY;
 +        @Override public @Nullable DataComponentMap spout$initializedComponents() { return this.initializedComponents; }
 +        @Override public void spout$initializedComponents(@Nullable DataComponentMap initializedComponents) { this.initializedComponents = initializedComponents; }

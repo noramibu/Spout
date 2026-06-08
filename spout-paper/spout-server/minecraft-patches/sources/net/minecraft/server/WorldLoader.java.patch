@@ -1,10 +1,18 @@
 --- a/net/minecraft/server/WorldLoader.java
 +++ b/net/minecraft/server/WorldLoader.java
+@@ -20,6 +_,7 @@
+ import net.minecraft.server.permissions.PermissionSet;
+ import net.minecraft.tags.TagLoader;
+ import net.minecraft.world.level.WorldDataConfiguration;
++import spout.gamecontent.datadriven.common.registry.delayedfrozen.DelayedRegistryFreezing;
+ 
+ public class WorldLoader {
+     public static <D, R> CompletableFuture<R> load(
 @@ -33,6 +_,8 @@
              .thenComposeAsync(
                  packsAndResourceManager -> {
                      CloseableResourceManager resources = packsAndResourceManager.getSecond();
-+                    return spout.gamecontent.datadriven.common.delayedfrozenregistries.DelayedRegistryFreezing.freezeDelayedRegistries(resources, mainThreadExecutor).thenComposeAsync(_ -> { // Spout - Game content - Data-driven - Delayed frozen registries - Freeze delayed registries
++                    return DelayedRegistryFreezing.freezeDelayedRegistries(resources, mainThreadExecutor).thenComposeAsync(_ -> { // Spout - Game content - Data-driven - Delayed frozen registries - Freeze delayed registries
 +                    spout.server.paper.impl.logging.CustomContentLogging.logCustomContent(); // Spout - Logging - Log custom content
                      LayeredRegistryAccess<RegistryLayer> initialLayers = RegistryLayer.createRegistryAccess();
                      List<Registry.PendingTags<?>> staticLayerTags = TagLoader.loadTagsForExistingRegistries(

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "spout.gamecontent.datadriven.item.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "DataComponentInitializersAccessor",
+    "ItemPropertiesSerializationDecoratorItemPropertiesMixin",
+    "ItemTypeDecoratorBlockItemMixin",
+    "ItemTypeDecoratorDoubleHighBlockItemMixin",
+    "ItemTypeDecoratorEggItemMixin",
+    "ItemTypeDecoratorItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

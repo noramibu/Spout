@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "spout.clientview.clientmod.protocol.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "AllowSpoutServerPacksMixin",
+    "ClientCommonPacketListenerImplAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

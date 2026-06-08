@@ -1,7 +1,10 @@
 --- a/net/minecraft/core/MappedRegistry.java
 +++ b/net/minecraft/core/MappedRegistry.java
-@@ -31,6 +_,16 @@
+@@ -29,8 +_,19 @@
+ import net.minecraft.util.RandomSource;
+ import net.minecraft.util.Util;
  import org.jspecify.annotations.Nullable;
++import spout.gamecontent.datadriven.common.registry.delayedfrozen.DelayedRegistryFreezing;
  
  public class MappedRegistry<T> implements WritableRegistry<T> {
 +    // Spout start - More data-driven - Minecraft registries - Type - Cache registry by name codec
@@ -30,7 +33,7 @@
  
      @Override
      public Holder.Reference<T> register(final ResourceKey<T> key, final T value, final RegistrationInfo registrationInfo) {
-+        spout.common.moredatadriven.minecraft.blocktype.MirrorMinecraftBlockTypeRegistry.mirrorFromMinecraftToSpoutIfNecessary(this, key, value, registrationInfo); // Spout - Minecraft registries - Block type - Adapt existing block type registry
++        spout.gamecontent.datadriven.blocktype.MirrorMinecraftBlockTypeRegistry.mirrorFromMinecraftToSpoutIfNecessary(this, key, value, registrationInfo); // Spout - Minecraft registries - Block type - Adapt existing block type registry
          this.validateWrite(key);
          Objects.requireNonNull(key);
          Objects.requireNonNull(value);
@@ -38,7 +41,7 @@
  
      @Override
      public Registry<T> freeze() {
-+        if (!spout.gamecontent.datadriven.common.delayedfrozenregistries.DelayedRegistryFreezing.canFreeze(this)) return this; // Spout - Game content - Data-driven - Delayed frozen registries - Delay freezing registries
++        if (!DelayedRegistryFreezing.canFreeze(this)) return this; // Spout - Game content - Data-driven - Delayed frozen registries - Delay freezing registries
          if (this.frozen) {
              return this;
          }

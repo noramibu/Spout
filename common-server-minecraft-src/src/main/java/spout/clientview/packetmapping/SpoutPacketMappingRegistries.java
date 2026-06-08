@@ -2,7 +2,7 @@ package spout.clientview.packetmapping;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import spout.common.util.minecraft.registry.RegistryKeyUtil;
+import spout.util.minecraft.registry.RegistryKeyUtil;
 
 /**
  * A class similar to {@link Registries},
