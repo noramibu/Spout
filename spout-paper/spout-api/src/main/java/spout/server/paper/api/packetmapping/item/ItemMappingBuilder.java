@@ -3,7 +3,7 @@ package spout.server.paper.api.packetmapping.item;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.inventory.ItemType;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.AwarenessLevelMappingBuilder;
 import spout.util.composable.FromBuilder;
 import spout.util.composable.FunctionBuilder;

@@ -2,7 +2,7 @@ package spout.server.paper.api.packetmapping.component.translatable;
 
 import spout.util.composable.Composable;
 import org.jspecify.annotations.Nullable;
-import spout.server.paper.impl.util.service.SpoutServices;
+import spout.api.SpoutAPIServices;
 
 /**
  * A service for registered server-side translations.
@@ -17,7 +17,7 @@ public interface ServerSideTranslations extends Composable<ServerSideTranslation
      * @return The {@link ServerSideTranslations} instance.
      */
     static ServerSideTranslations get() {
-        return SpoutServices.getServerSideTranslations();
+        return SpoutAPIServices.getServerSideTranslations();
     }
 
     /**

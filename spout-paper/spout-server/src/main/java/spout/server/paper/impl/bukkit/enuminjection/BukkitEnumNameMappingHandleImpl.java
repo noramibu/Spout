@@ -1,6 +1,6 @@
 package spout.server.paper.impl.bukkit.enuminjection;
 
-import spout.gamecontent.datadriven.common.enuminjection.BukkitEnumNamePickFunctionHandle;
+import spout.api.gamecontent.datadriven.common.enuminjection.BukkitEnumNamePickFunctionHandle;
 import spout.server.paper.impl.util.mappingpipeline.SimpleMappingFunctionHandleImpl;
 
 /**

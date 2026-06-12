@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.bukkit.block.data.BlockData;
 import org.jspecify.annotations.Nullable;
-import spout.server.paper.api.packetmapping.block.claim.ClaimRequestPriority;
+import spout.api.clientview.packetmapping.blockstate.resourcepackclaims.ClaimRequestPriority;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockStateRegistry;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 

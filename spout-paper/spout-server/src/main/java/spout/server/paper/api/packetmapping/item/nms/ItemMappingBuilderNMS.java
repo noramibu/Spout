@@ -2,7 +2,7 @@ package spout.server.paper.api.packetmapping.item.nms;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.AwarenessLevelMappingBuilder;
 import spout.server.paper.api.packetmapping.item.ItemMappingBuilder;
 import spout.util.composable.FromBuilder;

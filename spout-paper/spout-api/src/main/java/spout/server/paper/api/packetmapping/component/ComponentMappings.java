@@ -1,7 +1,7 @@
 package spout.server.paper.api.packetmapping.component;
 
 import spout.util.composable.Composable;
-import spout.server.paper.impl.util.service.SpoutServices;
+import spout.api.SpoutAPIServices;
 
 /**
  * A service for the component mappings that Spout applies.
@@ -12,7 +12,7 @@ public interface ComponentMappings<M> extends Composable<ComponentMappingsCompos
      * @return The {@link ComponentMappings} instance.
      */
     static ComponentMappings<?> get() {
-        return SpoutServices.getComponentMappings();
+        return SpoutAPIServices.getComponentMappings();
     }
 
 }

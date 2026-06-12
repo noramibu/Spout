@@ -1,7 +1,7 @@
 package spout.server.paper.api.moredatadriven.paper.registry.type.nms;
 
-import spout.gamecontent.datadriven.blocktype.BlockTypeType;
-import spout.gamecontent.datadriven.blocktype.BlockTypeTypeRegistryEntry;
+import spout.api.gamecontent.datadriven.blocktype.BlockTypeType;
+import spout.api.gamecontent.datadriven.blocktype.BlockTypeTypeRegistryEntry;
 
 /**
  * An extension of {@link BlockTypeTypeRegistryEntry} using Minecraft internals.

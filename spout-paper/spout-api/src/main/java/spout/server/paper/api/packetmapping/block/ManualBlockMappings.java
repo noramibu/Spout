@@ -3,7 +3,7 @@ package spout.server.paper.api.packetmapping.block;
 import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.util.composable.BuilderComposeEvent;
 import spout.util.composable.ChangeRegisteredComposeEvent;
 import spout.util.composable.GetRegisteredComposeEvent;

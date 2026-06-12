@@ -5,7 +5,7 @@ import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.Nullable;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.clientview.model.JavaWithClientModClientViewImpl;
 import spout.server.paper.impl.clientview.lookup.ClientViewLookup;
 import spout.server.paper.impl.clientview.lookup.packethandling.ClientViewLookupThreadLocal;

@@ -1,7 +1,7 @@
 package spout.server.paper.impl.packetmapping.block.light;
 
 import net.minecraft.world.level.block.state.BlockState;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.clientview.model.ClientViewImpl;
 import spout.server.paper.impl.packetmapping.block.BlockMappingFunctionContextImpl;
 import java.util.Arrays;

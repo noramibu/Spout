@@ -1,6 +1,6 @@
 package spout.server.paper.impl.packetmapping;
 
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.WithClientViewMappingFunctionContext;
 
 /**

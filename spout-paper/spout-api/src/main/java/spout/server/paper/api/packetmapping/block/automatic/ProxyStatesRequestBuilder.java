@@ -1,7 +1,7 @@
 package spout.server.paper.api.packetmapping.block.automatic;
 
 import spout.server.paper.api.SpoutEvents;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import java.util.function.Consumer;
 
 /**

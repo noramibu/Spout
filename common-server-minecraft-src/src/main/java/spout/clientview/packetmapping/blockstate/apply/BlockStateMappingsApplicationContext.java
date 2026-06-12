@@ -1,7 +1,7 @@
 package spout.clientview.packetmapping.blockstate.apply;
 
 import net.minecraft.core.BlockPos;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.clientview.model.FallbackClientViewImpl;
 import spout.clientview.packetmapping.WithClientViewMappingsApplicationContext;
 

@@ -5,12 +5,12 @@
          //<editor-fold desc="CraftBlockData Registration" defaultstate="collapsed">
          // Start generate - CraftBlockData#INSTANCE_CREATOR
 +        // Spout start - Built-in content - Blocks - API - Implementation part - Register BlockData translations
-+        register(spout.gamecontent.builtin.block.QuadBlock.class, spout.apiimpl.gamecontent.builtin.block.CraftQuad::new);
++        register(spout.gamecontent.builtin.block.QuadBlock.class, spout.api.gamecontent.builtin.block.CraftQuad::new);
 +        register(spout.gamecontent.builtin.block.HalfTransparentSlabBlock.class, org.bukkit.craftbukkit.block.impl.CraftSlab::new);
 +        register(spout.gamecontent.builtin.block.HalfTransparentStairBlock.class, org.bukkit.craftbukkit.block.impl.CraftStair::new);
 +        register(spout.gamecontent.builtin.block.TransparentSlabBlock.class, org.bukkit.craftbukkit.block.impl.CraftSlab::new);
 +        register(spout.gamecontent.builtin.block.TransparentStairBlock.class, org.bukkit.craftbukkit.block.impl.CraftStair::new);
-+        register(spout.gamecontent.builtin.block.VerticalSlabBlock.class, spout.apiimpl.gamecontent.builtin.block.CraftVerticalSlab::new);
++        register(spout.gamecontent.builtin.block.VerticalSlabBlock.class, spout.api.gamecontent.builtin.block.CraftVerticalSlab::new);
 +        // Spout end - Built-in content - Blocks - API - Implementation part - Register BlockData translations
          register(net.minecraft.world.level.block.AmethystClusterBlock.class, org.bukkit.craftbukkit.block.impl.CraftAmethystCluster::new);
          register(net.minecraft.world.level.block.AnvilBlock.class, org.bukkit.craftbukkit.block.impl.CraftAnvil::new);

@@ -1,8 +1,8 @@
 package spout.server.paper.impl.bukkit.enuminjection;
 
-import spout.gamecontent.datadriven.common.enuminjection.BukkitEnumNamePickFunctionHandle;
-import spout.gamecontent.datadriven.common.enuminjection.BukkitEnumNames;
-import spout.gamecontent.datadriven.common.enuminjection.BukkitEnumNamesComposeEvent;
+import spout.api.gamecontent.datadriven.common.enuminjection.BukkitEnumNamePickFunctionHandle;
+import spout.api.gamecontent.datadriven.common.enuminjection.BukkitEnumNames;
+import spout.api.gamecontent.datadriven.common.enuminjection.BukkitEnumNamesComposeEvent;
 import spout.server.paper.impl.util.mappingpipeline.MappingPipelineStep;
 import spout.server.paper.impl.util.composable.ComposableImpl;
 import spout.server.paper.impl.util.mappingpipeline.SimpleMappingPipelineStep;

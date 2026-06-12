@@ -22,7 +22,7 @@
 -
 -        filtered = filtered.replaceAll("\\s+", "_").replaceAll("\\W", "");
 -        return getMaterial(filtered, legacyName);
-+        return spout.gamecontent.datadriven.material.enuminjection.match.MaterialByKeyLookup.get().lookup(name, legacyName); // Spout - Material injection - Flexible matchMaterial
++        return spout.api.gamecontent.datadriven.material.enuminjection.match.MaterialByKeyLookup.get().lookup(name, legacyName); // Spout - Material injection - Flexible matchMaterial
      }
  
      static {

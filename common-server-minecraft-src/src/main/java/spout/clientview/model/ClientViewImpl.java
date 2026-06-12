@@ -1,8 +1,9 @@
 package spout.clientview.model;
 
 import com.mojang.serialization.Codec;
+import spout.api.clientview.model.ClientView;
 import spout.branding.SpoutNamespace;
-import spout.clientview.model.awarenesslevel.AwarenessLevel;import spout.server.paper.impl.packetmapping.item.reverse.ItemMappingReverser;
+import spout.server.paper.impl.packetmapping.item.reverse.ItemMappingReverser;
 import spout.util.mojang.codec.EnumViaIdentifierCodec;
 import org.jspecify.annotations.Nullable;
 import java.util.List;

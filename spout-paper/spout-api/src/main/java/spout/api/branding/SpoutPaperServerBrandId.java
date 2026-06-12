@@ -1,0 +1,21 @@
+package spout.api.branding;
+
+import net.kyori.adventure.key.Key;
+import spout.branding.SpoutNamespace;
+
+/**
+ * Holder for {@link #BRAND_ID}.
+ */
+public final class SpoutPaperServerBrandId {
+
+    private SpoutPaperServerBrandId() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * The brand id of Spout.
+     * Replacement for {@link io.papermc.paper.ServerBuildInfo#BRAND_PAPER_ID}.
+     */
+    public static final Key BRAND_ID = Key.key(SpoutNamespace.SPOUT, "spout-paper-server");
+
+}

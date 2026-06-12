@@ -3,7 +3,7 @@ package spout.server.paper.impl.packetmapping.component.translatable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.component.translatable.ServerSideTranslations;
 import spout.server.paper.impl.packetmapping.component.ComponentMappingHandleNMSImpl;
 import spout.server.paper.impl.packetmapping.component.ComponentMappingsImpl;

@@ -1,7 +1,7 @@
 package spout.server.paper.api.moredatadriven.paper.registry.type.nms;
 
-import spout.gamecontent.datadriven.itemtype.ItemTypeType;
-import spout.gamecontent.datadriven.itemtype.ItemTypeTypeRegistryEntry;
+import spout.api.gamecontent.datadriven.itemtype.ItemTypeType;
+import spout.api.gamecontent.datadriven.itemtype.ItemTypeTypeRegistryEntry;
 
 /**
  * An extension of {@link ItemTypeTypeRegistryEntry} using Minecraft internals.

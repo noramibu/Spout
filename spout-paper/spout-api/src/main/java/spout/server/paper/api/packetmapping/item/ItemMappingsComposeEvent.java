@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.util.composable.BuilderComposeEvent;
 import spout.util.composable.ChangeRegisteredComposeEvent;
 import spout.util.composable.GetRegisteredComposeEvent;

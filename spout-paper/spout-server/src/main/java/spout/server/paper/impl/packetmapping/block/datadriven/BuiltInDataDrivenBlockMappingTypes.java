@@ -12,7 +12,7 @@ import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.block.CraftBlockType;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.block.automatic.FromBlockStateRequestBuilder;
 import spout.server.paper.api.packetmapping.block.automatic.FromBlockTypeRequestBuilder;
 import spout.server.paper.api.packetmapping.block.automatic.ProxyStatesRequestBuilder;

@@ -7,7 +7,7 @@ import net.minecraft.network.protocol.login.ClientboundCustomQueryPacket;
 import net.minecraft.network.protocol.login.ServerboundCustomQueryAnswerPacket;
 import net.minecraft.network.protocol.login.custom.CustomQueryPayload;
 import net.minecraft.resources.Identifier;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.branding.SpoutNamespace;
 import spout.clientview.model.JavaVanillaClientViewImpl;
 import spout.clientview.model.JavaWithClientModClientViewImpl;

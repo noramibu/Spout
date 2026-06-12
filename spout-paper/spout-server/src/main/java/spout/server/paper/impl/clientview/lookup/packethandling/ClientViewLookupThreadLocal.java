@@ -1,6 +1,6 @@
 package spout.server.paper.impl.clientview.lookup.packethandling;
 
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.clientview.model.FallbackClientViewImpl;
 import spout.server.paper.impl.clientview.lookup.ClientViewLookup;
 import org.jspecify.annotations.Nullable;

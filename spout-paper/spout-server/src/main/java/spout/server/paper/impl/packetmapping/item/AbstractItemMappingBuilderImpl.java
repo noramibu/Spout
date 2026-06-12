@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import org.bukkit.craftbukkit.inventory.CraftItemType;
 import org.bukkit.inventory.ItemType;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import org.jspecify.annotations.Nullable;
 
 /**

@@ -23,7 +23,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
-import spout.gamecontent.datadriven.item.ItemTypeRegistryEntry;
+import spout.api.gamecontent.datadriven.item.ItemTypeRegistryEntry;
 import spout.server.paper.api.moredatadriven.paper.registry.nms.ItemTypeRegistryEntryBuilderNMS;
 import spout.server.paper.impl.moredatadriven.minecraft.BlockRegistry;
 import org.jspecify.annotations.Nullable;

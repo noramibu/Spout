@@ -2,7 +2,7 @@ package spout.server.paper.impl.packetmapping.item.builtin;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.server.paper.impl.packetmapping.component.ComponentMappingsImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingHandleNMSImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingsStep;

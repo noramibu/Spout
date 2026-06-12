@@ -4,7 +4,8 @@ import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.Nullable;
-import spout.api.clientview.model.ClientViewNMS;import spout.clientview.model.awarenesslevel.AwarenessLevel;
+import spout.api.clientview.model.ClientView;
+import spout.api.clientview.model.ClientViewNMS;
 import java.util.Locale;
 
 /**

@@ -1,7 +1,7 @@
 package spout.server.paper.api.resourcepack.plugin.discover;
 
+import spout.api.SpoutAPIServices;
 import spout.util.composable.Composable;
-import spout.server.paper.impl.util.service.SpoutServices;
 
 /**
  * A service to discover Spout plugin resource pack content.
@@ -12,7 +12,7 @@ public interface PluginResourcePackDiscovery extends Composable<PluginResourcePa
      * @return The {@link PluginResourcePackDiscovery} instance.
      */
     static PluginResourcePackDiscovery get() {
-        return SpoutServices.getPluginResourcePackDiscovery();
+        return SpoutAPIServices.getPluginResourcePackDiscovery();
     }
 
     String DEFAULT_PATH = "resource_pack";

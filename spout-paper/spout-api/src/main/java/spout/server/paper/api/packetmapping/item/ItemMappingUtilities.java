@@ -2,7 +2,7 @@ package spout.server.paper.api.packetmapping.item;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
-import spout.server.paper.impl.util.service.SpoutServices;
+import spout.api.SpoutAPIServices;
 
 /**
  * Some utilities for the mapping of items.
@@ -13,7 +13,7 @@ public interface ItemMappingUtilities {
      * @return The {@link ItemMappingUtilities} instance.
      */
     static ItemMappingUtilities get() {
-        return SpoutServices.getItemMappingUtilities();
+        return SpoutAPIServices.getItemMappingUtilities();
     }
 
     /**

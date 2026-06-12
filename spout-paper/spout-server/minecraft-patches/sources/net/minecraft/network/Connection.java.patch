@@ -12,7 +12,7 @@
  import org.slf4j.Logger;
  import org.slf4j.Marker;
  import org.slf4j.MarkerFactory;
-+import spout.clientview.model.ClientView;
++import spout.api.clientview.model.ClientView;
  
 -public class Connection extends SimpleChannelInboundHandler<Packet<?>> {
 +public class Connection extends SimpleChannelInboundHandler<Packet<?>> implements spout.server.paper.impl.clientview.lookup.ClientViewLookup { // Spout - Client view - Lookup - Implement for Connection

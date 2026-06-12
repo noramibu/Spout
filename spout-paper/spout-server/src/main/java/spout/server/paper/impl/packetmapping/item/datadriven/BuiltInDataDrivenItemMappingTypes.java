@@ -6,7 +6,7 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.MapLike;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.branding.SpoutNamespace;
 import spout.clientview.model.ClientViewImpl;
 import spout.server.paper.impl.moredatadriven.minecraft.ItemRegistry;

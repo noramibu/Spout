@@ -3,7 +3,7 @@ package spout.server.paper.impl.packetmapping.block;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
 import net.minecraft.world.level.block.state.BlockState;
-import spout.clientview.model.ClientView;
+import spout.api.clientview.model.ClientView;
 import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
 import spout.server.paper.api.packetmapping.block.BlockMappingFunctionContext;
 import spout.server.paper.api.packetmapping.block.BlockMappings;

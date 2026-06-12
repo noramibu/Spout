@@ -1,6 +1,7 @@
 package spout.clientview.model;
 
-import net.minecraft.network.Connection;import spout.clientview.model.awarenesslevel.AwarenessLevel;
+import net.minecraft.network.Connection;
+import spout.api.clientview.model.ClientView;
 
 /**
  * A simple implementation of {@link ClientView}
