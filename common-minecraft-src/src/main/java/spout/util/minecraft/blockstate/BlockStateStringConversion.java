@@ -1,4 +1,4 @@
-package spout.gamecontent.datadriven.block.subtypes;
+package spout.util.minecraft.blockstate;
 
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.Pair;

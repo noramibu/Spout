@@ -10,12 +10,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jspecify.annotations.Nullable;
 import spout.clientview.model.ClientView;
+import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
 import spout.server.paper.api.packetmapping.block.claim.ClaimRequestPriority;
 import spout.server.paper.api.packetmapping.item.nms.ItemMappingUtilitiesNMS;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockStateRegistry;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
 import spout.server.paper.impl.packetmapping.item.ItemMappingsImpl;
+import spout.util.minecraft.blockstate.visualduplicates.BlocksWithVisuallyDifferentBlockstates;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -129,7 +131,7 @@ public abstract class RequestProcessor<R extends ProxyStatesRequestBuilderImpl> 
         boolean consumeVisualDuplicates = !isFallback && createProxyToVisualDuplicateMappings;
         int[][] claimedStates = consumeVisualDuplicates ? new int[1][] : null; // Filled by result consumer to then by used by visual duplicate consumer
         // Attempt the claim
-        ResourcePackBlockStateClaimsImpl.get().claim(
+        ResourcePackBlockStateClaims.claim(
             proxyCandidateStateIndicesInRegistry,
             priority,
             consumeVisualDuplicates ? result -> {

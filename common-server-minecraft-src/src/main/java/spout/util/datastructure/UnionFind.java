@@ -1,4 +1,4 @@
-package spout.server.paper.impl.util.datastructure;
+package spout.util.datastructure;
 
 /**
  * Union-find is a data structure of a given number of nodes, where initially, all nodes form a group of themselves.

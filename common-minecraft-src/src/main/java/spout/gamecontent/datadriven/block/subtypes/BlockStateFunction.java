@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jspecify.annotations.Nullable;
+import spout.util.minecraft.blockstate.BlockStateStringConversion;
 
 import java.util.ArrayList;
 import java.util.HashMap;

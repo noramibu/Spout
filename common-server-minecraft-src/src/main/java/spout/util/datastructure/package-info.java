@@ -6,6 +6,6 @@
  * </p>
  */
 @NullMarked
-package spout.server.paper.impl.util.datastructure;
+package spout.util.datastructure;
 
 import org.jspecify.annotations.NullMarked;

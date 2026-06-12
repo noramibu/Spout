@@ -7,9 +7,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import org.jspecify.annotations.Nullable;
+import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockStateRegistry;
-import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
-import spout.server.paper.impl.packetmapping.block.claim.VisualDuplicatesImpl;
+import spout.util.minecraft.blockstate.visualduplicates.VisualDuplicateGroup;
 
 /**
  * A producer of {@link SortedClaimableStates} instances
@@ -55,11 +55,11 @@ public class BlockDynamicClaimableStates implements DynamicClaimableStates {
             this.initialBlocksSupplier = null;
             this.values = new LinkedHashSet<>(initialBlocks.size());
             initialBlocks.stream()
-                .filter(block -> block.getStateDefinition().getPossibleStates().stream().noneMatch(state -> this.isFallback ? ResourcePackBlockStateClaimsImpl.get().isClaimedNonVanilla(state) : ResourcePackBlockStateClaimsImpl.get().isClaimed(state)))
-                .sorted(VisualDuplicatesImpl.VisualDuplicateGroupImpl.BLOCK_COMPARATOR)
+                .filter(block -> block.getStateDefinition().getPossibleStates().stream().noneMatch(state -> this.isFallback ? ResourcePackBlockStateClaims.isClaimedNonVanilla(state) : ResourcePackBlockStateClaims.isClaimed(state)))
+                .sorted(VisualDuplicateGroup.BLOCK_COMPARATOR)
                 .forEach(this.values::add);
             if (!this.isFallback) {
-                ResourcePackBlockStateClaimsImpl.get().registerClaimListener(state -> this.values.remove(VanillaOnlyBlockStateRegistry.get().byId(state).getBlock()));
+                ResourcePackBlockStateClaims.registerClaimListener(state -> this.values.remove(VanillaOnlyBlockStateRegistry.get().byId(state).getBlock()));
             }
         }
         return SortedClaimableStates.of(from, this.values.stream().map(block -> block.getStateDefinition().getPossibleStates().toArray(BlockState[]::new)).toArray(BlockState[][]::new));

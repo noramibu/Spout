@@ -7,28 +7,7 @@ import spout.server.paper.impl.util.service.SpoutServices;
 import java.util.List;
 
 /**
- * Provides information about which {@linkplain BlockData block states} are visual duplicates of each other.
- *
- * <p>
- * Two block states are visual duplicates of each other if one block state can be
- * substituted with the other in packets sent to the client without any game-breaking effects
- * (such as that do not allow a state to be observed by the player visually,
- * or that do not allow a client to perform certain interactions with a block
- * due to a mismatch in expectations in what is possible).
- * In some cases, slight, but acceptable, temporary visual glitches may still occur (such as the client forcibly
- * updating the note block state based on the block below it) for 1 tick.
- * </p>
- *
- * <p>
- * Being a visual duplicates is a symmetric relation:
- * if A is a visual duplicate of B then B is a visual duplicate of A.
- * </p>
- *
- * <p>
- * Some blocks are visually similar but still not visually the same,
- * such as waterlogged double slabs (which have water particles, unlike their unwaterlogged counterpart).
- * Those do not count as visual duplicates.
- * </p>
+ * API for {@code spout.util.minecraft.blockstate.visualduplicates.VisualDuplicates}.
  *
  * <p>
  * Note that this class requires vanilla block states to have been registered,

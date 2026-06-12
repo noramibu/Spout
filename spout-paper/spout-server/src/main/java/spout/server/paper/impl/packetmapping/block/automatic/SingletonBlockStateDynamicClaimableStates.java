@@ -2,8 +2,8 @@ package spout.server.paper.impl.packetmapping.block.automatic;
 
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
-import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
-import spout.server.paper.impl.packetmapping.block.claim.VisualDuplicatesImpl;
+import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
+import spout.util.minecraft.blockstate.visualduplicates.VisualDuplicateGroup;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.function.Supplier;
@@ -47,11 +47,11 @@ public class SingletonBlockStateDynamicClaimableStates implements DynamicClaimab
             this.initialStatesSupplier = null;
             this.values = new LinkedHashMap<>(initialStates.size());
             initialStates.stream()
-                .filter(state -> !(this.isFallback ? ResourcePackBlockStateClaimsImpl.get().isClaimedNonVanilla(state) : ResourcePackBlockStateClaimsImpl.get().isClaimed(state)))
-                .sorted(VisualDuplicatesImpl.VisualDuplicateGroupImpl.STATE_COMPARATOR)
+                .filter(state -> !(this.isFallback ? ResourcePackBlockStateClaims.isClaimedNonVanilla(state) : ResourcePackBlockStateClaims.isClaimed(state)))
+                .sorted(VisualDuplicateGroup.STATE_COMPARATOR)
                 .forEach(state -> this.values.put(state.indexInVanillaOnlyBlockStateRegistry, state));
             if (!this.isFallback) {
-                ResourcePackBlockStateClaimsImpl.get().registerClaimListener(this.values::remove);
+                ResourcePackBlockStateClaims.registerClaimListener(this.values::remove);
             }
         }
         return SortedClaimableStates.of(from, this.values.values().toArray(BlockState[]::new));

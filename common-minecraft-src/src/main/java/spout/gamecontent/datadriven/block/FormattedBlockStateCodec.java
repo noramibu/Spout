@@ -2,7 +2,7 @@ package spout.gamecontent.datadriven.block;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.block.state.BlockState;
-import spout.gamecontent.datadriven.block.subtypes.BlockStateStringConversion;
+import spout.util.minecraft.blockstate.BlockStateStringConversion;
 
 /**
  * Holder for {@link #CODEC}.

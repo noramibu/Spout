@@ -2,7 +2,6 @@ package spout.server.paper.api.packetmapping.block.claim;
 
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import org.bukkit.block.data.BlockData;
-import spout.clientview.model.ClientView;
 import spout.server.paper.api.packetmapping.block.BlockMappingsComposeEvent;
 import org.jspecify.annotations.Nullable;
 import spout.server.paper.impl.util.service.SpoutServices;
@@ -11,30 +10,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * Provides functionality to register claims to block states
- * as they are shown to {@link ClientView.AwarenessLevel#RESOURCE_PACK} clients,
- * to avoid collisions with other plugins.
- *
- * <p>
- * When your plugin relies on the visual representation of a block state, as it appears to
- * {@link ClientView.AwarenessLevel#RESOURCE_PACK} clients, you should register your claim
- * to that block state here.
- * </p>
- *
- * <p>
- * This ensures that other plugins (and Spout built-in functionality such as proxy mappings)
- * do not alter the visuals of that block state.
- * </p>
- *
- * <p>
- * Claims are not run immediately when you call them. Rather, various claims are collected
- * and evaluated according to their {@linkplain ClaimRequestPriority priority}.
- * </p>
- *
- * <p>
- * Successful claims should normally be followed up by registering the claimed states
- * with {@link BlockMappingsComposeEvent#manualMappings()}.
- * </p>
+ * API for {@code spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims}.
  */
 public interface ResourcePackBlockStateClaims {
 

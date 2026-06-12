@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import spout.server.paper.impl.packetmapping.block.claim.VisualDuplicatesImpl;
+import spout.util.minecraft.blockstate.visualduplicates.VisualDuplicateGroup;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -149,7 +149,7 @@ public final class BlockRequestProcessUtils {
     }
 
     public static final Comparator<BlockState> COMMONALITY_COMPARATOR = Comparator
-        .comparing(state -> VisualDuplicatesImpl.VisualDuplicateGroupImpl.getMoreCommonBlocks().contains(state.getBlock().indexInVanillaOnlyBlockRegistry));
+        .comparing(state -> VisualDuplicateGroup.getMoreCommonBlocks().contains(state.getBlock().indexInVanillaOnlyBlockRegistry));
 
     public static final Comparator<BlockState> DOUBLE_SLAB_COMPARATOR = Comparator
         .comparing(state -> (boolean) state.getOptionalValue(BlockStateProperties.SLAB_TYPE).map(value -> value == SlabType.DOUBLE).orElse(false));

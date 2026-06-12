@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import org.jspecify.annotations.Nullable;
-import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
-import spout.server.paper.impl.packetmapping.block.claim.VisualDuplicatesImpl;
+import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
+import spout.util.minecraft.blockstate.visualduplicates.VisualDuplicateGroup;
 
 /**
  * A producer of {@link SortedClaimableStates} instances
@@ -66,8 +66,8 @@ public class ExplicitDynamicClaimableStates implements DynamicClaimableStates {
             this.initialBlockStatesSupplier = null;
             this.values = new LinkedList<>();
             initialBlockStates.stream()
-                .filter(states -> Arrays.stream(states).noneMatch(state -> this.isFallback ? ResourcePackBlockStateClaimsImpl.get().isClaimedNonVanilla(state) : ResourcePackBlockStateClaimsImpl.get().isClaimed(state)))
-                .sorted(Comparator.comparing(states -> states[0], VisualDuplicatesImpl.VisualDuplicateGroupImpl.STATE_COMPARATOR))
+                .filter(states -> Arrays.stream(states).noneMatch(state -> this.isFallback ? ResourcePackBlockStateClaims.isClaimedNonVanilla(state) : ResourcePackBlockStateClaims.isClaimed(state)))
+                .sorted(Comparator.comparing(states -> states[0], VisualDuplicateGroup.STATE_COMPARATOR))
                 .forEach(this.values::add);
             if (!this.isFallback) {
                 this.statesSet = new IntOpenHashSet();
@@ -76,7 +76,7 @@ public class ExplicitDynamicClaimableStates implements DynamicClaimableStates {
                         this.statesSet.add(state.indexInVanillaOnlyBlockStateRegistry);
                     }
                 });
-                ResourcePackBlockStateClaimsImpl.get().registerClaimListener(state -> {
+                ResourcePackBlockStateClaims.registerClaimListener(state -> {
                     if (this.statesSet.contains(state)) {
                         Iterator<BlockState[]> iterator = this.values.iterator();
                         while (iterator.hasNext()) {

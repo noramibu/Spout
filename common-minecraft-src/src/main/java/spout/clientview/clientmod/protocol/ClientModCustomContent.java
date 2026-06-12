@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import spout.clientview.clientmod.registryidmapping.BlockStateRegistryEntryIdList;
 import spout.gamecontent.datadriven.block.SpoutNonBuiltInBlock;
-import spout.gamecontent.datadriven.block.subtypes.BlockStateStringConversion;
+import spout.util.minecraft.blockstate.BlockStateStringConversion;
 import spout.gamecontent.datadriven.item.SpoutNonBuiltInItem;
 import spout.clientview.clientmod.registryidmapping.RegistryEntryIdList;
 import spout.util.minecraft.resources.KeyedValue;

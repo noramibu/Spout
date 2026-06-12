@@ -1,4 +1,4 @@
-package spout.server.paper.impl.packetmapping.block.automatic;
+package spout.util.minecraft.blockstate.visualduplicates;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import spout.server.paper.api.resourcepack.content.Blockstates;
-import spout.server.paper.impl.packetmapping.block.claim.VisualDuplicatesImpl;
 import spout.server.paper.impl.resourcepack.plugin.discover.PluginResourcePackDiscoveryImpl;
 
 /**
@@ -35,7 +34,7 @@ public final class BlocksWithVisuallyDifferentBlockstates {
                 return true;
             }
             if (block.isVanilla()) {
-                VisualDuplicatesImpl.VisualDuplicateGroupImpl visualDuplicateGroup = VisualDuplicatesImpl.get().getVisualDuplicates(block.defaultBlockState());
+                VisualDuplicateGroup visualDuplicateGroup = VisualDuplicates.getVisualDuplicates(block.defaultBlockState());
                 if (visualDuplicateGroup == null) {
                     return true;
                 }

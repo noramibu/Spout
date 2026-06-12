@@ -4,12 +4,12 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
 import net.minecraft.world.level.block.state.BlockState;
 import spout.clientview.model.ClientView;
+import spout.clientview.packetmapping.blockstate.resourcepackclaims.ResourcePackBlockStateClaims;
 import spout.server.paper.api.packetmapping.block.BlockMappingFunctionContext;
 import spout.server.paper.api.packetmapping.block.BlockMappings;
 import spout.server.paper.api.packetmapping.block.BlockMappingsComposeEvent;
 import spout.server.paper.impl.moredatadriven.minecraft.BlockRegistry;
 import spout.server.paper.impl.moredatadriven.minecraft.BlockStateRegistry;
-import spout.server.paper.impl.packetmapping.block.claim.ResourcePackBlockStateClaimsImpl;
 import spout.server.paper.impl.util.composable.ComposableImpl;
 import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
@@ -156,7 +156,7 @@ public final class BlockMappingsImpl extends ComposableImpl<BlockMappingsCompose
     protected void copyInformationFromEvent(BlockMappingsComposeEventImpl event) {
 
         // Process the claim requests
-        ResourcePackBlockStateClaimsImpl.get().processRequests();
+        ResourcePackBlockStateClaims.processRequests();
 
         // Initialize the steps
         int registrySize = BlockStateRegistry.get().size();

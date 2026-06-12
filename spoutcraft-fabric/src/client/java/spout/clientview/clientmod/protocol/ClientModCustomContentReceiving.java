@@ -17,7 +17,7 @@ import spout.clientview.clientmod.registryidmapping.RegistryIdMappings;
 import spout.clientview.clientmod.registryidmapping.BlockStateRegistryEntryIdList;
 import spout.gamecontent.datadriven.block.ContextAwareBlockPropertiesDecoding;
 import spout.gamecontent.datadriven.block.SpoutNonBuiltInBlock;
-import spout.gamecontent.datadriven.block.subtypes.BlockStateStringConversion;
+import spout.util.minecraft.blockstate.BlockStateStringConversion;
 import spout.gamecontent.datadriven.item.ContextAwareItemPropertiesDecoding;
 import spout.gamecontent.datadriven.item.SpoutNonBuiltInItem;
 import spout.clientview.clientmod.registryidmapping.RegistryEntryIdList;
