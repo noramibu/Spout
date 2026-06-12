@@ -27,12 +27,7 @@ public final class BuiltInAwarenessLevelRegistry {
     }
 
     /**
-     * A registry for block types.
-     *
-     * <p>
-     * This registry is synchronized with {@link BuiltInRegistries#BLOCK_TYPE}:
-     * entries added to either are added to the other.
-     * </p>
+     * A registry for awareness levels.
      */
     public static final Registry<AwarenessLevel> AWARENESS_LEVEL = BuiltInRegistries.registerSimple(BuiltInAwarenessLevelRegistryKey.AWARENESS_LEVEL, AwarenessLevels::bootstrap);
 
