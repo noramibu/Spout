@@ -22,6 +22,11 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.bukkit.block.data.BlockData;
 import org.jspecify.annotations.Nullable;
 import spout.api.clientview.packetmapping.blockstate.resourcepackclaims.ClaimRequestPriority;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.BlockDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.DynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.ExplicitDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.SingletonBlockStateDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.SortedClaimableStates;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockStateRegistry;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 

@@ -1,4 +1,4 @@
-package spout.server.paper.impl.packetmapping.block.automatic;
+package spout.clientview.packetmapping.blockstate.macro.processor;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * Some utilities for the processing of block requests.
  */
-public final class BlockRequestProcessUtils {
+public final class ProcessorBlockUtil {
 
-    private BlockRequestProcessUtils() {
+    private ProcessorBlockUtil() {
         throw new UnsupportedOperationException();
     }
 

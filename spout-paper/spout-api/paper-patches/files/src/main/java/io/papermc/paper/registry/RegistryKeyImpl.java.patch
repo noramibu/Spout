@@ -1,5 +1,23 @@
 --- a/src/main/java/io/papermc/paper/registry/RegistryKeyImpl.java
 +++ b/src/main/java/io/papermc/paper/registry/RegistryKeyImpl.java
+@@ -8,7 +_,7 @@
+ import org.jspecify.annotations.Nullable;
+ 
+ @NullMarked
+-record RegistryKeyImpl<T>(Key key) implements RegistryKey<T> {
++public record RegistryKeyImpl<T>(Key key) implements RegistryKey<T> { // Spout - Registry API - Make public
+ 
+     static final Set<RegistryKey<?>> REGISTRY_KEYS = Sets.newIdentityHashSet();
+ 
+@@ -23,7 +_,7 @@
+         return System.identityHashCode(this);
+     }
+ 
+-    static <T> RegistryKey<T> create(@Subst("some_key") final String key) {
++    public static <T> RegistryKey<T> create(@Subst("some_key") final String key) { // Spout - Registry API - Make public
+         final RegistryKey<T> registryKey = createInternal(key);
+         REGISTRY_KEYS.add(registryKey);
+         return registryKey;
 @@ -31,7 +_,7 @@
  
      // creates the key without adding to the internal set of keys

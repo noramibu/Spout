@@ -1,8 +1,9 @@
-package spout.server.paper.impl.packetmapping.block.automatic;
+package spout.clientview.packetmapping.blockstate.macro.processor.claimablestates;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrays;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
+import spout.clientview.packetmapping.blockstate.macro.processor.ProcessorBlockUtil;
 
 /**
  * A utility class representing claimable states.
@@ -40,7 +41,7 @@ public interface SortedClaimableStates {
         /**
          * A reference {@link BlockState} for which these states are being claimed:
          * specifically, it must be usable as the {@code from} state for
-         * {@linkplain BlockRequestProcessUtils#compareProxyCandidates proxy candidate comparisons}
+         * {@linkplain ProcessorBlockUtil#compareProxyCandidates proxy candidate comparisons}
          * for the first {@link BlockState} in every simultaneous claim request (aka
          * the element at index 0 in each inner array of {@link #candidates}).
          */
@@ -76,7 +77,7 @@ public interface SortedClaimableStates {
             if (claimIndex < GET_WITHOUT_SORTING_LIMIT || this.candidates.length < MINIMUM_SIZE_TO_SORT) {
                 int best = 0;
                 for (int i = 1; i < this.candidates.length; i++) {
-                    if (this.candidates[best] == null || (this.candidates[i] != null && BlockRequestProcessUtils.compareProxyCandidates(this.from, this.getFirstCandidate(best), this.getFirstCandidate(i)) > 0)) {
+                    if (this.candidates[best] == null || (this.candidates[i] != null && ProcessorBlockUtil.compareProxyCandidates(this.from, this.getFirstCandidate(best), this.getFirstCandidate(i)) > 0)) {
                         best = i;
                     }
                 }
@@ -93,7 +94,7 @@ public interface SortedClaimableStates {
                     if (states2 == null) {
                         return -1;
                     }
-                    return BlockRequestProcessUtils.compareProxyCandidates(this.from, this.getFirstCandidate(states1), this.getFirstCandidate(states2));
+                    return ProcessorBlockUtil.compareProxyCandidates(this.from, this.getFirstCandidate(states1), this.getFirstCandidate(states2));
                 });
             }
             // Get directly after sorting

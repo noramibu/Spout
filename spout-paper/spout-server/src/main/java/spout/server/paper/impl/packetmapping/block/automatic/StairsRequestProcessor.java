@@ -3,6 +3,8 @@ package spout.server.paper.impl.packetmapping.block.automatic;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StairBlock;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.BlockDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.DynamicClaimableStates;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockRegistry;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 import java.util.List;

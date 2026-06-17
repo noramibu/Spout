@@ -12,8 +12,8 @@ import spout.clientview.packetmapping.blockstate.macro.FromToBlockMacro;
 import spout.clientview.packetmapping.blockstate.macro.type.BlockStateMappingMacroTypes;
 import spout.clientview.packetmapping.blockstate.registry.BlockStateMapping;
 import spout.server.paper.impl.moredatadriven.minecraft.VanillaOnlyBlockRegistry;
-import spout.server.paper.impl.packetmapping.block.automatic.BlockDynamicClaimableStates;
-import spout.server.paper.impl.packetmapping.block.automatic.DynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.BlockDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.DynamicClaimableStates;
 
 /**
  * A {@link BlockStateMappingMacroProcessor} for {@link BlockStateMappingMacroTypes#ROTATED_PILLAR}.

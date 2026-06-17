@@ -1,6 +1,9 @@
 package spout.server.paper.impl.packetmapping.block.automatic;
 
 import net.minecraft.world.level.block.Block;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.BlockDynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.DynamicClaimableStates;
+import spout.clientview.packetmapping.blockstate.macro.processor.claimablestates.SortedClaimableStates;
 import spout.server.paper.impl.packetmapping.block.BlockMappingsComposeEventImpl;
 import java.util.Arrays;
 import java.util.List;

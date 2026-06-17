@@ -1,4 +1,4 @@
-package spout.server.paper.impl.packetmapping.block.automatic;
+package spout.clientview.packetmapping.blockstate.macro.processor.claimablestates;
 
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;

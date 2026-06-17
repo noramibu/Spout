@@ -1,4 +1,4 @@
-package spout.server.paper.impl.packetmapping.block.automatic;
+package spout.clientview.packetmapping.blockstate.macro.processor.claimablestates;
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
