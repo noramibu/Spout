@@ -70,7 +70,7 @@ public abstract class ReplaceColorsAndSizesOverlayMixin {
 
             @Override
             public TextureContents loadContents(ResourceManager resourceManager) throws IOException {
-                try (InputStream input = resourceManager.open(SpoutLogoIdentifier.IDENTIFIER)) {
+                try (InputStream input = SpoutLogoIdentifier.open()) {
                     TextureContents result = new TextureContents(NativeImage.read(input),
                         new TextureMetadataSection(true, true, MipmapStrategy.MEAN, 0.0f));
                     return result;

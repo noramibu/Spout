@@ -72,6 +72,17 @@ public final class ClientModCustomContentReceiving {
                             });
                         }).toList()
                     );
+                    RemappedBlockStateRegistry blockStateRegistry =
+                        (RemappedBlockStateRegistry) Block.BLOCK_STATE_REGISTRY;
+                    for (var keyedValue : receivedContent.getBlocks()) {
+                        Block block = BuiltInRegistries.BLOCK.get(keyedValue.identifier()).orElseThrow().value();
+                        for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+                            state.initCache();
+                            if (blockStateRegistry.getIdUnmapped(state) == -1) {
+                                Block.BLOCK_STATE_REGISTRY.add(state);
+                            }
+                        }
+                    }
                     // Set up registry id mappings where necessary
                     for (RegistryEntryIdList list : receivedContent.getRegistryEntryIdLists()) {
                         Registry registry = BuiltInRegistries.REGISTRY.getValue(list.registryIdentifier());
@@ -109,6 +120,10 @@ public final class ClientModCustomContentReceiving {
                     receivedContent.getBlockStateRegistryEntryIdLists().add(((ClientModCustomContentPacketPayload.Element.BlockStateRegistryEntryIdListContents) contents).value);
             }
         }
+    }
+
+    static void clear() {
+        receivedContent = null;
     }
 
 }

@@ -14,14 +14,6 @@
   "license": "See the included LICENSE.txt",
   "icon": "assets/spout/icon.png",
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "spout.main.SpoutcraftModInitializer"
-    ],
-    "client": [
-      "spout.main.SpoutcraftClientModInitializer"
-    ]
-  },
   "accessWidener": "spoutcraft.classtweaker",
   "mixins": [
     {
@@ -76,7 +68,6 @@
   "depends": {
     "fabricloader": ">=0.19.2",
     "minecraft": "~26.1.2",
-    "java": ">=25",
-    "fabric-api": "*"
+    "java": ">=25"
   }
 }
